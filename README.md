@@ -3,19 +3,19 @@ Source code for assignments from COSC 4368.
 
 Getting Started
 In console, enter
-git clone https://github.com/tattmeal/zivility-app.git
+```git clone https://github.com/tattmeal/zivility-app.git```
 
 then,
 
-cd zivility-app
+```cd zivility-app```
 
 Install npm and yarn
 
-npm install
+```npm install```
 
-npm install -g yarn
+```npm install -g yarn```
 
-yarn install
+```yarn install```
 
 To launch a local instance of the app, enter in console yarn start
 
