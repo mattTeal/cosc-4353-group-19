@@ -3,6 +3,7 @@ Source code for assignments from COSC 4368.
 
 Getting Started
 In console, enter
+
 ```git clone https://github.com/tattmeal/zivility-app.git```
 
 then,
