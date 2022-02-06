@@ -4,11 +4,11 @@ Source code for assignments from COSC 4368.
 Getting Started
 In console, enter
 
-```git clone https://github.com/tattmeal/zivility-app.git```
+```git clone https://github.com/tattmeal/cosc-4368-group-19.git```
 
 then,
 
-```cd zivility-app```
+```cd cosc-4368-group-19```
 
 Install npm and yarn
 
