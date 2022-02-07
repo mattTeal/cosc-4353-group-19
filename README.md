@@ -10,6 +10,8 @@ then,
 
 ```cd cosc-4368-group-19```
 
+```cd fuel-form-app```
+
 Install npm and yarn
 
 ```npm install```
