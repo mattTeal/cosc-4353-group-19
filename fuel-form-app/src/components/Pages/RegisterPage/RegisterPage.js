@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './RegisterPage.css'
 
 function RegisterPage() {
 
@@ -8,30 +9,34 @@ function RegisterPage() {
   const showForm = (
     <div className="registerForm">
       <form>
+
+      <div className="signup">
+            <label>Sign Up</label>
+          </div>
+
         <div className="register_container">
-          <label for="user">Username:</label>
+          <label for="user" id="username">Username </label>
           <input type="text" id="user" name="user" required></input>
         </div>
         
         <div className="register_container"> 
-          <label for="pass">Password:</label>
+          <label for="pass" id="password">Password </label>
           <input type="password" id="pass" name="pass" required></input>
         </div>
 
         <div className="register_container"> 
-          <label for="confirmpass">Confirm Password:</label>
+          <label for="confirmpass" id="confirmpassword">Confirm Password </label>
           <input type="password" id="confirmpass" name="confirmpass" required></input>
         </div>
         
         <div className="butt_container">
-          <input type="submit" class="submit_butt" value="Submit"></input>
+          <input type="submit" class="submit_butt" value="Complete Profile"></input>
         </div>
         
         
       </form>
     </div>
   );
-
 
   return (
 
