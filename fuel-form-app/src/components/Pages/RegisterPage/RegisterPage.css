@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Quicksand&family=Shizuru&display=swap');
+
+
+#register-header{
+    font-family: 'Manrope';
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    flex-direction: column;
+    height: 75vh;
+}
+
+.register_container #confirmpassword, #username, #password{
+    color: black;
+    font-family: 'Manrope';
+}
+
+#confirmpass, #user, #pass{
+    height: 20px;
+    border: 1px solid var(--main-color);
+    border-radius: 15px 15px;
+}
+
+.signup{
+    font-family: 'Manrope';
+    font-size: 25px;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+}
