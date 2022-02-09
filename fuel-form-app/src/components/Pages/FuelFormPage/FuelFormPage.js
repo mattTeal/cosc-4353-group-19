@@ -1,9 +1,10 @@
 import React from 'react';
+import FuelForm from './util/FuelForm/FuelForm';
 
 function FuelFormPage() {
   return (
-    <div>
-        <h1>FuelFormPage</h1>
+    <div className="Form">
+        <FuelForm/>
     </div>
   );
 }
