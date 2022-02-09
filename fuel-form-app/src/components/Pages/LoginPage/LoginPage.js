@@ -27,20 +27,21 @@ function LoginPage() {
       <div className="loginForm">
         <form>
           <div className="login_container">
-            <label for="user">Username</label>
+            <label for="user">Username:</label>
             <input type="text" id="user" name="user" required></input>
           </div>
           
           <div className="login_container"> 
-            <label for="pass">Password</label>
+            <label for="pass">Password:</label>
             <input type="password" id="pass" name="pass" required></input>
           </div>
           
           <div className="butt_container">
             <input type="submit" class="submit_butt" value="Submit"></input>
           </div>
-          
-          
+          <div>
+            <a href="/register">New here? Sign-up!</a>
+          </div>
         </form>
       </div>
     );
