@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Quicksand&family=Shizuru&display=swap');
+
+:root{
+    --main-color: #FF4500;
+    --secondary-color: #191970;
+}
+
+#login-header{
+    font-family: 'Manrope';
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signin{
+    font-family: 'Manrope';
+    font-size: 25px;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+}
+
+.loginForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    flex-direction: column;
+    height: 75vh;
+}
+
+.login_container #username, #password{
+    color: black;
+    font-family: 'Manrope';
+}
+
+#user, #pass{
+    height: 20px;
+    border: 1px solid var(--main-color);
+    border-radius: 15px 15px;
+    margin-bottom: 5px;
+}
+
+a:link{
+    color: var(--main-color);
+}
+a:visited{
+    color: var(--secondary-color);
+}
+a:hover{
+    cursor: pointer;
+}
+
+input[type = "submit"]{
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: none;
+    margin-bottom: 2em;
+    border-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em 1em;
+    width: unset;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+input[type = "submit"]:hover{
+    cursor: pointer;
+    transform: scale(1.1) perspective(1px);
+}
