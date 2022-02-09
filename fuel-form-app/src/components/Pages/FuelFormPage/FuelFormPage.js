@@ -3,7 +3,7 @@ import React from 'react';
 function FuelFormPage() {
   return (
     <div>
-        <h1>FuelFormPage</h1>
+        <h1 id="FuelHeader">FuelFormPage</h1>
     </div>
   );
 }
