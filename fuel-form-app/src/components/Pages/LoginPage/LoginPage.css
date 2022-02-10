@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     background-color: whitesmoke;
+    margin-bottom: 50px;
 }
 
 .loginForm{
@@ -32,7 +33,7 @@
     height: 75vh;
 }
 
-.login_container #username, #password{
+.login_container {
     color: black;
     font-family: 'Manrope';
 }
@@ -42,6 +43,12 @@
     border: 1px solid var(--main-color);
     border-radius: 15px 15px;
     margin-bottom: 5px;
+}
+
+#linkToReg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a:link{
@@ -55,6 +62,13 @@ a:hover{
     color: var(--main-color);
 }
 
+.butt_container{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 input[type = "submit"]{
     background-color: var(--main-color);
     color: white;
@@ -63,9 +77,6 @@ input[type = "submit"]{
     border: none;
     margin-bottom: 2em;
     border-radius: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: .5em 1em;
     width: unset;
     cursor: pointer;
@@ -75,4 +86,12 @@ input[type = "submit"]{
 input[type = "submit"]:hover{
     cursor: pointer;
     transform: scale(1.1) perspective(1px);
+}
+
+#copyright{
+    font-family: 'Manrope';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
 }
