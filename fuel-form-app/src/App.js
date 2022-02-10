@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { LoginPage, ProfilePage, RegisterPage, FuelFormPage } from './components/Pages';
+// import Navbar from './components/Navbar';
 import './App.css';
+import React from 'react';
 
 function App() {
   return (
     <Router>
+      {/* <Navbar /> */}
       <Routes>
         <Route exact path='/' element={<FuelFormPage/>}/>
         <Route exact path='/register' element={<RegisterPage/>}/>
