@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from '../util/NavBar/NavBar';
 import './LoginPage.css'
 
 function LoginPage() {
@@ -64,14 +65,15 @@ function LoginPage() {
       
 
   return (
-    <>
+    <div>
+      <NavBar/>
       <div className="login-form">
         <div className="title">
           <h1 id="login-header">LoginPage</h1>
           {submit ? <div>SignIn</div> : showForm}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
