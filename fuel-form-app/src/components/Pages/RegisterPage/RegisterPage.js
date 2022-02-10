@@ -7,6 +7,8 @@ function RegisterPage() {
   const [submit, setsubmit] = useState(false);
 
   const showForm = (
+
+    <>
     <div className="registerForm">
       <form>
 
@@ -32,10 +34,15 @@ function RegisterPage() {
         <div className="butt_container">
           <input type="submit" class="submit_butt" value="Complete Profile"></input>
         </div>
-        
-        
       </form>
     </div>
+
+      <div>
+      <footer id="copyright">
+        <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
+      </footer>
+      </div>
+    </>  
   );
 
   return (
