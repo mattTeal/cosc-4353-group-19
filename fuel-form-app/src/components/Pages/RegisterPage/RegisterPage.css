@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Quicksand&family=Shizuru&display=swap');
 
+:root{
+    --main-color: #FF4500;
+    --secondary-color: #191970;
+}
 
 #register-header{
     font-family: 'Manrope';
@@ -27,6 +31,10 @@
     height: 20px;
     border: 1px solid var(--main-color);
     border-radius: 15px 15px;
+}
+
+input [type="submit"]{
+    
 }
 
 .signup{
