@@ -25,6 +25,7 @@ function LoginPage() {
 
 
     const showForm = (
+    <>
       <div className="loginForm">
         <form>
           <div className="signin">
@@ -48,9 +49,17 @@ function LoginPage() {
           <div>
             <a href="/register" id="linkToReg">New here? Sign Up!</a>
           </div>
-          
         </form>
+
+        
       </div>
+
+      <div>
+          <footer id="copyright">
+            <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
+          </footer>
+        </div>
+    </>
     );
       
 
