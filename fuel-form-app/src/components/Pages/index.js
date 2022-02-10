@@ -8,4 +8,4 @@ export {
     FuelFormPage,
     ProfilePage,
     RegisterPage
-}
+};
