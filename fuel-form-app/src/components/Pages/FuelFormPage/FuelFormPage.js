@@ -4,7 +4,7 @@ import FuelForm from './util/FuelForm/FuelForm';
 function FuelFormPage() {
   return (
     <div className="Form">
-        <FuelForm/>
+      <FuelForm/>
     </div>
   );
 }
