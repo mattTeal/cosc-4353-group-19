@@ -32,37 +32,23 @@ function LoginPage() {
           </div>
 
           <div className="login_container">
-<<<<<<< Updated upstream
-            <label for="user">Username:</label>
-=======
             <label for="user" id="username">Username </label>
->>>>>>> Stashed changes
             <input type="text" id="user" name="user" required></input>
           </div>
           
           <div className="login_container"> 
-<<<<<<< Updated upstream
-            <label for="pass">Password:</label>
-=======
             <label for="pass" id="password">Password </label>
->>>>>>> Stashed changes
             <input type="password" id="pass" name="pass" required></input>
           </div>
           
           <div className="butt_container">
             <input type="submit" class="submit_butt" value="Submit"></input>
           </div>
-<<<<<<< Updated upstream
-          <div>
-            <a href="/register">New here? Sign-up!</a>
-          </div>
-=======
           
           <div>
             <a href="/register" id="linkToReg">New here? Sign Up!</a>
           </div>
           
->>>>>>> Stashed changes
         </form>
       </div>
     );
