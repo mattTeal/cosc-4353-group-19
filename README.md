@@ -10,6 +10,8 @@ then,
 
 ```cd fuel-form-app```
 
+```cd fuel-form-app```
+
 Install npm and yarn
 
 ```npm install```

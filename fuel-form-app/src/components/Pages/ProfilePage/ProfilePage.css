@@ -1,0 +1,11 @@
+label {
+    display:block;
+    color:rgb(60, 67, 75);
+    font-size:smaller;
+    padding: 0px 5px 10px 0px;
+}
+div.ProfileContainer {
+    display:flex;
+    flex-direction:column;
+    padding:2.5%;
+}
