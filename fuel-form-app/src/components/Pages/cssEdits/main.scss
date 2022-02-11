@@ -21,7 +21,6 @@
     align-items: center;
     justify-content: center;
     background-color: whitesmoke;
-    margin-bottom: 50px;
 }
 
 .loginForm{
@@ -30,12 +29,11 @@
     justify-content: center;
     background-color: whitesmoke;
     flex-direction: column;
-    
     height: 75vh;
 }
 
-.login_container {
-    color: #666;
+.login_container #username, #password{
+    color: black;
     font-family: 'Manrope';
 }
 
@@ -46,59 +44,57 @@
     margin-bottom: 5px;
 }
 
-#linkToReg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-a:link{
-    color: var(--main-color);
-}
-a:visited{
-    color: var(--secondary-color);
-}
-a:hover{
-    cursor: pointer;
-    color: var(--main-color);
-}
-
-.butt_container{
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 input[type = "submit"]{
     background-color: var(--main-color);
     color: white;
     font-weight: bold;
     font-size: 1.2em;
     border: none;
-    margin-bottom: 2em;
-    border-radius: 2em;
-    padding: .5em 1em;
+    margin-bottom: 2.5em;
+    border-radius: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7em 1em;
     width: unset;
     cursor: pointer;
     margin-top: 5px;
 }
 
-input[type = "submit"]:hover{
-    cursor: pointer;
-    transform: scale(1.1) perspective(1px);
-}
-
-.error{
-    color: red;
-    font-size: smaller;
-    margin: 5px 5px;
-}
-
-#copyright{
+#register-header{
     font-family: 'Manrope';
+    color: var(--main-color);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.registerForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    flex-direction: column;
+    height: 75vh;
+}
+
+.register_container #confirmpassword, #username, #password{
+    color: black;
+    font-family: 'Manrope';
+}
+
+#confirmpass, #user, #pass{
+    height: 20px;
+    border: 1px solid var(--main-color);
+    border-radius: 15px 15px;
+}
+
+.signup{
+    font-family: 'Manrope';
+    font-size: 25px;
     color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
 }

@@ -8,7 +8,7 @@ In console, enter
 
 then,
 
-```cd cosc-4368-group-19```
+```cd fuel-form-app```
 
 ```cd fuel-form-app```
 
