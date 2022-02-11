@@ -1,9 +1,12 @@
 import React from 'react';
+import NavBar from '../util/NavBar/NavBar';
+import FuelForm from './util/FuelForm/FuelForm'
 
 function FuelFormPage() {
   return (
     <div>
-        <h1 id="FuelHeader">FuelFormPage</h1>
+        <NavBar/>
+        <FuelForm/>
     </div>
   );
 }
