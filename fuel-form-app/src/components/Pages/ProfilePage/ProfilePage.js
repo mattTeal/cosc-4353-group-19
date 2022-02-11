@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ProfilePage.css'
 
 function ProfilePage() {
@@ -12,16 +12,20 @@ function ProfilePage() {
     stateCode:'',
     zipcode:''
   }
-  //var currProfInfoDisplay = document.getElementById('ProfileInfoDisplay');
-  var editProfInfoDisplay = document.getElementById('ProfileInfoEditingDisplay');
 
-  const editProfileInfo = () => {
-    editProfInfoDisplay.style.display = "block";
-  }
+  const [hidden, setHidden] = useState(true);
+  //var currProfInfoDisplay = document.getElementById('ProfileInfoDisplay');
+  // var editProfInfoDisplay = document.getElementById('ProfileInfoEditingDisplay');
+
+  // const editProfileInfo = () => {
+  //   editProfInfoDisplay.style.display = "block";
+  // }
 
   var saveChanges = () => {
-    //editProfInfoDisplay.style.display = "none";
+    
   }
+
+
 
   return (
     <div>
@@ -44,9 +48,11 @@ function ProfilePage() {
             <span className='ZipcodeDisplay'>{UserProfileInfo.zipcode}</span>
           </div>
 
-          <button onClick={editProfileInfo}>Edit Profile Information</button>
+          <button onClick={setHidden(s => !s)}>Edit Profile Information</button>
 
         </div>
+
+        {hidden ? 
 
         <div classname='ProfileInfoEditing' id='ProfileInfoEditingDisplay'>
 
@@ -73,7 +79,7 @@ function ProfilePage() {
 
           </form>
 
-        </div>
+        </div> : null }
 
       </div>
       <br />
