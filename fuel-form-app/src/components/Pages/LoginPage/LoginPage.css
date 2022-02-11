@@ -88,6 +88,12 @@ input[type = "submit"]:hover{
     transform: scale(1.1) perspective(1px);
 }
 
+.error{
+    color: red;
+    font-size: smaller;
+    margin: 5px 5px;
+}
+
 #copyright{
     font-family: 'Manrope';
     display: flex;
