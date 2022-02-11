@@ -3,8 +3,41 @@ import './RegisterPage.css'
 
 function RegisterPage() {
 
+  // edit to validate matching passwords and hold the variables
+
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
+
+  // const ErrorMessage = (name) =>
+  //   name === errmsg.name && (
+  //   <div className="error">{errmsg.message}</div>
+  // );
+
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+
+  //   var {user, pass} = document.forms[0];
+  //   const data = tempLogin.find((users) => users.username === user.value);
+
+  //   if(data){
+  //     if(data.password !== pass.value){
+  //       seterrmsg({name: "pass", message: errs.pass})
+  //     }
+  //     else{
+  //       setsubmit(true);
+  //     }
+  //   }
+  //   else{
+  //     seterrmsg({name: "user", message: errs.user});
+  //   }
+  // };
+
+
+  // const errs = {
+  //   user: "invalid username",
+  //   pass: "invalid password"
+  // };
+
 
   const showForm = (
 
@@ -50,7 +83,7 @@ function RegisterPage() {
       <div className="register-form">
         <div className="title">
           <h1 id="register-header">RegisterPage</h1>
-          {submit ? <div>Register</div> : showForm}
+          {submit ? <div>Successfully created!</div> : showForm}
         </div>
       </div>
   );
