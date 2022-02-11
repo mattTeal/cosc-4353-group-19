@@ -23,6 +23,8 @@
 form {
     display: block;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 form .form-inner h2 {
