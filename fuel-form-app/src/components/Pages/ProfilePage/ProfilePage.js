@@ -22,10 +22,9 @@ function ProfilePage() {
   //   editProfInfoDisplay.style.display = "block";
   // }
 
-  // var saveChanges = () => {
+  var saveChanges = () => {
     
-  // }
-
+  }
 
 
   return (
@@ -76,7 +75,7 @@ function ProfilePage() {
               <input type='text' id='zipcodeForm' name='zipcodeForm' maxLength={9} minLength={5} required></input>
               <label for='zipcodeForm'>Zip Code</label>
 
-            <button /*onClick={saveChanges()*/>Save Changes</button>
+            <button onClick={saveChanges()}>Save Changes</button>
 
           </form>
         </div> : null }
