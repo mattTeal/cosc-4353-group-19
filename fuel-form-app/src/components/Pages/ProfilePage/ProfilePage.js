@@ -14,6 +14,7 @@ function ProfilePage() {
   }
 
   const [hidden, setHidden] = useState(true);
+
   //var currProfInfoDisplay = document.getElementById('ProfileInfoDisplay');
   // var editProfInfoDisplay = document.getElementById('ProfileInfoEditingDisplay');
 
@@ -21,9 +22,9 @@ function ProfilePage() {
   //   editProfInfoDisplay.style.display = "block";
   // }
 
-  var saveChanges = () => {
+  // var saveChanges = () => {
     
-  }
+  // }
 
 
 
@@ -48,11 +49,11 @@ function ProfilePage() {
             <span className='ZipcodeDisplay'>{UserProfileInfo.zipcode}</span>
           </div>
 
-          <button onClick={setHidden(s => !s)}>Edit Profile Information</button>
+          <button onClick={() => setHidden(s => !s)}>Edit Profile Information</button>
 
         </div>
 
-        {hidden ? 
+        {!hidden ? 
 
         <div classname='ProfileInfoEditing' id='ProfileInfoEditingDisplay'>
 
@@ -75,10 +76,9 @@ function ProfilePage() {
               <input type='text' id='zipcodeForm' name='zipcodeForm' maxLength={9} minLength={5} required></input>
               <label for='zipcodeForm'>Zip Code</label>
 
-            <button onClick={saveChanges()}>Save Changes</button>
+            <button /*onClick={saveChanges()*/>Save Changes</button>
 
           </form>
-
         </div> : null }
 
       </div>
