@@ -3,6 +3,8 @@ import './LoginPage.css'
 
 function LoginPage() {
 
+  //edit to have variables that hold the username and password
+
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
 
