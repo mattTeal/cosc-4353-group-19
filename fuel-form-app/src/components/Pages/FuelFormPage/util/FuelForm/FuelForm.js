@@ -10,6 +10,7 @@ function FuelForm() {
     }
 
     return (
+        <>
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Find out how much you can save</h2>
@@ -34,6 +35,13 @@ function FuelForm() {
                 </div>
             </div>
         </form>
+
+        <div>
+            <footer id="copyright">
+            <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
+            </footer>
+         </div>
+        </>
     )
 }
 
