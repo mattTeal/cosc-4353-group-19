@@ -30,7 +30,7 @@ function FuelForm() {
                                 e => setDetails({...details, date: e.target.value})} value={details.date}/>
                 </div>
                 <div className="form-group">
-                    <input type="submit" value="Find Cost"/>
+                    <input type="submit" value="Find Cost"></input>
                 </div>
             </div>
         </form>
