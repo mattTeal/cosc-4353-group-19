@@ -56,7 +56,7 @@ function LoginPage() {
       <div className="loginForm">
         <form onSubmit={submitHandler}>
           <div className="signin">
-            <label>SignIn</label>
+            <label>Sign In</label>
           </div>
 
           <div className="login_container">
@@ -97,7 +97,7 @@ function LoginPage() {
       <NavBar/>
       <div className="login-form">
         <div className="title">
-          <h1 id="login-header">LoginPage</h1>
+          {/* <h1 id="login-header">LoginPage</h1> */}
           {submit ? <div>Signed in successfully!</div> : showForm}
         </div>
       </div>
