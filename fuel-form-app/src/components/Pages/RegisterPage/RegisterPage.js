@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from '../util/NavBar/NavBar';
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -7,43 +8,14 @@ function RegisterPage() {
 
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
-
-  // const ErrorMessage = (name) =>
-  //   name === errmsg.name && (
-  //   <div className="error">{errmsg.message}</div>
-  // );
-
-  // const submitHandler = (event) => {
-  //   event.preventDefault();
-
-  //   var {user, pass} = document.forms[0];
-  //   const data = tempLogin.find((users) => users.username === user.value);
-
-  //   if(data){
-  //     if(data.password !== pass.value){
-  //       seterrmsg({name: "pass", message: errs.pass})
-  //     }
-  //     else{
-  //       setsubmit(true);
-  //     }
-  //   }
-  //   else{
-  //     seterrmsg({name: "user", message: errs.user});
-  //   }
-  // };
-
-
-  // const errs = {
-  //   user: "invalid username",
-  //   pass: "invalid password"
-  // };
+  
 
 
   const showForm = (
 
     <>
     <div className="registerForm">
-      <form>
+       <form /*onSubmit={this.passwordChecker}*/>
 
       <div className="signup">
             <label>Sign Up</label>
@@ -56,7 +28,8 @@ function RegisterPage() {
         
         <div className="register_container"> 
           <label for="pass" id="password">Password </label>
-          <input type="password" id="pass" name="pass" required></input>
+          <input type="password" id="pass" name="pass" required /*value={this.useState.input.pass}
+                  onChange={this.submit}*/></input>
         </div>
 
         <div className="register_container"> 
@@ -81,8 +54,9 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
+        <NavBar/>
         <div className="title">
-          <h1 id="register-header">RegisterPage</h1>
+          {/* <h1 id="register-header">RegisterPage</h1> */}
           {submit ? <div>Successfully created!</div> : showForm}
         </div>
       </div>
