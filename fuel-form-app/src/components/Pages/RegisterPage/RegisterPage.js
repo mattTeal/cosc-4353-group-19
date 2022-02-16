@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -81,10 +82,8 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        <div className="title">
-          <h1 id="register-header">RegisterPage</h1>
-          {submit ? <div>Successfully created!</div> : showForm}
-        </div>
+        <NavBar/>
+        {submit ? <div>Successfully created!</div> : showForm}
       </div>
   );
 }
