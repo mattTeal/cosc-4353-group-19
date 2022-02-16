@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import AuthContext from '../../../context/AuthProvider'
 import './LoginPage.css'
 
 function LoginPage() {
 
   //edit to have variables that hold the username and password
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
 
-  const [errmsg, seterrmsg] = useState({});
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [errmsg, seterrmsg] = useState('');
   const [submit, setsubmit] = useState(false);
 
   const ErrorMessage = (name) =>
@@ -13,11 +19,13 @@ function LoginPage() {
     <div className="error">{errmsg.message}</div>
   );
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = (e) => {
+    e.preventDefault();
 
     var {user, pass} = document.forms[0];
     const data = tempLogin.find((users) => users.username === user.value);
+    setUser('');
+    setPwd('');
 
     if(data){
       if(data.password !== pass.value){
@@ -60,13 +68,15 @@ function LoginPage() {
 
           <div className="login_container">
             <label for="user" id="username">Username </label>
-            <input type="text" id="user" name="user" required></input>
+            <input ref={userRef}type="text" id="user" name="user" required
+            onChange={(e) => setUser(e.target.value)} value={user}/>
             {ErrorMessage("user")}
           </div>
           
           <div className="login_container"> 
             <label for="pass" id="password">Password </label>
-            <input type="password" id="pass" name="pass" required></input>
+            <input ref={userRef} type="password" id="pass" name="pass" required
+            onChange={(e) => setPwd(e.target.value)} value={pwd}/>
             {ErrorMessage("pass")}
           </div>
           
@@ -96,7 +106,7 @@ function LoginPage() {
       <div className="login-form">
         <div className="title">
           <h1 id="login-header">LoginPage</h1>
-          {submit ? <div>Signed in successfully!</div> : showForm}
+          {submit ? <div>S  igned in successfully!</div> : showForm}
         </div>
       </div>
     </>
