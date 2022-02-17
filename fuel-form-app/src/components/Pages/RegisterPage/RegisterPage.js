@@ -2,9 +2,6 @@ import React, {callback, useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
-
-
-
 function RegisterPage() {
 
   // edit to validate matching passwords and hold the variables
