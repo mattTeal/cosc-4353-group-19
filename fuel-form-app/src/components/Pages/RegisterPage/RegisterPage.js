@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import NavBar from '../util/NavBar/NavBar';
 import './RegisterPage.css'
@@ -9,13 +10,67 @@ function RegisterPage() {
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
   
+=======
+import React, {callback, useEffect, useState } from 'react';
+import NavBar from '../util/NavBar/NavBar'
+import './RegisterPage.css'
 
+
+
+
+function RegisterPage() {
+
+  // edit to validate matching passwords and hold the variables
+>>>>>>> Stashed changes
+
+    const [errmsg, seterrmsg] = useState({});
+    const [submit, setsubmit] = useState(false);
+    const [vals, setVals] = useState({
+      user: '',
+      pass: '',
+      confirmpass: ''
+    });
+
+    const changeHandler = (e) => {
+      const {name, value} = e.target
+      setVals({
+        ...vals,
+        [name]: value
+      })
+    };
+
+    const submitHandler = (e) => {
+      e.preventDefault();
+      seterrmsg(ValiditePass());
+      setsubmit(true);
+    }
+
+    useEffect(
+      () => {
+        if(Object.keys(errmsg).length === 0 && submit) {
+          callback();
+        }
+      }, [errmsg]
+    );
+
+  function ValiditePass(){
+
+    if(vals.confirmpass !== vals.pass){
+      errmsg.confirmpass = 'Passwords do not match'
+    }
+
+    return errmsg;
+  }
 
   const showForm = (
 
     <>
     <div className="registerForm">
+<<<<<<< Updated upstream
        <form /*onSubmit={this.passwordChecker}*/>
+=======
+      <form onSubmit={submitHandler}>
+>>>>>>> Stashed changes
 
       <div className="signup">
             <label>Sign Up</label>
@@ -23,22 +78,33 @@ function RegisterPage() {
 
         <div className="register_container">
           <label for="user" id="username">Username </label>
-          <input type="text" id="user" name="user" required></input>
+          <input type="text" id="user" name="user" required 
+            value={vals.user} 
+            onChange={changeHandler}></input>
         </div>
         
         <div className="register_container"> 
           <label for="pass" id="password">Password </label>
+<<<<<<< Updated upstream
           <input type="password" id="pass" name="pass" required /*value={this.useState.input.pass}
                   onChange={this.submit}*/></input>
+=======
+          <input type="password" id="pass" name="pass" required 
+            value={vals.pass} 
+            onChange={changeHandler}></input>
+>>>>>>> Stashed changes
         </div>
 
         <div className="register_container"> 
           <label for="confirmpass" id="confirmpassword">Confirm Password </label>
-          <input type="password" id="confirmpass" name="confirmpass" required></input>
+          <input type="password" id="confirmpass" name="confirmpass" required 
+            value={vals.confirmpass} 
+            onChange={changeHandler}></input>
+            {errmsg.confirmpass && <p>{errmsg.confirmpass}</p>}
         </div>
         
         <div className="butt_container">
-          <input type="submit" class="submit_butt" value="Complete Profile"></input>
+          <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
         </div>
       </form>
     </div>
@@ -55,10 +121,14 @@ function RegisterPage() {
 
       <div className="register-form">
         <NavBar/>
+<<<<<<< Updated upstream
         <div className="title">
           {/* <h1 id="register-header">RegisterPage</h1> */}
           {submit ? <div>Successfully created!</div> : showForm}
         </div>
+=======
+        {!submit ? showForm : <div>Signed Up successfully!</div>}
+>>>>>>> Stashed changes
       </div>
   );
 }
