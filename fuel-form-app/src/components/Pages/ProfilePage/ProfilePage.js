@@ -61,7 +61,7 @@ function ProfilePage() {
           </div>
 
           <button 
-            onClick={() => setHidden(hidden => !hidden)}>Edit Profile Information
+            onClick={() => setHidden(hidden => !hidden)} className='editbutton'>Edit Profile Information
           </button>
 
         </div>
@@ -73,7 +73,7 @@ function ProfilePage() {
           <form onSubmit={saveChanges} >
 
             <button
-              onClick={() => setHidden(hidden => !hidden)}>Cancel Editing Profile Information
+              onClick={() => setHidden(hidden => !hidden)} className='bttn'>Cancel Editing Profile Information
             </button>
 
             <h2>Full Name</h2>
@@ -185,7 +185,7 @@ function ProfilePage() {
               </input>
               <label htmlFor='zipcodeForm'>Zip Code</label>
 
-            <button type="submit">Save Changes</button>
+            <button type="submit" className='bttn'>Save Changes</button>
 
           </form>
         </div> }
