@@ -13,7 +13,13 @@ function AddressData(props) {
     return (
         <div className='UserAddressDisplayClass' id='UserAddressDisplayID'>
             <span className='Address1Display'>{userData.addressLine1} </span> <br></br>
-            <span className='Address2Display'>{userData.addressLine2}</span> <br></br>
+            {userData.addressLine2 === "" ? null 
+            : 
+                <div>
+                <span className='Address2Display'>{userData.addressLine2}</span> 
+                <br></br> 
+                </div>
+            }
             <span className='CityDisplay'>{userData.city}, </span>
             <span className='StateDisplay'>{userData.stateCode} </span>
             <span className='ZipcodeDisplay'>{userData.zipcode}</span>

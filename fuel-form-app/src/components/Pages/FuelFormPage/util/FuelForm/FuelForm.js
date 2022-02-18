@@ -1,25 +1,23 @@
 import React, { useState } from 'react'
 import './FuelForm.css'
-import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
+//import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from './AddressData/AddressData'
 
-function FuelForm() {
+function FuelForm(props) {
 
-    const userData = getStorageValue("user", {
-        firstName:"",
-        lastName:"",
-        addressLine1:"",
-        addressLine2:"",
-        city:"",
-        stateCode:"",
-        zipcode:""
-        } 
-    );
+    const userData = {
+        addressLine1: props.addressLine1,
+        addressLine2: props.addressLine2,
+        city: props.city,
+        stateCode: props.stateCode,
+        zipcode: props.zipcode
+    }
 
     const [details, setDetails] = useState({gallons: "", state: userData.stateCode, date: ""})
 
     const submitHandler = e => {
         e.preventDefault();
+        localStorage.setItem("quote", JSON.stringify(details)); // should eventually learn how to store arrays
     }
 
     return (
@@ -58,12 +56,6 @@ function FuelForm() {
                 </div>
             </div>
         </form>
-
-        <div>
-            <footer id="copyright">
-            <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
-            </footer>
-         </div>
         </>
     )
 }
