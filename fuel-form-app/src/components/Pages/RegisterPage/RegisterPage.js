@@ -33,7 +33,7 @@ function RegisterPage() {
         if(Object.keys(errmsg).length === 0 && submit) {
           // TO-DO
         }
-      }, [errmsg]
+      }, [errmsg, submit]
     );
 
   function ValiditePass(){
