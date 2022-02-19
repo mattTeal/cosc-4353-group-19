@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+//import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
 //import AddressData from "../AddressData/AddressData";
@@ -19,29 +19,20 @@ function QuoteTable(props) {
     //in the future, update the list UPON CHANGING THE DATA, not upon refreshing.
 
     //data in table
-    const userData = {
-      name: props.firstName + " " + props.lastName,
-      address: 
-              props.addressLine1 + " " + props.addressLine2 + " " + 
-              props.city + ", " + props.stateCode + " " + props.zipcode,
-      date: props.date,
-      gallons: props.gallons,
-      ppg: 30, // 30$ per gallon in-state, 50$ per gallon out of state
-      total: props.gallons * 30
-    }
 
     const data = React.useMemo(() =>
     [
         {
-        name: userData.name,
-        address: userData.address,
-        date: userData.date,
-        gallons: userData.gallons,
-        ppg: userData.ppg,
-        total: userData.total
+        name: props.firstName + " " + props.lastName,
+        address: props.addressLine1 + " " + props.addressLine2 + " " + 
+        props.city + ", " + props.stateCode + " " + props.zipcode,
+        date: props.date,
+        gallons: props.gallons,
+        ppg: 30,
+        total: props.gallons * 30
         },
     ],
-    []
+    [props.firstName, props.lastName, props.addressLine1, props.addressLine2, props.city, props.stateCode, props.zipcode, props.date, props.gallons] //<- not that anyone cares but this is the depedency array!
     )
 
     //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.

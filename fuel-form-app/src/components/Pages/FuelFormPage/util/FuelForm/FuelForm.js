@@ -18,6 +18,7 @@ function FuelForm(props) {
     const submitHandler = e => {
         e.preventDefault();
         localStorage.setItem("quote", JSON.stringify(details)); // should eventually learn how to store arrays
+        // this will be replaced with a backend call in the future
     }
 
     return (
@@ -27,7 +28,7 @@ function FuelForm(props) {
                 <h2>Find out how much you can save!</h2>
                 <div className="form-group">
                     <label>Gallons requested</label>
-                    <input type="text" name="gallons" id="gallons" onChange={
+                    <input type="number" name="gallons" id="gallons" onChange={
                         e => setDetails({...details, gallons: e.target.value})} value={details.gallons}/>
                 </div>
                 <div className="form-group">

@@ -166,8 +166,8 @@ function ProfilePage() {
               </select>
               <label htmlFor='stateForm'>State</label>
 
-              <input 
-                type='text' 
+              <input inputMode='numeric'
+                type='number' 
                 id='zipcodeForm' 
                 name='zipcodeForm' 
                 maxLength={9} 
