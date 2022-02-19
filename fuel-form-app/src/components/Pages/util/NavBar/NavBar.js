@@ -14,7 +14,6 @@ const NavBar = () => {
                         <ul>
                             <li><a href="/profile">Profile</a></li>
                             <li><a href="/">Sign Out</a></li>
-                            
                             {/* <li><a href="/login">Login</a></li> */}
                             {/* <li><a href="/register">Register</a></li> */}
                             <li><a href="/fuel">Fuel Quote</a></li>

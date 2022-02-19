@@ -1,27 +1,49 @@
 import React, { useState } from 'react'
 import './FuelForm.css'
-import StateDropDown from './StateDropDown/StateDropDown'
+//import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
+import AddressData from './AddressData/AddressData'
 
-function FuelForm() {
-    const [details, setDetails] = useState({gallons: "", state: "", date: ""})
+function FuelForm(props) {
+
+    const userData = {
+        addressLine1: props.addressLine1,
+        addressLine2: props.addressLine2,
+        city: props.city,
+        stateCode: props.stateCode,
+        zipcode: props.zipcode
+    }
+
+    const [details, setDetails] = useState({gallons: "", state: userData.stateCode, date: ""})
 
     const submitHandler = e => {
         e.preventDefault();
+        localStorage.setItem("quote", JSON.stringify(details)); // should eventually learn how to store arrays
+        // this will be replaced with a backend call in the future
     }
 
     return (
         <>
         <form onSubmit={submitHandler}>
             <div className="form-inner">
-                <h2>Find out how much you can save</h2>
+                <h2>Find out how much you can save!</h2>
                 <div className="form-group">
                     <label>Gallons requested</label>
-                    <input type="text" name="gallons" id="gallons" onChange={
+                    <input type="number" name="gallons" id="gallons" onChange={
                         e => setDetails({...details, gallons: e.target.value})} value={details.gallons}/>
                 </div>
                 <div className="form-group">
-                    <label>State</label>
-                    <StateDropDown/>
+                    <label>Shipping Address</label>
+                    <AddressData 
+                        addressLine1 = {userData.addressLine1}
+                        addressLine2 = {userData.addressLine2}
+                        city = {userData.city}
+                        stateCode = {userData.stateCode}
+                        zipcode = {userData.zipcode}
+                    />
+                    <div>
+                        <br></br>
+                        {details.state === "TX" ? "You qualify for in-state rates!" : "You do not qualify for in-state rates."}
+                    </div>
                 </div>
                 <div className="form-group">
                     <label>Date of Purchase</label>
@@ -35,12 +57,6 @@ function FuelForm() {
                 </div>
             </div>
         </form>
-
-        <div>
-            <footer id="copyright">
-            <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
-            </footer>
-         </div>
         </>
     )
 }
