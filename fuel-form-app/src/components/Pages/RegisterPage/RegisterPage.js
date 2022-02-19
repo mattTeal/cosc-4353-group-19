@@ -1,4 +1,4 @@
-import React, {callback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
@@ -31,7 +31,7 @@ function RegisterPage() {
     useEffect(
       () => {
         if(Object.keys(errmsg).length === 0 && submit) {
-          callback();
+          // TO-DO
         }
       }, [errmsg]
     );
