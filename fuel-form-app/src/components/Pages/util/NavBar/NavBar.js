@@ -12,28 +12,16 @@ const NavBar = () => {
                 <nav>  
                     <div className="right-nav">
                         <ul>
-<<<<<<< Updated upstream
                             <li><a href="/profile">Profile</a></li>
                             <li><a href="/">Sign Out</a></li>
                             
                             {/* <li><a href="/login">Login</a></li> */}
                             {/* <li><a href="/register">Register</a></li> */}
-=======
-<<<<<<< Updated upstream
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/profile">Profile</a></li>
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/register">Register</a></li>
-=======
                             <li><a href="/fuel">Fuel Quote</a></li>
                             <li><a href="/profile">Profile</a></li>
-                            <li><a href="/">Sign Out</a></li>
-                            
-                            
+                            <li><a href="/">Sign Out</a></li>                          
                             {/* <li><a href="/login">Login</a></li> */}
                             {/* <li><a href="/register">Register</a></li> */}
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                         </ul>
                     </div>
                 </nav>
