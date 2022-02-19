@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FuelFormPage } from '..';
 import NavBar from '../util/NavBar/NavBar';
 import './LoginPage.css'
 
@@ -94,11 +95,11 @@ function LoginPage() {
 
   return (
     <div>
-      <NavBar/>
+      {/* <NavBar/> */}
       <div className="login-form">
         <div className="title">
-          <h1 id="login-header">LoginPage</h1>
-          {submit ? <div>Signed in successfully!</div> : showForm}
+          {/* <h1 id="login-header">LoginPage</h1> */}
+          {submit ? <FuelFormPage/> : showForm}
         </div>
       </div>
     </div>
