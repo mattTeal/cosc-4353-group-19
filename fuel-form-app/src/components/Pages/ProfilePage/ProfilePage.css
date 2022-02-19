@@ -1,92 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&family=Quicksand&family=Shizuru&display=swap');
-
-:root{
-    --main-color: #FF4500;
-    --secondary-color: #191970;
-}
-
-.ProfileContainer{
-    font-family: 'Manrope';
-    color: var(--main-color);
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
-}
-
-.ProfileContainer h1{
-    margin-bottom: 1em;
-}
-
-.ProfileInfo .FullNameDisplay, .UserAddressDisplayClass{
-    font-family: 'Manrope';
-    color: black;
-    display: flex;
-    flex-direction: column;
-}
-.ProfileInfo{
-    background-color: whitesmoke;
-    height: 75vh;
-}
-
-.ProfileInfoEditing{
-    width: 100%;
-}
-
-
-.ProfileContainer label {
+label {
     display:block;
     color:rgb(60, 67, 75);
     font-size:smaller;
     padding: 0px 5px 10px 0px;
-    background-color: whitesmoke;
 }
-
-.ProfileContainer input{
-    height: 20px;
-    border: 1px solid var(--main-color);
-    border-radius: 25px 25px;
-    margin-bottom: 5px;
-    padding: .75em;
+input, form {
+    display:block;
+    width: fit-content, 50%;
+    font-size:medium;
 }
-
-button{
-    background-color: var(--main-color);
-    color: white;
-    font-weight: bold;
-    font-size: 1em;
-    border: none;
-    margin-bottom: 2em;
-    border-radius: 2em;
-    padding: .5em 1em;
-    width: unset;
-    cursor: pointer;
-    margin-top: 5px;
+div.ProfileContainer {
+    display:flex;
+    flex-direction:column;
+    padding:2.5%;
 }
-
-button:hover{
-    cursor: pointer;
-    transform: scale(1.1) perspective(1px);
-}
-
-.ProfileInfoEditing form {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    background-color: whitesmoke;
-    flex-direction: column;
-    height: 75vh;
-    width: 100%;
-}
-
-/* div.ProfileInfoEditing, .ProfileInfo>button {
+div.ProfileInfoEditing, .ProfileInfo>button {
     display:flex;
     flex-direction:column;
     margin-top: 2.5%;
-} */
-
-/* div.ProfileInfo>button, form>button {
+}
+div.ProfileInfo>button, form>button {
     font-size:medium;
     padding: 1%;
     margin: 0% 0% 1% 0% 
-} */
+}

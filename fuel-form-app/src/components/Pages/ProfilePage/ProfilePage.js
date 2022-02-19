@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
+//import StateDropDown from '../FuelFormPage/util/FuelForm/StateDropDown/StateDropDown';
+import AddressData from '../FuelFormPage/util/FuelForm/AddressData/AddressData';
 import './ProfilePage.css'
 
 function ProfilePage() {
-
-  /*var User = {
-    firstName:'',
-    lastName:'',
-    addressLine1:'',
-    addressLine2:'',
-    city:'',
-    stateCode:'',
-    zipcode:''
-  }*/
 
   const [hidden, setHidden] = useState(true);
 
@@ -33,8 +25,8 @@ function ProfilePage() {
   const saveChanges = async e => {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify(User));
+    setHidden(hidden => !hidden);
   }
-
 
   return (
     <div>
@@ -52,16 +44,16 @@ function ProfilePage() {
             <span className='LastNameDisplay'>{User.lastName}</span> {/*Fill these fields in with actual data later!*/}
           </div>
 
-          <div className='UserAddressDisplayClass' id='UserAddressDisplayID'>
-            <span className='Address1Display'>{User.addressLine1} </span> <br></br>
-            <span className='Address2Display'>{User.addressLine2}</span> <br></br>
-            <span className='CityDisplay'>{User.city}, </span>
-            <span className='StateDisplay'>{User.stateCode} </span>
-            <span className='ZipcodeDisplay'>{User.zipcode}</span>
-          </div>
+          <AddressData 
+            addressLine1 = {User.addressLine1}
+            addressLine2 = {User.addressLine2}
+            city = {User.city}
+            stateCode = {User.stateCode}
+            zipcode = {User.zipcode}
+          />
 
           <button 
-            onClick={() => setHidden(hidden => !hidden)} className='editbutton'>Edit Profile Information
+            onClick={() => setHidden(hidden => !hidden)}>Edit Profile Information
           </button>
 
         </div>
@@ -73,7 +65,7 @@ function ProfilePage() {
           <form onSubmit={saveChanges} >
 
             <button
-              onClick={() => setHidden(hidden => !hidden)} className='bttn'>Cancel Editing Profile Information
+              onClick={() => setHidden(hidden => !hidden)}>Cancel Editing Profile Information
             </button>
 
             <h2>Full Name</h2>
@@ -174,8 +166,8 @@ function ProfilePage() {
               </select>
               <label htmlFor='stateForm'>State</label>
 
-              <input 
-                type='text' 
+              <input inputMode='numeric'
+                type='number' 
                 id='zipcodeForm' 
                 name='zipcodeForm' 
                 maxLength={9} 
@@ -185,7 +177,7 @@ function ProfilePage() {
               </input>
               <label htmlFor='zipcodeForm'>Zip Code</label>
 
-            <button type="submit" className='bttn'>Save Changes</button>
+            <button type="submit">Save Changes</button>
 
           </form>
         </div> }

@@ -13,7 +13,7 @@
     justify-content: center;
 }
 
-.loginForm .signin{
+.signin{
     font-family: 'Manrope';
     font-size: 25px;
     color: var(--main-color);
@@ -24,12 +24,13 @@
     margin-bottom: 50px;
 }
 
-.loginForm form{
+.loginForm{
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: whitesmoke;
     flex-direction: column;
+    
     height: 75vh;
 }
 

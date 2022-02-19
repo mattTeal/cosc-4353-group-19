@@ -5,7 +5,6 @@ import './LoginPage.css'
 function LoginPage() {
 
   //edit to have variables that hold the username and password
-  //create an onlick for submit to link to the profile page
 
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
@@ -57,7 +56,7 @@ function LoginPage() {
       <div className="loginForm">
         <form onSubmit={submitHandler}>
           <div className="signin">
-            <label>Sign In</label>
+            <label>SignIn</label>
           </div>
 
           <div className="login_container">
@@ -98,7 +97,7 @@ function LoginPage() {
       <NavBar/>
       <div className="login-form">
         <div className="title">
-          {/* <h1 id="login-header">LoginPage</h1> */}
+          <h1 id="login-header">LoginPage</h1>
           {submit ? <div>Signed in successfully!</div> : showForm}
         </div>
       </div>

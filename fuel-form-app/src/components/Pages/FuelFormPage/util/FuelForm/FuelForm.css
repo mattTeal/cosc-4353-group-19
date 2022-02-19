@@ -21,10 +21,10 @@
 }
 
 form {
-    display: block;
     position: relative;
     display: flex;
     justify-content: center;
+    max-width: fit-content;
 }
 
 form .form-inner h2 {
@@ -71,10 +71,11 @@ input[type="submit"]:hover {
 
 form .form-inner {
     position: relative;
-    display: block;
+    max-width: fit-content;
     background-color:whitesmoke;
     padding: 30px;
     z-index: 2;
+    flex-grow: 1;
 }
 
 form .form-inner .form-group {
