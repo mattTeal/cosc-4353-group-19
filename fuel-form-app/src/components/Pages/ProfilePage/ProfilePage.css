@@ -1,0 +1,26 @@
+label {
+    display:block;
+    color:rgb(60, 67, 75);
+    font-size:smaller;
+    padding: 0px 5px 10px 0px;
+}
+input, form {
+    display:block;
+    width: fit-content, 50%;
+    font-size:medium;
+}
+div.ProfileContainer {
+    display:flex;
+    flex-direction:column;
+    padding:2.5%;
+}
+div.ProfileInfoEditing, .ProfileInfo>button {
+    display:flex;
+    flex-direction:column;
+    margin-top: 2.5%;
+}
+div.ProfileInfo>button, form>button {
+    font-size:medium;
+    padding: 1%;
+    margin: 0% 0% 1% 0% 
+}
