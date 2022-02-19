@@ -52,7 +52,7 @@ function RegisterPage() {
       <form onSubmit={submitHandler}>
 
       <div className="signup">
-            <label>Sign Up</label>
+            <h3>Sign Up</h3>
           </div>
 
         <div className="register_container">
@@ -80,9 +80,12 @@ function RegisterPage() {
         <div className="butt_container">
           <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
         </div>
+        <div>
+          <a href="/" id="linkToReg">Already have an account? Login</a>
+        </div>
       </form>
     </div>
-
+      
       <div>
       <footer id="copyright">
         <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
@@ -94,7 +97,6 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        <NavBar/>
         {!submit ? showForm : <div>Signed Up successfully!</div>}
       </div>
   );
