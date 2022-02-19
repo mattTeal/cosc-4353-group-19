@@ -10,8 +10,6 @@ then,
 
 ```cd fuel-form-app```
 
-```cd fuel-form-app```
-
 Install npm and yarn
 
 ```npm install```
@@ -20,6 +18,8 @@ Install npm and yarn
 
 ```yarn install```
 
-To launch a local instance of the app, enter in console yarn start
+To launch a local instance of the app, enter in console 
+
+```yarn start```
 
 If all goes accordingly, the application should launch in your default browswer. If not, try navigating to localhost:3000 in your browser.
