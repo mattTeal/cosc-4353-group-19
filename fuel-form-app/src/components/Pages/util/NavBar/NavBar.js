@@ -12,7 +12,7 @@ const NavBar = () => {
                     <div className="right-nav">
                         <ul>
                             <li><a href="/profile">Profile</a></li>
-                            <li><a href="/login">Sign Out</a></li>
+                            <li><a href="/">Sign Out</a></li>
                         </ul>
                     </div>
                 </nav>
