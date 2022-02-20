@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 //import StateDropDown from '../FuelFormPage/util/FuelForm/StateDropDown/StateDropDown';
-import AddressData from '../FuelFormPage/util/FuelForm/AddressData/AddressData';
+import AddressData from '../FuelFormPage/util/AddressData/AddressData';
 import './ProfilePage.css'
 
 function ProfilePage() {
