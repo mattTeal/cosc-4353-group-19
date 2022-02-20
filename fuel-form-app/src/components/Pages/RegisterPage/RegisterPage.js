@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {callback, useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
@@ -13,6 +13,7 @@ function RegisterPage() {
       pass: '',
       confirmpass: ''
     });
+    const [passwordValid, setPasswordValid] = useState(false);
 
     const changeHandler = (e) => {
       const {name, value} = e.target
@@ -24,14 +25,14 @@ function RegisterPage() {
 
     const submitHandler = (e) => {
       e.preventDefault();
+      setsubmit(passwordValid);
       seterrmsg(ValiditePass());
-      setsubmit(true);
     }
 
     useEffect(
       () => {
         if(Object.keys(errmsg).length === 0 && submit) {
-          // TO-DO
+          callback();
         }
       }, [errmsg]
     );
@@ -39,9 +40,10 @@ function RegisterPage() {
   function ValiditePass(){
 
     if(vals.confirmpass !== vals.pass){
+      setPasswordValid(false);
       errmsg.confirmpass = 'Passwords do not match'
     }
-
+    setPasswordValid(true);
     return errmsg;
   }
 
