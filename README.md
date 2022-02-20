@@ -20,6 +20,10 @@ Install npm and yarn
 
 To launch a local instance of the app, enter in console 
 
+```npm start```
+
+or
+
 ```yarn start```
 
 If all goes accordingly, the application should launch in your default browswer. If not, try navigating to localhost:3000 in your browser.
