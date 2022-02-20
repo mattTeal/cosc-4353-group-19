@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FuelFormPage } from '..';
 import './LoginPage.css'
 
 function LoginPage() {
@@ -55,7 +56,7 @@ function LoginPage() {
       <div className="loginForm">
         <form onSubmit={submitHandler}>
           <div className="signin">
-            <label>SignIn</label>
+            <h3>Sign In</h3>
           </div>
 
           <div className="login_container">
@@ -92,14 +93,15 @@ function LoginPage() {
       
 
   return (
-    <>
+    <div>
+      {/* <NavBar/> */}
       <div className="login-form">
         <div className="title">
-          <h1 id="login-header">LoginPage</h1>
-          {submit ? <div>Signed in successfully!</div> : showForm}
+          {/* <h1 id="login-header">LoginPage</h1> */}
+          {submit ? <FuelFormPage/> : showForm}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

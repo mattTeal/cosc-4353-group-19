@@ -1,0 +1,21 @@
+table, th, td {
+    border: 1px solid;
+    border-color: black; 
+    border-collapse: collapse;
+
+}
+table {
+    width: 100%;
+    word-break: break-word;
+}
+th {
+    background-color: #FF4500;
+    color: white;
+}
+th,td {
+    padding: .5%;
+}
+td {
+    background-color: white;
+    width: fit-content;
+}
