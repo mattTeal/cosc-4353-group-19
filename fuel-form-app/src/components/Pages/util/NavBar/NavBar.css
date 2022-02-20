@@ -1,20 +1,67 @@
 .topnav {
-  background-color: #fff;
-  overflow: hidden;
+  background: white;
+  padding: 1em;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
+  text-align: right;
+  font-family: 'Manrope';
+}
+
+.topnav .compName{
+  text-decoration: none;
+  font-weight: bolder;
+  color: black;
+  font-size: 25px;
+  margin: none;
+  padding: 1em;
+}
+
+.compName span{
+  color: #FF4500;
+}
+
+.topnav nav{
+  display: flex;
+}
+
+.topnav .container{
+  display: flex;
+  place-content: space-between;
+}
+
+.topnav .container .left-nav {
+  color: #f2f2f2;
+  text-align: left;
+  font-size: 17px;
+  margin: none;
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
+nav ul.right-nav {
   color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  text-align: right;
   font-size: 17px;
+  margin: none;
+}
+
+nav ul li{
+  list-style-type: none;
+  overflow: hidden;
+  float: left;
+}
+
+nav a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 1em;
+  margin-top: none;
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
+.topnav .right-nav a:hover {
+  background-color: #FFEBCD;
   color: #FF4500;
 }

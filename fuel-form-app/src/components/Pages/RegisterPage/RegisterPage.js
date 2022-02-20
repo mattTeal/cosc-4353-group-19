@@ -1,5 +1,4 @@
-import React, {callback, useEffect, useState } from 'react';
-import NavBar from '../util/NavBar/NavBar'
+import React, { useEffect, useState } from 'react';
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -32,9 +31,9 @@ function RegisterPage() {
     useEffect(
       () => {
         if(Object.keys(errmsg).length === 0 && submit) {
-          callback();
+          
         }
-      }, [errmsg]
+      }, [errmsg, submit]
     );
 
   function ValiditePass(){
@@ -82,6 +81,9 @@ function RegisterPage() {
         <div className="butt_container">
           <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
         </div>
+        <div>
+            <a href="/" id="linkToReg">Already have an account? Login</a>
+        </div>
       </form>
     </div>
 
@@ -96,7 +98,6 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        <NavBar/>
         {!submit ? showForm : <div>Signed Up successfully!</div>}
       </div>
   );
