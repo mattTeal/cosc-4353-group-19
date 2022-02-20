@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
+import { Navigate } from 'react-router';
 import AuthContext from '../../../context/AuthProvider'
 import './LoginPage.css'
 
@@ -107,7 +108,7 @@ function LoginPage() {
       <div className="login-form">
         <div className="title">
           <h1 id="login-header">LoginPage</h1>
-          {submit ? <div>S  igned in successfully!</div> : showForm}
+          {submit ? <Navigate to="/fuel"/> : showForm}
         </div>
       </div>
     </div>
