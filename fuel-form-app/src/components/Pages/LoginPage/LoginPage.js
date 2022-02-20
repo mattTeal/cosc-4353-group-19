@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FuelFormPage } from '..';
+import { Navigate } from 'react-router-dom';
 import './LoginPage.css'
 
 function LoginPage() {
@@ -98,7 +98,7 @@ function LoginPage() {
       <div className="login-form">
         <div className="title">
           {/* <h1 id="login-header">LoginPage</h1> */}
-          {submit ? <FuelFormPage/> : showForm}
+          {submit ? <Navigate to="/fuel"/> : showForm}
         </div>
       </div>
     </div>
