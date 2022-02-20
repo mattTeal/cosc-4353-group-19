@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -12,6 +13,7 @@ function RegisterPage() {
       pass: '',
       confirmpass: ''
     });
+    const [passwordValid, setPasswordValid] = useState(false);
 
     const changeHandler = (e) => {
       const {name, value} = e.target
@@ -23,8 +25,8 @@ function RegisterPage() {
 
     const submitHandler = (e) => {
       e.preventDefault();
+      setsubmit(passwordValid);
       seterrmsg(ValiditePass());
-      setsubmit(true);
     }
 
     useEffect(
@@ -38,9 +40,10 @@ function RegisterPage() {
   function ValiditePass(){
 
     if(vals.confirmpass !== vals.pass){
+      setPasswordValid(false);
       errmsg.confirmpass = 'Passwords do not match'
     }
-
+    setPasswordValid(true);
     return errmsg;
   }
 
@@ -51,7 +54,7 @@ function RegisterPage() {
       <form onSubmit={submitHandler}>
 
       <div className="signup">
-            <h3>Sign Up</h3>
+            <label>Sign Up</label>
           </div>
 
         <div className="register_container">
@@ -79,12 +82,9 @@ function RegisterPage() {
         <div className="butt_container">
           <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
         </div>
-        <div>
-          <a href="/" id="linkToReg">Already have an account? Login</a>
-        </div>
       </form>
     </div>
-      
+
       <div>
       <footer id="copyright">
         <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
@@ -96,6 +96,7 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
+        <NavBar/>
         {!submit ? showForm : <div>Signed Up successfully!</div>}
       </div>
   );
