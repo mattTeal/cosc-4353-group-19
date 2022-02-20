@@ -96,7 +96,7 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        {!submit ? showForm : <Navigate to ="/fuel"/>}
+        {!submit ? showForm : <Navigate to ="/profile"/>}
       </div>
   );
 }
