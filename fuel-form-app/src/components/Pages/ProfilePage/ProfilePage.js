@@ -31,19 +31,14 @@ function ProfilePage() {
   return (
     <div>
       <NavBar />
-
       <div className='ProfileContainer'>
-
         <h1>Profile</h1>
-
         {hidden ? 
         <div className='ProfileInfo' id='ProfileInfoDisplay'>
-
           <div className='FullNameDisplay'> {/*This div could be unnecessary*/}
             <span className='FirstNameDisplay'>{User.firstName} </span>
             <span className='LastNameDisplay'>{User.lastName}</span> {/*Fill these fields in with actual data later!*/}
           </div>
-
           <AddressData 
             addressLine1 = {User.addressLine1}
             addressLine2 = {User.addressLine2}
@@ -51,19 +46,15 @@ function ProfilePage() {
             stateCode = {User.stateCode}
             zipcode = {User.zipcode}
           />
-
           <button 
             onClick={() => setHidden(hidden => !hidden)}>Edit Profile Information
           </button>
-
         </div>
 
         :
 
         <div className='ProfileInfoEditing' id='ProfileInfoEditingDisplay'>
-
           <form onSubmit={saveChanges} >
-
             <button
               onClick={() => setHidden(hidden => !hidden)}>Cancel Editing Profile Information
             </button>
@@ -86,7 +77,7 @@ function ProfilePage() {
                 required>
               </input>
               <label htmlFor='address1Form'>Address Line 1</label>
-    
+              
               <input 
                 type='text' 
                 id='address2Form' 
@@ -96,7 +87,7 @@ function ProfilePage() {
                 value = {User.addressLine2}>
               </input>
               <label htmlFor='address2Form'>Address Line 2</label>
-
+              
               <input 
                 type='text' 
                 id='cityForm' 
@@ -107,11 +98,10 @@ function ProfilePage() {
                 required>  
               </input>
               <label htmlFor='cityForm'>City</label>
-
+              
               <select 
               value={User.stateCode}
-              onChange={e => setUser({...User, stateCode: e.target.value})} >
-
+              onChange={e => setUser({...User, stateCode: e.target.value})}>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AR">AR</option>	
@@ -178,13 +168,10 @@ function ProfilePage() {
               <label htmlFor='zipcodeForm'>Zip Code</label>
 
             <button type="submit">Save Changes</button>
-
           </form>
         </div> }
-
       </div>
       <br />
-      
       <div>
         <footer id="copyright">
           <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
