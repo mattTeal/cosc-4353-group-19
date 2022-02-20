@@ -96,7 +96,6 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        <NavBar/>
         {!submit ? showForm : <div>Signed Up successfully!</div>}
       </div>
   );
