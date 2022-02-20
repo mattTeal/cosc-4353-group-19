@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from '../util/NavBar/NavBar'
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -81,6 +80,9 @@ function RegisterPage() {
         
         <div className="butt_container">
           <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
+        </div>
+        <div>
+            <a href="/" id="linkToReg">Already have an account? Login</a>
         </div>
       </form>
     </div>
