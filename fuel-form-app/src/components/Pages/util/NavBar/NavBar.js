@@ -6,7 +6,7 @@ const NavBar = () => {
         <div className="topnav">
             <div className="container">
                 <div className="left-nav">
-                        <a href="/" className="compName"><span>Fi</span>eco</a>
+                        <a href="/fuel" className="compName"><span>Fi</span>eco</a>
                     </div>
                 <nav>  
                     <div className="right-nav">
