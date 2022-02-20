@@ -5,12 +5,22 @@
     --secondary-color: #191970;
 }
 
-#login-header{
+/* #login-header{
     font-family: 'Manrope';
     color: var(--main-color);
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+
+.loginForm{
+    font-family: 'Manrope';
+    color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
 }
 
 .signin{
@@ -24,13 +34,12 @@
     margin-bottom: 50px;
 }
 
-.loginForm{
+.loginForm form{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: whitesmoke;
-    flex-direction: column;
-    
     height: 75vh;
 }
 
@@ -70,7 +79,7 @@ a:hover{
     align-items: center;
 }
 
-input[type = "submit"]{
+.loginForm input[type = "submit"]{
     background-color: var(--main-color);
     color: white;
     font-weight: bold;
@@ -84,7 +93,7 @@ input[type = "submit"]{
     margin-top: 5px;
 }
 
-input[type = "submit"]:hover{
+.loginForm input[type = "submit"]:hover{
     cursor: pointer;
     transform: scale(1.1) perspective(1px);
 }
