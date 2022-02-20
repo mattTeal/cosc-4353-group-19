@@ -11,6 +11,7 @@ const NavBar = () => {
                 <nav>  
                     <div className="right-nav">
                         <ul>
+                            <li><a href="/fuel">Home</a></li>
                             <li><a href="/profile">Profile</a></li>
                             <li><a href="/">Sign Out</a></li>
                         </ul>
