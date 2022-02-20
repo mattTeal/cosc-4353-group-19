@@ -8,10 +8,12 @@
 .ProfileContainer{
     font-family: 'Manrope';
     color: var(--main-color);
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; */
+    justify-content: center;
+    background-color: whitesmoke;
+    padding: 2em;
 }
 
 .ProfileContainer h1{
@@ -27,10 +29,14 @@
 .ProfileInfo{
     background-color: whitesmoke;
     height: 75vh;
+    width: 100%;
 }
 
 .ProfileInfoEditing{
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: whitesmoke;
+    height: 75vh;
 }
 
 
@@ -50,7 +56,7 @@
     padding: .75em;
 }
 
-button{
+.ProfileContainer button{
     background-color: var(--main-color);
     color: white;
     font-weight: bold;
@@ -64,7 +70,7 @@ button{
     margin-top: 5px;
 }
 
-button:hover{
+.ProfileContainer button:hover{
     cursor: pointer;
     transform: scale(1.1) perspective(1px);
 }
