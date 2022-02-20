@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom'
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -95,7 +96,7 @@ function RegisterPage() {
   return (
 
       <div className="register-form">
-        {!submit ? showForm : <div>Signed Up successfully!</div>}
+        {!submit ? showForm : <Navigate to ="/fuel"/>}
       </div>
   );
 }
