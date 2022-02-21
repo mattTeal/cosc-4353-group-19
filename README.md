@@ -1,10 +1,10 @@
 # cosc-4368-group-19
-Source code for assignments from COSC 4368.
+Source code for assignments from COSC 4353.
 
 Getting Started
 In console, enter
 
-```git clone https://github.com/tattmeal/cosc-4368-group-19.git```
+```git clone https://github.com/tattmeal/cosc-4353-group-19.git```
 
 then,
 
@@ -19,6 +19,10 @@ Install npm and yarn
 ```yarn install```
 
 To launch a local instance of the app, enter in console 
+
+```npm start```
+
+or
 
 ```yarn start```
 

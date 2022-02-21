@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './FuelForm.css'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
-import AddressData from './AddressData/AddressData'
+import AddressData from '../AddressData/AddressData'
 
 function FuelForm(props) {
 

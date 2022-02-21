@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../util/NavBar/NavBar';
 import FuelForm from './util/FuelForm/FuelForm'
-import QuoteTable from './util/FuelForm/QuoteTable/QuoteTable';
+import QuoteTable from './util/QuoteTable/QuoteTable';
 import getStorageValue from '../util/useLocalStorage/useLocalStorage'
 import './FuelFormPage.css';
 
