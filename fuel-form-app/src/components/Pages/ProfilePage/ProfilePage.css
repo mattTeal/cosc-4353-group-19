@@ -14,17 +14,23 @@
     justify-content: center;
     background-color: whitesmoke;
     padding: 2em;
+    min-height: fit-content;
 }
 
 .ProfileContainer h1{
     margin-bottom: 1em;
 }
 
-.ProfileInfo .FullNameDisplay, .UserAddressDisplayClass{
+.ProfileInfo {
     font-family: 'Manrope';
     color: black;
     display: flex;
     flex-direction: column;
+    max-width:fit-content;
+}
+.UserAddressDisplayClass, .FullNameDisplay{
+    font-family: 'Manrope';
+    color: black;
 }
 .ProfileInfo{
     background-color: whitesmoke;
@@ -37,6 +43,7 @@
     justify-content: center;
     box-shadow: whitesmoke;
     height: 75vh;
+    width: 70%;
 }
 
 
