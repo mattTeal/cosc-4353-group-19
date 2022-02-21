@@ -20,101 +20,99 @@ function QuoteTable(props) {
 
     //data in table
 
-    const data = React.useMemo(() =>
+  const data = React.useMemo(() =>
+  [
+    {
+    name: props.firstName + " " + props.lastName,
+    address: props.addressLine1 + " " + props.addressLine2 + " " + 
+    props.city + ", " + props.stateCode + " " + props.zipcode,
+    date: props.date,
+    gallons: props.gallons,
+    ppg: 30,
+    total: props.gallons * 30
+    },
+  ],
+  [props.firstName, props.lastName, props.addressLine1, props.addressLine2, props.city, props.stateCode, props.zipcode, props.date, props.gallons] //<- not that anyone cares but this is the depedency array!
+  )
+
+  //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.
+  const columns = React.useMemo(() => 
     [
-        {
-        name: props.firstName + " " + props.lastName,
-        address: props.addressLine1 + " " + props.addressLine2 + " " + 
-        props.city + ", " + props.stateCode + " " + props.zipcode,
-        date: props.date,
-        gallons: props.gallons,
-        ppg: 30,
-        total: props.gallons * 30
-        },
+      {
+        Header: 'User Info',
+        columns: 
+          [
+            {
+            Header: 'Name',
+            accessor: 'name', // <- 'accessor' in columns is the 'key' in data
+            },
+            {
+            Header: 'Address',
+            accessor: 'address',
+            },
+          ],
+      },
+      {
+        Header: 'Quote Info',
+        columns: 
+          [
+            {
+                Header: 'Delivery Date',
+                accessor: 'date',
+            },
+            {
+                Header: '# Gallons',
+                accessor: 'gallons',
+            },
+            {
+                Header: '$ / Gallon',
+                accessor: 'ppg',
+            },
+            {
+                Header: 'Total',
+                accessor: 'total',
+            },
+          ],
+      },
     ],
-    [props.firstName, props.lastName, props.addressLine1, props.addressLine2, props.city, props.stateCode, props.zipcode, props.date, props.gallons] //<- not that anyone cares but this is the depedency array!
-    )
+    []
+  )
 
-    //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.
+      //useTable hook
+  const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+  } = useTable({columns, data})
 
-    const columns = React.useMemo(() => 
-        [
-            {
-            Header: 'User Info',
-            columns: 
-                [
-                    {
-                    Header: 'Name',
-                    accessor: 'name', // <- 'accessor' in columns is the 'key' in data
-                    },
-                    {
-                    Header: 'Address',
-                    accessor: 'address',
-                    },
-                ],
-            },
-            {
-            Header: 'Quote Info',
-            columns: 
-                [
-                    {
-                        Header: 'Delivery Date',
-                        accessor: 'date',
-                    },
-                    {
-                        Header: '# Gallons',
-                        accessor: 'gallons',
-                    },
-                    {
-                        Header: '$ / Gallon',
-                        accessor: 'ppg',
-                    },
-                    {
-                        Header: 'Total',
-                        accessor: 'total',
-                    },
-                ],
-            },
-        ],
-        []
-       )
-
-        //useTable hook
-        const {
-            getTableProps,
-            getTableBodyProps,
-            headerGroups,
-            rows,
-            prepareRow,
-        } = useTable({columns, data})
-
-        //rendering
-        return (
-            <table {...getTableProps()}>
-              <thead>
-                {headerGroups.map(headerGroup => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                      <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
-                  prepareRow(row)
-                  return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                      })}
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-        )
-
+  //rendering
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map(row => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
 }
 
 export default QuoteTable;

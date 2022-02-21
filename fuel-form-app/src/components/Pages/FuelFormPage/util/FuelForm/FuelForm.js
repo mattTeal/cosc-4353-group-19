@@ -4,7 +4,6 @@ import './FuelForm.css'
 import AddressData from '../AddressData/AddressData'
 
 function FuelForm(props) {
-
     const userData = {
         addressLine1: props.addressLine1,
         addressLine2: props.addressLine2,
@@ -22,7 +21,6 @@ function FuelForm(props) {
     }
 
     return (
-        <>
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Find out how much you can save!</h2>
@@ -57,7 +55,6 @@ function FuelForm(props) {
                 </div>
             </div>
         </form>
-        </>
     )
 }
 

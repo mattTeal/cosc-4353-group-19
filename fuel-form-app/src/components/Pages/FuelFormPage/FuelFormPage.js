@@ -6,7 +6,6 @@ import getStorageValue from '../util/useLocalStorage/useLocalStorage'
 import './FuelFormPage.css';
 
 function FuelFormPage() {
-
   const userData = getStorageValue("user", {
     firstName:"",
     lastName:"",
@@ -28,7 +27,6 @@ function FuelFormPage() {
   return (
     <div id="OuterDiv">
         <NavBar/>
-
         <div id="FuelFormPageContent">
           <FuelForm 
             addressLine1 = {userData.addressLine1}
@@ -54,13 +52,11 @@ function FuelFormPage() {
             />
           </div>
         </div>
-
         <div>
             <footer id="copyright">
             <small>&copy; Copyright 2022, Fuel Form Page Group 19</small>
             </footer>
         </div>
-        
     </div>
   );
 }
