@@ -1,29 +1,30 @@
 # cosc-4368-group-19
+
 Source code for assignments from COSC 4353.
 
 Getting Started
 In console, enter
 
-```git clone https://github.com/tattmeal/cosc-4353-group-19.git```
+`git clone https://github.com/tattmeal/cosc-4353-group-19.git`
 
 then,
 
-```cd fuel-form-app```
+`cd client`
 
 Install npm and yarn
 
-```npm install```
+`npm install`
 
-```npm install -g yarn```
+`npm install -g yarn`
 
-```yarn install```
+`yarn install`
 
-To launch a local instance of the app, enter in console 
+To launch a local instance of the app, enter in console
 
-```npm start```
+`npm start`
 
 or
 
-```yarn start```
+`yarn start`
 
 If all goes accordingly, the application should launch in your default browswer. If not, try navigating to localhost:3000 in your browser.
