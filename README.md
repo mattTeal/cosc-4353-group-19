@@ -1,4 +1,4 @@
-# cosc-4368-group-19
+# cosc-4353-group-19
 
 Source code for assignments from COSC 4353.
 
@@ -28,3 +28,4 @@ or
 `yarn start`
 
 If all goes accordingly, the application should launch in your default browswer. If not, try navigating to localhost:3000 in your browser.
+
