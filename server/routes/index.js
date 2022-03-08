@@ -7,6 +7,6 @@ router.get("/", function(req, res) {
 });
 
 const profileRouter = require("./profileRoutes");
-//app.use('/profile', profileRouter);
+app.use('/profile', profileRouter);
 
 module.exports = router;

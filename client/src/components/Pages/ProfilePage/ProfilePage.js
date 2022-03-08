@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 //import StateDropDown from '../FuelFormPage/util/FuelForm/StateDropDown/StateDropDown';
 import AddressData from '../FuelFormPage/util/AddressData/AddressData';
@@ -8,7 +8,9 @@ function ProfilePage() {
 
   const [hidden, setHidden] = useState(true);
 
-  const [User, setUser] = useState(() => {
+  // localStorage code from Assignment2
+
+  /*const [User, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     const initialValue = JSON.parse(savedUser);
     return initialValue || {
@@ -20,7 +22,11 @@ function ProfilePage() {
                             stateCode:"",
                             zipcode:""
                           };
-  });
+  });*/
+
+  useEffect(() => {
+      fetch()
+  })
 
   const saveChanges = async e => {
     e.preventDefault();
@@ -100,7 +106,7 @@ function ProfilePage() {
               <label htmlFor='cityForm'>City</label>
               
               <select 
-              value={User.stateCode}
+              value={User.stateCode} name="stateForm"
               onChange={e => setUser({...User, stateCode: e.target.value})}>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
