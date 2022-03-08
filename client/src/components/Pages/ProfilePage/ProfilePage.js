@@ -24,9 +24,9 @@ function ProfilePage() {
                           };
   });*/
 
-  useEffect(() => {
-      fetch()
-  })
+  // useEffect(() => {
+      
+  // }, []); //<- do this from postman
 
   const saveChanges = async e => {
     e.preventDefault();
