@@ -13,7 +13,7 @@ let { mockDB } = require("../mockdatabase");
 */
 
 router.get('/', (req, res) => {
-    res.send(mockDB["quoteHistory"][0]); // <- broken right now 
+    //res.send(mockDB["quoteHistory"][0]); 
 });
 
 router.post('/', (req, res) => {
