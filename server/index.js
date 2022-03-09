@@ -9,7 +9,12 @@ const port = process.env.PORT || 8080;
 const baseDir = process.cwd();
 app.use(express.urlencoded( {extended: true} ));
 
-app.use("/api", router);
+app.use(express.json());
+app.use("/api", router) 
+
+app.get("/", (req, res) => {
+    res.send("hello root")
+});
 // app.use(express.static(path.join(baseDir, 'build'), {
 //     extensions: ['html', 'htm']
 // }));
