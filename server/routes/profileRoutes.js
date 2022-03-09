@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+let { mockDB } = require("../mockdatabase");
 
 /*form parameters:
     firstName:"firstNameForm",
@@ -12,7 +13,7 @@ const router = express.Router();
 */
 
 router.get('/', (req, res) => {
-    
+    res.send(mockDB["quoteHistory"][0]); // <- broken right now 
 });
 
 router.post('/', (req, res) => {
