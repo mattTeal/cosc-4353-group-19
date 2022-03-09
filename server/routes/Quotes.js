@@ -2,21 +2,21 @@ const express = require("express");
 let router = express.Router();
 
 router
-    .route("/prices")
+    .route("/")
     .get((req, res) => {
-        res.send("hello /Quotes/prices");
+        res.send("hello /Quotes/");
     })
     .post((req, res) => {
-        res.send("hello /Quotes/prices");
+        res.send("hello /Quotes/");
     })
 
 router
-    .route("/prices/:priceid")
+    .route("/:quoteid")
     .get((req, res) => {
-        res.send("Hello /Quotes/Prices/" + req.params.priceid);
+        res.send("Hello /Quotes/" + req.params.quoteid);
     })
     .post((req, res) => {
-        res.send("Hello /Quotes/Prices/" + req.params.priceid);
+        res.send("Hello /Quotes/" + req.params.quoteid);
     })
 
 module.exports = router;
