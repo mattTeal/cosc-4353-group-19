@@ -31,7 +31,6 @@ function RegisterPage() {
   useEffect(
     () => {
       if(Object.keys(errmsg).length === 0 && submit) {
-        
       }
     }, [errmsg, submit]
   );
@@ -49,7 +48,7 @@ function RegisterPage() {
   const showForm = (
     <>
       <div className="registerForm">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} action="/api/register" method="POST">
           <div className="signup">
             <label>Sign Up</label>
           </div>

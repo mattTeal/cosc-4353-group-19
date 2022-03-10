@@ -50,18 +50,18 @@ function LoginPage() {
   const showForm = (
     <>
       <div className="loginForm">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} action="/api/login" method="POST">
           <div className="signin">
             <h3>Sign In</h3>
           </div>
           <div className="login_container">
             <label for="user" id="username">Username </label>
-            <input type="text" id="user" name="user" required></input>
+            <input type="text" id="user" name="username" required></input>
             {ErrorMessage("user")}
           </div>
           <div className="login_container"> 
             <label for="pass" id="password">Password </label>
-            <input type="password" id="pass" name="pass" required></input>
+            <input type="password" id="pass" name="password" required></input>
             {ErrorMessage("pass")}
           </div>
           <div className="butt_container">
