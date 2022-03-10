@@ -2,18 +2,8 @@ const express = require("express");
 const router = express.Router();
 let { mockDB } = require("../mockdatabase");
 
-/*form parameters:
-    firstName:"firstNameForm",
-    lastName:"",
-    addressLine1:"",
-    addressLine2:"",
-    city:"",
-    stateCode:"",
-    zipcode:""
-*/
-
 router.get('/', (req, res) => {
-    //res.send(mockDB["quoteHistory"][0]); 
+    res.status(200).send(mockDB.userProfileInfo);
 });
 
 router.post('/', (req, res) => {
@@ -30,8 +20,11 @@ router.post('/', (req, res) => {
 
     //input validation
 
+    //create user object
+    mockDB["userProfileInfo"] = JSON.stringify(addressData);
+
     //response
-    res.send(200);
+    res.status(200).send("Post completed with status code 200.");
 })
 
 // router.put('/:id', (req, res) => {

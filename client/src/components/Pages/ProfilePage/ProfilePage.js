@@ -10,8 +10,11 @@ function ProfilePage() {
 
   // localStorage code from Assignment2
 
-  /*const [User, setUser] = useState(() => {
+  const [User, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
+
+    //REPLACE LINE ABOVE THIS ONE WITH A REAL GET REQUEST 
+
     const initialValue = JSON.parse(savedUser);
     return initialValue || {
                             firstName:"",
@@ -21,8 +24,8 @@ function ProfilePage() {
                             city:"",
                             stateCode:"",
                             zipcode:""
-                          };
-  });*/
+                          }; // this whole thing might need to get implemented in the backend
+  });
 
   // useEffect(() => {
       
@@ -30,7 +33,8 @@ function ProfilePage() {
 
   const saveChanges = async e => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(User));
+    //localStorage.setItem("user", JSON.stringify(User));
+    
     setHidden(hidden => !hidden);
   }
 
@@ -60,7 +64,7 @@ function ProfilePage() {
         :
 
         <div className='ProfileInfoEditing' id='ProfileInfoEditingDisplay'>
-          <form onSubmit={saveChanges} >
+          <form action="http://localhost:8080/api/profile" method="POST">
             <button
               onClick={() => setHidden(hidden => !hidden)}>Cancel Editing Profile Information
             </button>
