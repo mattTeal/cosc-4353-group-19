@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../util/NavBar/NavBar';
 import FuelForm from './util/FuelForm/FuelForm'
 import QuoteTable from './util/QuoteTable/QuoteTable';
 import getStorageValue from '../util/useLocalStorage/useLocalStorage'
 import './FuelFormPage.css';
+
+import { getQuotes } from '../../../api/quoteBackend'
 
 function FuelFormPage() {
   const userData = getStorageValue("user", {
@@ -23,6 +25,10 @@ function FuelFormPage() {
       date: ""
     }
   );
+
+  useEffect(() => {
+    getQuotes();
+  }) 
 
   return (
     <div id="OuterDiv">

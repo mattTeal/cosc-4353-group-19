@@ -1,4 +1,4 @@
-const BASE_ENDPOINT = "https://www.localhost:8080"
+const BASE_ENDPOINT = "https://www.localhost:8080/users"
 const HEADER = {
     'Accept': 'application/json',
     'Content-Type': 'application/json;charset=UTF-8'

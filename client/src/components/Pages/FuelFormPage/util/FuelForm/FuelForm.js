@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './FuelForm.css'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
+import { createQuote } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
     const userData = {
@@ -16,8 +17,8 @@ function FuelForm(props) {
 
     const submitHandler = e => {
         e.preventDefault();
-        localStorage.setItem("quote", JSON.stringify(details)); // should eventually learn how to store arrays
-        // this will be replaced with a backend call in the future
+        const quote = { details };
+        createQuote(quote)
     }
 
     return (
