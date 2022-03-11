@@ -9,15 +9,17 @@ function ProfilePage() {
 
   const [User, setUser] = useState(
     {
-      firstName:"",
-      lastName:"",
-      addressLine1:"",
-      addressLine2:"",
-      city:"",
-      stateCode:"",
-      zipcode:""
-    } // this whole thing might need to get implemented in the backend
+      firstName: "",
+      lastName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      stateCode: "",
+      zipcode: ""
+    }
   );
+
+  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
     const url = "http://localhost:8080/api/profile/";
@@ -28,14 +30,58 @@ function ProfilePage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data); 
         setUser(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setHidden(false);
+      });
 
-  },[]);
+  },[hidden]);
 
-  const [hidden, setHidden] = useState(true);
+  //const [hidden, setHidden] = useState(); // this boolean will be replaced by user authenticated or profileComplete
+
+  let profileEditHandler = (e) => {
+    e.preventDefault();
+    
+    console.log(JSON.stringify(User));
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("firstNameForm", User.firstName);
+    urlencoded.append("lastNameForm", User.lastName);
+    urlencoded.append("address1Form", User.addressLine1);
+    urlencoded.append("address2Form", User.addressLine2);
+    urlencoded.append("cityForm", User.city);
+    urlencoded.append("stateForm", User.stateCode);
+    urlencoded.append("zipcodeForm", User.zipcode);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: 'follow'
+    };
+    
+    fetch("http://localhost:8080/api/profile/", requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => { throw new Error(text) });
+        }
+        else 
+          return response.text();
+      })
+      .then(result => {
+        console.log(result);
+        setHidden(hidden => !hidden);
+      })
+      .catch(error => {
+        alert(error);
+      });
+  }
 
   return (
     <div>
@@ -46,7 +92,7 @@ function ProfilePage() {
         <div className='ProfileInfo' id='ProfileInfoDisplay'>
           <div className='FullNameDisplay'> {/*This div could be unnecessary*/}
             <span className='FirstNameDisplay'>{User.firstName} </span>
-            <span className='LastNameDisplay'>{User.lastName}</span> {/*Fill these fields in with actual data later!*/}
+            <span className='LastNameDisplay'>{User.lastName}</span>
           </div>
           <AddressData 
             addressLine1 = {User.addressLine1}
@@ -56,22 +102,29 @@ function ProfilePage() {
             zipcode = {User.zipcode}
           />
           <button 
-            onClick={() => setHidden(hidden => !hidden)}>Edit Profile Information
+            onClick={() => {setHidden(hidden => !hidden);}}>Edit Profile Information
           </button>
         </div>
 
         :
 
         <div className='ProfileInfoEditing' id='ProfileInfoEditingDisplay'>
-          <form action="http://localhost:8080/api/profile" method="POST">
+          <form onSubmit={profileEditHandler} /*action="http://localhost:8080/api/profile" method="POST" */>
             <button
-              onClick={() => setHidden(hidden => !hidden)}>Cancel Editing Profile Information
+              onClick={() => {
+                if ((User.firstName === " " || User.firstName === "") && hidden === false) //replace with a "profile made" boolean
+                  alert("Please submit valid profile information!");
+                else {
+                  setHidden(hidden => !hidden);
+                }
+              }}>
+              Cancel Editing Profile Information
             </button>
 
             <h2>Full Name</h2>
-              <input type='text' id='firstNameForm' placeholder='eg. John' name='firstNameForm' maxLength={25} /*onChange={e => setUser({...User, firstName: e.target.value})} value = {User.firstName}*/ required></input>
+              <input type='text' id='firstNameForm' placeholder='eg. John' name='firstNameForm' maxLength={25} onChange={e => setUser({...User, firstName: e.target.value})} value = {User.firstName} required></input>
               <label htmlFor='firstNameForm'>First Name</label>
-              <input type='text' id='lastNameForm' placeholder='eg. Doe' name='lastNameForm' maxLength={25} /*onChange={e => setUser({...User, lastName: e.target.value})} value = {User.lastName}*/ required></input>
+              <input type='text' id='lastNameForm' placeholder='eg. Doe' name='lastNameForm' maxLength={25} onChange={e => setUser({...User, lastName: e.target.value})} value = {User.lastName} required></input>
               <label htmlFor='lastNameForm'>Last Name</label>
               <br />
 
@@ -81,8 +134,8 @@ function ProfilePage() {
                 id='address1Form' 
                 name='address1Form' 
                 maxLength={100} 
-                //onChange={e => setUser({...User, addressLine1: e.target.value})} 
-                //value = {User.addressLine1} 
+                onChange={e => setUser({...User, addressLine1: e.target.value})} 
+                value = {User.addressLine1} 
                 required>
               </input>
               <label htmlFor='address1Form'>Address Line 1</label>
@@ -92,8 +145,8 @@ function ProfilePage() {
                 id='address2Form' 
                 name='address2Form' 
                 maxLength={100} 
-                /*onChange={e => setUser({...User, addressLine2: e.target.value})} 
-                </form>value = {User.addressLine2}*/>
+                onChange={e => setUser({...User, addressLine2: e.target.value})} 
+                value = {User.addressLine2}>
               </input>
               <label htmlFor='address2Form'>Address Line 2</label>
               
@@ -102,15 +155,15 @@ function ProfilePage() {
                 id='cityForm' 
                 name='cityForm' 
                 maxLength={100} 
-                /*onChange={e => setUser({...User, city: e.target.value})} 
-                value = {User.city} */
+                onChange={e => setUser({...User, city: e.target.value})} 
+                value = {User.city}
                 required>  
               </input>
               <label htmlFor='cityForm'>City</label>
               
               <select 
-              /*value={User.stateCode}*/ name="stateForm"
-              /*onChange={e => setUser({...User, stateCode: e.target.value})}*/>
+              value={User.stateCode} name="stateForm"
+              onChange={e => setUser({...User, stateCode: e.target.value})}>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AR">AR</option>	
@@ -171,7 +224,7 @@ function ProfilePage() {
                 name='zipcodeForm' 
                 maxLength={9} 
                 minLength={5} 
-                //onChange={e => setUser({...User, zipcode: e.target.value})} value = {User.zipcode}
+                onChange={e => setUser({...User, zipcode: e.target.value})} value = {User.zipcode}
                 required>
               </input>
               <label htmlFor='zipcodeForm'>Zip Code</label>

@@ -12,20 +12,20 @@ exports.mockDB = {
         gallons: 0,
         totalCost: 0 */
     ],
-    "userProfileInfo": "" /*{
+    "userProfileInfo": {
         firstName:"",
         lastName:"",
         addressLine1:"",
         addressLine2:"",
         city:"",
-        stateCode:"",
+        stateCode: "AL", //lol
         zipcode:""
-    }*/
-    ,
+    },
     "authInfo": {
         username: "",
         password: "",
-        existingCustomer: true
+        existingCustomer: true,
+        profileCompleted: false,
     }
 };
 
