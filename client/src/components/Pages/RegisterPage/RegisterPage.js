@@ -30,6 +30,7 @@ function RegisterPage() {
   useEffect(
     () => {
       if(Object.keys(errmsg).length === 0 && submit) {
+        setPasswordValid(true);
       }
     }, [errmsg, submit]
   );
