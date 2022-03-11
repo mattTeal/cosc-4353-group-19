@@ -19,6 +19,8 @@ function ProfilePage() {
     }
   );
 
+  const [hidden, setHidden] = useState(true);
+
   useEffect(() => {
     const url = "http://localhost:8080/api/profile/";
 
@@ -28,14 +30,17 @@ function ProfilePage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data); 
         setUser(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setHidden(false);
+      });
 
-  },[]);
+  },[hidden]);
 
-  const [hidden, setHidden] = useState(User.firstName !== " " && User.firstName !== ""); // this boolean will be replaced by user authenticated or profileComplete
+  //const [hidden, setHidden] = useState(); // this boolean will be replaced by user authenticated or profileComplete
 
   let profileEditHandler = (e) => {
     e.preventDefault();
@@ -62,9 +67,20 @@ function ProfilePage() {
     };
     
     fetch("http://localhost:8080/api/profile/", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => { throw new Error(text) });
+        }
+        else 
+          return response.text();
+      })
+      .then(result => {
+        console.log(result);
+        setHidden(hidden => !hidden);
+      })
+      .catch(error => {
+        alert(error);
+      });
   }
 
   return (
