@@ -13,7 +13,7 @@ const NavBar = () => {
                         <ul>
                             <li><a href="/fuel">Home</a></li>
                             <li><a href="/profile">Profile</a></li>
-                            <li><a href="/">Sign Out</a></li>
+                            <li><a href="api/auth/logout">Sign Out</a></li>
                         </ul>
                     </div>
                 </nav>

@@ -1,40 +1,61 @@
-const express = require('express')
-const router = require('.')
-const authRouter = express.Router()
+const express = require('express');
+const router = express.Router();
 const passport = require('passport');
-const genPass = require('../valUsrPss').genPass;
+const findUser = require('../valUsrPss').findUser;
+const createUser = require('../valUsrPss').createUser;
 
-const valregex = /\w/;
+const valregex = /^\w+$/i;
+
+// router.get('/', (req, res) => {
+//     res.status(200).send("here at auth");
+// });
 
 //login route
-authRouter.post("/login", passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", {
     successReturnToOrRedirect: "/profile",
     failureRedirect: "/login",
     failureFlash: true
 }));
 
 //register route
-authRouter.post("/register", (req, res) => {
+router.post("/register", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    // validate these two are valid.
+    const confirmpass = req.body.confirmpass;
 
- 
+    console.log(req.body);
+
+    // validate these two are valid.
+    if(!valregex.test(username)){
+        return res.status(428).send({message: 'Bad username'})
+    }
+    else if(!valregex.test(password) || password != confirmpass){
+        return res.status(428).send({message: 'Bad password'})
+    }
+
     // Check if user already exists, if so bad.
+    if(findUser(username, password) != undefined){
+        return res.status(428).send({message: 'User already exists. Register with new user.'})
+        
+    }
 
     // Go ahead and create a new user.
+    createUser(username, password);
+
+    console.log(req.body);
 
     // Redirect them somewhere.
-    res.status(200).send({message: "Successful Creation"}).redirect("/profile")
+    return res.redirect("http://localhost:3000/profile");
+
+    // console.log(req.body);
+    // res.status(200).send();
 
 })
 
 //logout
-authRouter.post("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
     req.logout();
-    res.redirect("/login");
+    res.redirect("http://localhost:3000/login");
 })
 
-
-
-module.exports = authRouter
+module.exports = router;

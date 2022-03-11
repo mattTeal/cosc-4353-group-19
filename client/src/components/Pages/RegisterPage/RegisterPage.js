@@ -3,12 +3,11 @@ import { Navigate } from 'react-router-dom'
 import './RegisterPage.css'
 
 function RegisterPage() {
-  // edit to validate matching passwords and hold the variables
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
   const [vals, setVals] = useState({
-    user: '',
-    pass: '',
+    username: '',
+    password: '',
     confirmpass: ''
   });
 
@@ -23,7 +22,7 @@ function RegisterPage() {
   };
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setsubmit(passwordValid);
     seterrmsg(ValiditePass());
   }
@@ -48,19 +47,19 @@ function RegisterPage() {
   const showForm = (
     <>
       <div className="registerForm">
-        <form onSubmit={submitHandler} action="/api/register" method="POST">
+        <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/register" method="POST">
           <div className="signup">
             <label>Sign Up</label>
           </div>
           <div className="register_container">
             <label for="user" id="username">Username </label>
-            <input type="text" id="user" name="user" required 
+            <input type="text" id="user" name="username" required 
               value={vals.user} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
             <label for="pass" id="password">Password </label>
-            <input type="password" id="pass" name="pass" required 
+            <input type="password" id="pass" name="password" required 
               value={vals.pass} 
               onChange={changeHandler}></input>
           </div>

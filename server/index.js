@@ -1,13 +1,12 @@
-import passport from "passport";
+var passport = require("passport");
+require('./passport');
 
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const session = require("express-session");
 const router = require("./routes");
-
-//import authRouter from './routes/authRoutes.js'
-
+const morgan = require("morgan");
 
 dotenv.config();
 const app = express();
@@ -26,19 +25,17 @@ app.use(session({
   }
 }));
 
+app.use(morgan(':method :url :status'));
 app.use(passport.initialize());
-app.use(passport.session)
+app.use(passport.session());
+
+app.use("/api", router);
 
 app.use(express.static(path.join(baseDir, 'build'), {
     extensions: ['html', 'htm']
 }));
 
-app.use("/api", router);
-
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
   console.log(path.join(baseDir, 'client', 'build'))
 });
-
-
-export default app;

@@ -13,7 +13,7 @@ function LoginPage() {
   );
 
   const submitHandler = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
 
     var {user, pass} = document.forms[0];
     const data = tempLogin.find((users) => users.username === user.value);
@@ -50,7 +50,7 @@ function LoginPage() {
   const showForm = (
     <>
       <div className="loginForm">
-        <form onSubmit={submitHandler} action="/api/login" method="POST">
+        <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/login" method="POST">
           <div className="signin">
             <h3>Sign In</h3>
           </div>

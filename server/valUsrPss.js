@@ -1,4 +1,5 @@
-const crypto = require("crypto")
+const crypto = require("crypto");
+let {mockDB} = require('./mockdatabase');
 
 function genPass(password){
     var salt = crypto.randomBytes(32).toString('hex');
@@ -10,10 +11,46 @@ function genPass(password){
     };
 }
 
+function genUserid(){
+    var userid = crypto.randomBytes(16).toString('hex');
+    return userid
+}
+
+function findUser(username){
+    const user = mockDB.authInfo.find(u => u.username === username);
+    return user;
+}
+
+function findUserId(id){
+    const userid = mockDB.authInfo.find(u => u.id === id)
+    return userid;
+}
+
+function createUser(username, password){
+    const salthash = genPass(password);
+    const salt = salthash.salt;
+    const hash = salthash.hash;
+
+    const newUser = {
+        userId: genUserid(),
+        username: username,
+        hash: hash,
+        salt: salt,
+    };
+
+    mockDB['authInfo'] = JSON.stringify(newUser)
+
+}
+
+
 function validatePass(password, hash, salt){
     var verhash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
     return hash === verhash;
 }
 
-module.exports.validatePass = validPass;
+module.exports.validatePass = validatePass;
 module.exports.genPass = genPass;
+module.exports.genUserid = genUserid;
+module.exports.findUser = findUser;
+module.exports.findUserId = findUserId;
+module.exports.createUser = createUser;
