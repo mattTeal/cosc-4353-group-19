@@ -19,6 +19,16 @@ router.post('/', (req, res) => {
     }
 
     //input validation
+    const regexName = /^[a-zA-Z]+$/;
+    const regexStreet = /\b\d{1,6} +.{2,25}\b(avenue|ave|court|ct|street|st|drive|dr|lane|ln|road|rd|blvd|plaza|parkway|pkwy)[.,]?(.{0,25} +\b\d{5}\b)?/ig;
+
+    if (!regexName.test(addressData.firstName) || !regexName.test(addressData.lastName))
+        //res.status(400).send("First or last name contains invalid characters.");
+        res.status(400).send(`First (${req.body.firstNameForm}) or last name (${addressData.lastName}) contains invalid characters.`);
+    else if (!regexStreet.test(addressData.addressLine1)) 
+        res.status(400).send("Address line 1 invalid. Please try again with valid input.")
+    
+
 
     //create user object
     mockDB["userProfileInfo"] = JSON.stringify(addressData);

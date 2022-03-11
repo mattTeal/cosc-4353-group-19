@@ -35,26 +35,29 @@ function ProfilePage() {
 
   },[]);
 
-  const [hidden, setHidden] = useState(User.firstName !== " " && User.firstName !== "");
+  const [hidden, setHidden] = useState(User.firstName !== " " && User.firstName !== ""); // this boolean will be replaced by user authenticated or profileComplete
 
   let profileEditHandler = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     
     console.log(JSON.stringify(User));
 
-    var formData = new FormData();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-    formData.append("firstNameForm", User.firstName);
-    formData.append("lastNameForm", User.lastName);
-    formData.append("address1Form", User.addressLine1);
-    formData.append("address2Form", User.addressLine2);
-    formData.append("cityForm", User.city);
-    formData.append("stateForm", User.stateCode);
-    formData.append("zipcodeForm", User.zipcode);
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("firstNameForm", User.firstName);
+    urlencoded.append("lastNameForm", User.lastName);
+    urlencoded.append("address1Form", User.addressLine1);
+    urlencoded.append("address2Form", User.addressLine2);
+    urlencoded.append("cityForm", User.city);
+    urlencoded.append("stateForm", User.stateCode);
+    urlencoded.append("zipcodeForm", User.zipcode);
 
     var requestOptions = {
       method: 'POST',
-      body: formData,
+      headers: myHeaders,
+      body: urlencoded,
       redirect: 'follow'
     };
     
@@ -93,7 +96,7 @@ function ProfilePage() {
           <form onSubmit={profileEditHandler} /*action="http://localhost:8080/api/profile" method="POST" */>
             <button
               onClick={() => {
-                if ((User.firstName === " " || User.firstName === "") && hidden === false)
+                if ((User.firstName === " " || User.firstName === "") && hidden === false) //replace with a "profile made" boolean
                   alert("Please submit valid profile information!");
                 else {
                   setHidden(hidden => !hidden);

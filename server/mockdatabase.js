@@ -24,7 +24,8 @@ exports.mockDB = {
     "authInfo": {
         username: "",
         password: "",
-        existingCustomer: true
+        existingCustomer: true,
+        profileCompleted: false,
     }
 };
 
