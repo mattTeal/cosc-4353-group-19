@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
 const router = require("./routes");
@@ -6,6 +7,9 @@ const router = require("./routes");
 // something
 dotenv.config();
 const app = express();
+
+app.use(cors());
+
 const port = process.env.PORT || 8080;
 const baseDir = process.cwd();
 app.use(express.urlencoded( {extended: true} ));

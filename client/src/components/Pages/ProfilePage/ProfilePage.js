@@ -2,41 +2,40 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 //import StateDropDown from '../FuelFormPage/util/FuelForm/StateDropDown/StateDropDown';
 import AddressData from '../FuelFormPage/util/AddressData/AddressData';
+//import fetchData from '../util/FrontEndFunctions/apiRequests';
 import './ProfilePage.css'
 
 function ProfilePage() {
 
+  const [User, setUser] = useState(
+    {
+      firstName:"",
+      lastName:"",
+      addressLine1:"",
+      addressLine2:"",
+      city:"",
+      stateCode:"",
+      zipcode:""
+    } // this whole thing might need to get implemented in the backend
+  );
+
+  useEffect(() => {
+    const url = "http://localhost:8080/api/profile/";
+
+    fetch(url, {
+      method:"GET",
+      redirect:"follow"
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUser(data);
+      })
+      .catch((error) => console.log(error));
+
+  },[]);
+
   const [hidden, setHidden] = useState(true);
-
-  // localStorage code from Assignment2
-
-  const [User, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
-
-    //REPLACE LINE ABOVE THIS ONE WITH A REAL GET REQUEST 
-
-    const initialValue = JSON.parse(savedUser);
-    return initialValue || {
-                            firstName:"",
-                            lastName:"",
-                            addressLine1:"",
-                            addressLine2:"",
-                            city:"",
-                            stateCode:"",
-                            zipcode:""
-                          }; // this whole thing might need to get implemented in the backend
-  });
-
-  // useEffect(() => {
-      
-  // }, []); //<- do this from postman
-
-  const saveChanges = async e => {
-    e.preventDefault();
-    //localStorage.setItem("user", JSON.stringify(User));
-    
-    setHidden(hidden => !hidden);
-  }
 
   return (
     <div>
@@ -70,9 +69,9 @@ function ProfilePage() {
             </button>
 
             <h2>Full Name</h2>
-              <input type='text' id='firstNameForm' placeholder='eg. John' name='firstNameForm' maxLength={25} onChange={e => setUser({...User, firstName: e.target.value})} value = {User.firstName} required></input>
+              <input type='text' id='firstNameForm' placeholder='eg. John' name='firstNameForm' maxLength={25} /*onChange={e => setUser({...User, firstName: e.target.value})} value = {User.firstName}*/ required></input>
               <label htmlFor='firstNameForm'>First Name</label>
-              <input type='text' id='lastNameForm' placeholder='eg. Doe' name='lastNameForm' maxLength={25} onChange={e => setUser({...User, lastName: e.target.value})} value = {User.lastName} required></input>
+              <input type='text' id='lastNameForm' placeholder='eg. Doe' name='lastNameForm' maxLength={25} /*onChange={e => setUser({...User, lastName: e.target.value})} value = {User.lastName}*/ required></input>
               <label htmlFor='lastNameForm'>Last Name</label>
               <br />
 
@@ -82,8 +81,8 @@ function ProfilePage() {
                 id='address1Form' 
                 name='address1Form' 
                 maxLength={100} 
-                onChange={e => setUser({...User, addressLine1: e.target.value})} 
-                value = {User.addressLine1} 
+                //onChange={e => setUser({...User, addressLine1: e.target.value})} 
+                //value = {User.addressLine1} 
                 required>
               </input>
               <label htmlFor='address1Form'>Address Line 1</label>
@@ -93,8 +92,8 @@ function ProfilePage() {
                 id='address2Form' 
                 name='address2Form' 
                 maxLength={100} 
-                onChange={e => setUser({...User, addressLine2: e.target.value})} 
-                value = {User.addressLine2}>
+                /*onChange={e => setUser({...User, addressLine2: e.target.value})} 
+                </form>value = {User.addressLine2}*/>
               </input>
               <label htmlFor='address2Form'>Address Line 2</label>
               
@@ -103,15 +102,15 @@ function ProfilePage() {
                 id='cityForm' 
                 name='cityForm' 
                 maxLength={100} 
-                onChange={e => setUser({...User, city: e.target.value})} 
-                value = {User.city} 
+                /*onChange={e => setUser({...User, city: e.target.value})} 
+                value = {User.city} */
                 required>  
               </input>
               <label htmlFor='cityForm'>City</label>
               
               <select 
-              value={User.stateCode} name="stateForm"
-              onChange={e => setUser({...User, stateCode: e.target.value})}>
+              /*value={User.stateCode}*/ name="stateForm"
+              /*onChange={e => setUser({...User, stateCode: e.target.value})}*/>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AR">AR</option>	
@@ -172,7 +171,7 @@ function ProfilePage() {
                 name='zipcodeForm' 
                 maxLength={9} 
                 minLength={5} 
-                onChange={e => setUser({...User, zipcode: e.target.value})} value = {User.zipcode} 
+                //onChange={e => setUser({...User, zipcode: e.target.value})} value = {User.zipcode}
                 required>
               </input>
               <label htmlFor='zipcodeForm'>Zip Code</label>

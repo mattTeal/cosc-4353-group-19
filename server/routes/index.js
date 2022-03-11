@@ -10,4 +10,7 @@ router.get("/", function(req, res) {
 const profileRouter = require("./profileRoutes");
 router.use('/profile', profileRouter);
 
+const authRouter = require("./authRoutes");
+router.use('/auth', authRouter);
+
 module.exports = router;
