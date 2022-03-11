@@ -12,13 +12,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // copying input data 
     const addressData = { 
-        firstName: req.body.firstNameForm || " ",
-        lastName: req.body.lastNameForm || " ",
-        addressLine1: req.body.address1Form || " ",
-        addressLine2: req.body.address2Form || "",
-        city: req.body.cityForm || " ",
-        stateCode: req.body.stateForm || " ",
-        zipcode: req.body.zipcodeForm || " " //<- for error checking
+        firstName: req.body.firstNameForm.trim() || "",
+        lastName: req.body.lastNameForm.trim() || "",
+        addressLine1: req.body.address1Form.trim() || "",
+        addressLine2: req.body.address2Form.trim() || "",
+        city: req.body.cityForm.trim() || "",
+        stateCode: req.body.stateForm.trim() || "",
+        zipcode: req.body.zipcodeForm.trim() || "" //<- for error checking
     }
 
     //input validation
