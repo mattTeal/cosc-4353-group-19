@@ -12,10 +12,20 @@ const valregex = /^\w+$/i;
 
 //login route
 router.post("/login", passport.authenticate("local", {
-    successReturnToOrRedirect: "/profile",
-    failureRedirect: "/login",
-    failureFlash: true
+    successReturnToOrRedirect: "http://localhost:3000/profile",
+    failureRedirect: "http://localhost:3000/",
+    //failureMessage: true
 }));
+
+// router.post("/login", (req, res) => {
+//     if (req.isAuthenticated())
+//       return res.redirect('http://localhost:3000/profile"');
+//     const authenticateUser = passport.authenticate('local', {
+//       successReturnToOrRedirect: "http://localhost:3000/profile",
+//       failureRedirect: "http://localhost:3000/"
+//     })
+//     authenticateUser(req, res, () => res.redirect('http://localhost:3000/'))
+//   });
 
 //register route
 router.post("/register", (req, res) => {
@@ -27,10 +37,10 @@ router.post("/register", (req, res) => {
 
     // validate these two are valid.
     if(!valregex.test(username)){
-        return res.status(428).send({message: 'Bad username'})
+        return res.redirect("http://localhost:3000/register") //.status(428).send({message: 'Bad username'})
     }
     else if(!valregex.test(password) || password != confirmpass){
-        return res.status(428).send({message: 'Bad password'})
+        return res.redirect("http://localhost:3000/register") //.status(428).send({message: 'Bad password'})
     }
 
     // Check if user already exists, if so bad.
@@ -53,9 +63,9 @@ router.post("/register", (req, res) => {
 })
 
 //logout
-router.post("/logout", (req, res) => {
-    req.logout();
-    res.redirect("http://localhost:3000/login");
+router.get("/logout", (req, res) => {
+    res.redirect("http://localhost:3000/");
+    req.logout();    
 })
 
 module.exports = router;

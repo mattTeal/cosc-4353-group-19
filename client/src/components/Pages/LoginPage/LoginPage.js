@@ -12,35 +12,53 @@ function LoginPage() {
     <div className="error">{err.message}</div>
   );
 
-  const submitHandler = (event) => {
+  const submitHandler = (e) => {
     //event.preventDefault();
 
-    var {user, pass} = document.forms[0];
-    const data = tempLogin.find((users) => users.username === user.value);
+  //   var {user, pass} = document.forms[0];
+  //   const data = tempLogin.find((users) => users.username === user.value);
 
-    if(data) {
-      if(data.password !== pass.value){
-        setErr({name: "pass", message: errs.pass})
-      }
-      else{
-        setSubmit(true);
-      }
-    }
-    else {
-      setErr({name: "user", message: errs.user});
-    }
-  };
+  //   if(data) {
+  //     if(data.password !== pass.value){
+  //       setErr({name: "pass", message: errs.pass})
+  //     }
+  //     else{
+  //       setSubmit(true);
+  //     }
+  //   }
+  //   else {
+  //     setErr({name: "user", message: errs.user});
+  //   }
+  // };
 
-  const tempLogin = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
+  // const tempLogin = [
+  //   {
+  //     username: "user1",
+  //     password: "pass1"
+  //   },
+  //   {
+  //     username: "user2",
+  //     password: "pass2"
+  //   }
+
+
+  //];
+
+  const { username, password } = document.forms[0];
+    const validRegex = /^\w+$/;
+
+    if (!validRegex.test(username)) {
+        e.preventDefault();
+        setErr({ name: "username", message: errs.user })
     }
-  ];
+
+    if (!validRegex.test(password)) {
+        e.preventDefault();
+        setErr({ name: "password", message: errs.pass })
+    }
+
+    setSubmit(true);
+  }
 
   const errs = {
     user: "invalid username",
@@ -50,18 +68,19 @@ function LoginPage() {
   const showForm = (
     <>
       <div className="loginForm">
-        <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/login" method="POST">
+        <form action="http://localhost:8080/api/auth/login" method="POST">
+        {/* <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/login" method="POST"> */}
           <div className="signin">
             <h3>Sign In</h3>
           </div>
           <div className="login_container">
-            <label for="user" id="username">Username </label>
-            <input type="text" id="user" name="username" required></input>
+            <label for="username" id="username">Username </label>
+            <input type="text" id="username" name="username" required></input>
             {ErrorMessage("user")}
           </div>
           <div className="login_container"> 
-            <label for="pass" id="password">Password </label>
-            <input type="password" id="pass" name="password" required></input>
+            <label for="password" id="password">Password </label>
+            <input type="password" id="password" name="password" required></input>
             {ErrorMessage("pass")}
           </div>
           <div className="butt_container">

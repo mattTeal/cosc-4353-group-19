@@ -1,12 +1,12 @@
 const crypto = require("crypto");
 let {mockDB} = require('./mockdatabase');
 
-function genPass(password){
-    var salt = crypto.randomBytes(32).toString('hex');
-    var genhash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString('hex');
+function genPass(password, salt){
+    const newSalt = salt ? salt : crypto.randomBytes(16).toString('hex')
+    var genhash = crypto.pbkdf2Sync(password, newSalt, 10000, 64, "sha512").toString('hex');
 
     return{
-        salt: salt,
+        salt: newSalt,
         hash: genhash
     };
 }
@@ -38,7 +38,7 @@ function createUser(username, password){
         salt: salt,
     };
 
-    mockDB['authInfo'] = JSON.stringify(newUser)
+    mockDB['authInfo'].push(newUser) 
 
 }
 
