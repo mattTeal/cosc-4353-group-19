@@ -3,15 +3,15 @@ const router = express.Router();
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
-    res.status(200).send(mockDB.quoteHistory);
+    res.status(200).send(mockDB.user);
 })
 
 router.post('/', (req, res) => {
     const quoteData = {
-        gallons: req.body.gallonsForm.trim(),
-        timestamp: req.body.timestampForm.trim(),
-        totalCost: req.body.totalCostForm.trim(),
-        stateCode: req.body.stateCodeForm.trim(),
+        gallons: req.body.gallons.trim(),
+        timestamp: req.body.timestamp.trim(),
+        totalCost: req.body.totalCost.trim(),
+        stateCode: req.body.stateCode.trim(),
     }
     const regexGallons = /\s+\d{1,6}\s+/;
 
