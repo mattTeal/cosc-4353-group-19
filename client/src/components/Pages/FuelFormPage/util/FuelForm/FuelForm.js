@@ -13,12 +13,17 @@ function FuelForm(props) {
         zipcode: props.zipcode
     }
 
-    const [details, setDetails] = useState({gallons: "", state: userData.stateCode, date: ""})
+    const [details, setDetails] = useState({gallons: "", date: ""})
+    const [loading, setLoading] = useState('false')
 
-    const submitHandler = e => {
+    const submitHandler = (e) => {
         e.preventDefault();
-        const quote = { details };
-        createQuote(quote)
+        setLoading(true);
+        console.log(details);
+        createQuote(details).then(
+            setLoading(false),
+            console.log("New quote created.")
+        )
     }
 
     return (

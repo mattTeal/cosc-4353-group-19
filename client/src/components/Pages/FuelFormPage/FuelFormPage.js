@@ -21,6 +21,15 @@ function FuelFormPage() {
     } 
   );
 
+  const [Quotes, setQuotes] = useState(
+    {
+      timestamp: "",
+      stateCode: "",
+      pricePerGallon: "",
+      gallons: "",
+    }
+  )
+
   const quoteData = getStorageValue("quote", {
       firstName:"",
       lastName:"",
@@ -38,6 +47,9 @@ function FuelFormPage() {
   useEffect(() => {
     getUser().then((result) => {
       setUser(result);
+    })
+    getQuotes().then((result) => {
+      setQuotes(result);
     })
   }, [])
 
@@ -62,10 +74,11 @@ function FuelFormPage() {
               addressLine1 = {User.addressLine1}
               addressLine2 = {User.addressLine2}
               city = {User.city}
-              stateCode = {User.stateCode}
+              stateCode = {Quotes.stateCode}
               zipcode = {User.zipcode}
-              gallons = {quoteData.gallons}
-              date = {quoteData.date}
+              gallons = {Quotes.gallons}
+              ppg = {Quotes.pricePerGallon}
+              date = {Quotes.date}
             />
           </div>
         </div>

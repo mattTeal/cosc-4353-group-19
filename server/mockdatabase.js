@@ -1,11 +1,7 @@
 exports.mockDB = {
     "quoteHistory": {
-        quoteId: "",
-        timestamp: "", // <- don't know about this. might need make this like a template type instead of an object
-        stateCode:"",
-        //inState: (this.mockDB.quoteHistory == 'TX'), // <- waaah.
-        gallons: 0,
-        totalCost: 0 
+        date: "",
+        gallons: "",
     },
     "userProfileInfo": {
         firstName:"",
