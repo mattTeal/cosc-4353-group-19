@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const findUser = require('../valUsrPss').findUser;
 const createUser = require('../valUsrPss').createUser;
+let { mockDB } = require('../mockdatabase');
 
 const valregex = /^\w+$/i;
 
@@ -12,10 +13,13 @@ const valregex = /^\w+$/i;
 
 //login route
 router.post("/login", passport.authenticate("local", {
-    successReturnToOrRedirect: "http://localhost:3000/profile",
-    failureRedirect: "http://localhost:3000/",
+    //successRedirect: "http://localhost:3000/profile",
+    //failureRedirect: "http://localhost:3000/",
     //failureMessage: true
-}));
+}), (req, res) => {
+    let url = (mockDB["authInfo"].profileCompleted?"http://localhost:3000/fuel":"http://localhost:3000/profile");
+    res.status(200).send(url);
+});
 
 // router.post("/login", (req, res) => {
 //     if (req.isAuthenticated())
@@ -65,7 +69,7 @@ router.post("/register", (req, res) => {
 //logout
 router.post("/logout", (req, res) => {
     req.logout(); 
-    //res.redirect("http://localhost:3000/");
+    //res.redirect("http://localhost:3000/"); //<- this wasn't working on angel's computer, so we did a workaround
     res.status(301).send("http://localhost:3000/")
 })
 

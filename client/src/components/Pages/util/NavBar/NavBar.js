@@ -13,11 +13,11 @@ const NavBar = () => {
                         <ul>
                             <li><a href="/fuel">Home</a></li>
                             <li><a href="/profile">Profile</a></li>
-                            {/* <li><a href="http://localhost:8080/api/auth/logout">Sign Out</a></li> */}
+                            {/* <li><a href="http://localhost:8080/api/auth/logout">Sign Out</a></li> */ /* <- this wasn't working on angel's computer */}
                             <li><button onClick={() => {
                                     var requestOptions = {
                                         method: 'POST',
-                                        //redirect: 'follow'
+                                        redirect: 'follow'
                                     };
                                     
                                     fetch("http://localhost:8080/api/auth/logout", requestOptions)

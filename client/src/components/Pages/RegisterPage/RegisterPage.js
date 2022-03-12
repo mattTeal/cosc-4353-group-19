@@ -53,26 +53,26 @@ function RegisterPage() {
             <label>Sign Up</label>
           </div>
           <div className="register_container">
-            <label for="user" id="username">Username </label>
+            <label htmlFor="user" id="username">Username </label>
             <input type="text" id="user" name="username" required 
               value={vals.user} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
-            <label for="pass" id="password">Password </label>
+            <label htmlFor="pass" id="password">Password </label>
             <input type="password" id="pass" name="password" required 
               value={vals.pass} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
-            <label for="confirmpass" id="confirmpassword">Confirm Password </label>
+            <label htmlFor="confirmpass" id="confirmpassword">Confirm Password </label>
             <input type="password" id="confirmpass" name="confirmpass" required 
               value={vals.confirmpass} 
               onChange={changeHandler}></input>
               {errmsg.confirmpass && <p>{errmsg.confirmpass}</p>}
           </div>
           <div className="butt_container">
-            <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
+            <input type="submit" className="submit_butt" value="Complete Sign Up"></input>
           </div>
           <div>
               <a href="/" id="linkToReg">Already have an account? Login</a>

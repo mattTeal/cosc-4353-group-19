@@ -65,3 +65,21 @@ nav a {
   background-color: #FFEBCD;
   color: #FF4500;
 }
+
+li button {
+  background-color: #FF4500;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border-radius: 2em;
+  padding: .5em 1em;
+  width: unset;
+  cursor: pointer;
+  margin: .6em;
+}
+
+li button:hover {
+  cursor: pointer;
+  transform: scale(1.05) perspective(1px);
+}

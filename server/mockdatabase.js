@@ -27,6 +27,7 @@ exports.mockDB = {
         username: "",
         hash: "",
         salt: "",
-        existingCustomer: true
+        existingCustomer: true,
+        profileCompleted: false
     }]
 };
