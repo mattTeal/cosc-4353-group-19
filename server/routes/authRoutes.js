@@ -63,9 +63,10 @@ router.post("/register", (req, res) => {
 })
 
 //logout
-router.get("/logout", (req, res) => {
-    res.redirect("http://localhost:3000/");
-    req.logout();    
+router.post("/logout", (req, res) => {
+    req.logout(); 
+    //res.redirect("http://localhost:3000/");
+    res.status(301).send("http://localhost:3000/")
 })
 
 module.exports = router;

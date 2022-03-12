@@ -7,12 +7,14 @@ const path = require("path");
 const session = require("express-session");
 const router = require("./routes");
 const morgan = require("morgan");
+var cors = require("cors");
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 const baseDir = path.dirname(process.cwd());
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
