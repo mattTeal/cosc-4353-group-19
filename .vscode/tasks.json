@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "start",
+			"path": "client/",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+			},
+			"label": "Client Build",
+			"detail": "react-scripts start"
+		},
+		{
+			"command": "node",
+			"args": ["index.js"],
+			"label": "Server Build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+			},
+			"options": {
+				"cwd": "${workspaceFolder}/server"
+			},
+		},
+		{
+			"label": "Build",
+			"dependsOn": ["Client Build", "Server Build"],
+			"group": {
+				"kind": "build",
+				"isDefault": true,
+			},
+		}
+	]
+}
