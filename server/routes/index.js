@@ -10,6 +10,9 @@ router.get("/", function(req, res) {
 const profileRouter = require("./profileRoutes");
 router.use('/profile', profileRouter);
 
+const quoteRouter = require("./quoteRoutes");
+router.use('/quotes', quoteRouter);
+
 const authRouter = require("./authRoutes");
 router.use('/auth', authRouter);
 

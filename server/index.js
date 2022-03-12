@@ -1,3 +1,4 @@
+
 const express = require("express");
 var cors = require("cors");
 var bodyParser = require('body-parser')
@@ -5,7 +6,6 @@ const dotenv = require("dotenv");
 const path = require("path");
 const router = require("./routes");
 
-// something
 dotenv.config();
 const app = express();
 
