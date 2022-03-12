@@ -22,7 +22,7 @@ function RegisterPage() {
   };
 
   const submitHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setsubmit(passwordValid);
     seterrmsg(ValiditePass());
   }
@@ -37,7 +37,7 @@ function RegisterPage() {
 
   function ValiditePass(){
 
-    if(vals.confirmpass !== vals.pass){
+    if(vals.confirmpass !== vals.password){
       setPasswordValid(false);
       errmsg.confirmpass = 'Passwords do not match'
     }
@@ -55,13 +55,13 @@ function RegisterPage() {
           <div className="register_container">
             <label htmlFor="user" id="username">Username </label>
             <input type="text" id="user" name="username" required 
-              value={vals.user} 
+              value={vals.username} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
             <label htmlFor="pass" id="password">Password </label>
             <input type="password" id="pass" name="password" required 
-              value={vals.pass} 
+              value={vals.password} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
