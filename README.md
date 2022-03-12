@@ -21,7 +21,7 @@ Install npm and yarn
 
 To launch a local instance of the app, use the keybind
 
-`ctrl + shift + B
+`ctrl + shift + B`
 
 If all goes accordingly, the application should launch in your default browswer. If not, try navigating to localhost:3000 in your browser.
 
