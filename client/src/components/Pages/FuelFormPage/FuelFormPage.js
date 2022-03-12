@@ -21,11 +21,9 @@ function FuelFormPage() {
     } 
   );
 
-  const [Quotes, setQuotes] = useState(
+  const [quotes, setQuotes] = useState(
     {
-      timestamp: "",
-      stateCode: "",
-      pricePerGallon: "",
+      date: "",
       gallons: "",
     }
   )
@@ -74,11 +72,11 @@ function FuelFormPage() {
               addressLine1 = {User.addressLine1}
               addressLine2 = {User.addressLine2}
               city = {User.city}
-              stateCode = {Quotes.stateCode}
+              stateCode = {quotes.stateCode}
               zipcode = {User.zipcode}
-              gallons = {Quotes.gallons}
-              ppg = {Quotes.pricePerGallon}
-              date = {Quotes.date}
+              gallons = {quotes.gallons}
+              ppg = {quotes.pricePerGallon}
+              date = {quotes.date}
             />
           </div>
         </div>
