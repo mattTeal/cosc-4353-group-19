@@ -3,12 +3,11 @@ import { Navigate } from 'react-router-dom'
 import './RegisterPage.css'
 
 function RegisterPage() {
-  // edit to validate matching passwords and hold the variables
   const [errmsg, seterrmsg] = useState({});
   const [submit, setsubmit] = useState(false);
   const [vals, setVals] = useState({
-    user: '',
-    pass: '',
+    username: '',
+    password: '',
     confirmpass: ''
   });
 
@@ -31,14 +30,14 @@ function RegisterPage() {
   useEffect(
     () => {
       if(Object.keys(errmsg).length === 0 && submit) {
-        
+        setPasswordValid(true);
       }
     }, [errmsg, submit]
   );
 
   function ValiditePass(){
 
-    if(vals.confirmpass !== vals.pass){
+    if(vals.confirmpass !== vals.password){
       setPasswordValid(false);
       errmsg.confirmpass = 'Passwords do not match'
     }
@@ -49,31 +48,31 @@ function RegisterPage() {
   const showForm = (
     <>
       <div className="registerForm">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/register" method="POST">
           <div className="signup">
             <label>Sign Up</label>
           </div>
           <div className="register_container">
-            <label for="user" id="username">Username </label>
-            <input type="text" id="user" name="user" required 
-              value={vals.user} 
+            <label htmlFor="user" id="username">Username </label>
+            <input type="text" id="user" name="username" required 
+              value={vals.username} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
-            <label for="pass" id="password">Password </label>
-            <input type="password" id="pass" name="pass" required 
-              value={vals.pass} 
+            <label htmlFor="pass" id="password">Password </label>
+            <input type="password" id="pass" name="password" required 
+              value={vals.password} 
               onChange={changeHandler}></input>
           </div>
           <div className="register_container"> 
-            <label for="confirmpass" id="confirmpassword">Confirm Password </label>
+            <label htmlFor="confirmpass" id="confirmpassword">Confirm Password </label>
             <input type="password" id="confirmpass" name="confirmpass" required 
               value={vals.confirmpass} 
               onChange={changeHandler}></input>
               {errmsg.confirmpass && <p>{errmsg.confirmpass}</p>}
           </div>
           <div className="butt_container">
-            <input type="submit" class="submit_butt" value="Complete Sign Up"></input>
+            <input type="submit" className="submit_butt" value="Complete Sign Up"></input>
           </div>
           <div>
               <a href="/" id="linkToReg">Already have an account? Login</a>
