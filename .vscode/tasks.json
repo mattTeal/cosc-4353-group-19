@@ -14,7 +14,8 @@
 			"detail": "react-scripts start"
 		},
 		{
-			"command": "node",
+			"type": "shell",
+			"command": "nodemon",
 			"args": ["index.js"],
 			"label": "Server Build",
 			"presentation": {
