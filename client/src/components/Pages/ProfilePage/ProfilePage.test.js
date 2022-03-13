@@ -36,11 +36,11 @@ test('get user', () => {
 })
 
 test('edit profile test', () => {
-    const mockData = {firstName: "firstName"}
+    const mockData = {firstName: "thename"}
     global.fetch = jest.fn().mockReturnValue(Promise.resolve({
         ok: true,
         json: () => Promise.resolve({
-            quotes: [mockData]
+            profile: [mockData]
         })
     }))
 
@@ -51,15 +51,18 @@ test('edit profile test', () => {
                 header: HEADER,
                 body: JSON.stringify(mockData)
             }
+        ).then(
+            response => response.json()
         ).then(result => {
             expect(global.fetch).toHaveBeenCalledWith(
                 `${BASE_ENDPOINT}/profile`,
                 {
-                    method: "POST",
-                    headers: HEADER,
+                    method: 'POST',
+                    header: HEADER,
                     body: JSON.stringify(mockData)
                 }
             )
+            expect(result).toEqual({profile: [mockData]})
         })
     )
 })
