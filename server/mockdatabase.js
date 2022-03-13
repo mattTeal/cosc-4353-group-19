@@ -9,16 +9,16 @@ exports.mockDB = {
         addressLine1:"",
         addressLine2:"",
         city:"",
-        stateCode: "AL", //lol
+        stateCode:"",
         zipcode:""
-    },
-    "authInfo": {
-        username: "",
-        password: "",
-        existingCustomer: true,
-        profileCompleted: false,
     }
+    ,
+    "authInfo": [{
+        userId: "",
+        username: "",
+        hash: "",
+        salt: "",
+        existingCustomer: true,
+        profileCompleted: false
+    }],
 };
-
-
-
