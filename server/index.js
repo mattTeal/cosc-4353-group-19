@@ -4,7 +4,9 @@ var cors = require("cors");
 var bodyParser = require('body-parser')
 const dotenv = require("dotenv");
 const path = require("path");
+const session = require("express-session");
 const router = require("./routes");
+const morgan = require("morgan");
 
 dotenv.config();
 const app = express();
@@ -18,20 +20,32 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 8080;
-const baseDir = process.cwd();
-app.use(express.urlencoded( {extended: true} ));
+const baseDir = path.dirname(process.cwd());
 
+app.use(cors());
 app.use(express.json());
-app.use("/api", router) 
+app.use(express.urlencoded({extended: true}));
 
-app.get("/", (req, res) => {
-    res.send("hello root")
-});
-// app.use(express.static(path.join(baseDir, 'build'), {
-//     extensions: ['html', 'htm']
-// }));
+app.use(session({
+  secret: 'some secret',
+  resave: false, 
+  saveUninitialized: true,
+  cookie:{
+    maxAge: 1000 * 60 * 60 * 24 //1 day
+  }
+}));
+
+app.use(morgan(':method :url :status'));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/api", router);
+
+app.use(express.static(path.join(baseDir, 'build'), {
+    extensions: ['html', 'htm']
+}));
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
-  console.log(path.join(baseDir, 'build'))
+  console.log(path.join(baseDir, 'client', 'build'))
 });

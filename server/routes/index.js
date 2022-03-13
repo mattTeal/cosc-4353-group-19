@@ -1,4 +1,5 @@
 const express = require("express");
+const authRouter = require("./authRoutes");
 const router = express.Router();
 //let { mockDB } = require("../mockdatabase"); // for testing
 
