@@ -12,12 +12,12 @@ exports.mockDB = {
         stateCode:"",
         zipcode:""
     },
-    "authInfo": {
+    "authInfo": [{
         userId: "",
         username: "",
         hash: "",
         salt: "",
         existingCustomer: true,
         profileCompleted: false
-    }
+    }]
 };
