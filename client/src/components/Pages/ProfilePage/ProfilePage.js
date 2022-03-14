@@ -28,7 +28,12 @@ function ProfilePage() {
       method:"GET",
       redirect:"follow"
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok)
+          return response.text().then(text => { throw new Error(text)} )
+        else 
+          return response.json();
+      })
       .then((data) => {
         console.log(data); 
         setUser(data);

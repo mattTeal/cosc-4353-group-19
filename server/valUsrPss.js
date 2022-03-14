@@ -22,7 +22,7 @@ function findUser(username){
 }
 
 function findUserId(id){
-    const userid = mockDB.authInfo.find(u => u.id === id)
+    const userid = mockDB.authInfo.find(u => u.userId === id)
     return userid;
 }
 

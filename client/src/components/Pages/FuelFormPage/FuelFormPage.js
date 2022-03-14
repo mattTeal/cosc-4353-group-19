@@ -72,7 +72,7 @@ function FuelFormPage() {
               addressLine1 = {User.addressLine1}
               addressLine2 = {User.addressLine2}
               city = {User.city}
-              stateCode = {quotes.stateCode}
+              stateCode = {User.stateCode}
               zipcode = {User.zipcode}
               gallons = {quotes.gallons}
               ppg = {quotes.pricePerGallon}
