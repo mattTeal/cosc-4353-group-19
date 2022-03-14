@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import './RegisterPage.css'
 
 function RegisterPage() {
-  const [errmsg, seterrmsg] = useState({});
+  const [errmsg, seterrmsg] = useState({ name:"", message: "" });
   const [submit, setsubmit] = useState(false);
   const [vals, setVals] = useState({
     username: '',
@@ -25,6 +25,50 @@ function RegisterPage() {
     e.preventDefault();
     setsubmit(passwordValid);
     seterrmsg(ValiditePass());
+
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+    const confirmpass = e.target.confirmpass.value;
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("username", username);
+    urlencoded.append("password", password);
+    urlencoded.append("confirmpass", confirmpass);
+
+    //console.log(`password: ${password}`); // <- testing
+    //console.log(`username: ${username}`); // <- testing
+      
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      //redirect: 'follow'
+    };
+      
+    fetch("http://localhost:8080/api/auth/register", requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          //e.preventDefault();
+          return response.text().then(text => {
+            console.log(text); //<- testing
+            throw new Error(text);
+          })
+        }
+        else {
+          //setsubmit(true);
+          //e.preventDefault();
+          console.log(response.text); //<- testing
+          return response.text();
+        }
+      })
+      .then(result => window.location.replace(result))
+      .catch(error => {
+        console.log('error', error);
+        //seterrmsg({name: "Error", message: error});
+      });
   }
 
   useEffect(
@@ -48,7 +92,7 @@ function RegisterPage() {
   const showForm = (
     <>
       <div className="registerForm">
-        <form onSubmit={submitHandler} action="http://localhost:8080/api/auth/register" method="POST">
+        <form onSubmit={submitHandler}/*action="http://localhost:8080/api/auth/register" method="POST"*/>
           <div className="signup">
             <label>Sign Up</label>
           </div>

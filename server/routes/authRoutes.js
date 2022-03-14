@@ -31,20 +31,27 @@ router.post("/login", passport.authenticate("local", {
 //     authenticateUser(req, res, () => res.redirect('http://localhost:3000/'))
 //   });
 
+//get entire database route for testing
+/*router.get("/getDatabase", (req,res) => {
+    res.status(200).send(JSON.stringify(mockDB));
+}) */
+
 //register route
 router.post("/register", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const confirmpass = req.body.confirmpass;
 
-    console.log(req.body);
+    //console.log(req.body);
 
     // validate these two are valid.
     if(!valregex.test(username)){
-        return res.redirect("http://localhost:3000/register") //.status(428).send({message: 'Bad username'})
+        //return res.redirect("http://localhost:3000/register") //
+        return res.status(428).send({message: 'Bad username'})
     }
     else if(!valregex.test(password) || password != confirmpass){
-        return res.redirect("http://localhost:3000/register") //.status(428).send({message: 'Bad password'})
+        //return res.redirect("http://localhost:3000/register") 
+        return res.status(428).send({message: `Bad password`})
     }
 
     // Check if user already exists, if so bad.
@@ -59,11 +66,10 @@ router.post("/register", (req, res) => {
     console.log(req.body);
 
     // Redirect them somewhere.
-    return res.redirect("http://localhost:3000/profile");
+    // return res.redirect("http://localhost:3000/profile");
 
     // console.log(req.body);
-    // res.status(200).send();
-
+    res.status(200).send("http://localhost:3000/profile");
 })
 
 //logout

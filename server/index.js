@@ -9,7 +9,6 @@ const path = require("path");
 const session = require("express-session");
 const router = require("./routes");
 const morgan = require("morgan");
-var cors = require("cors");
 
 dotenv.config();
 const app = express();
