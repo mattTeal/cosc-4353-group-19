@@ -38,7 +38,7 @@ function createUser(username, password){
         salt: salt,
     };
 
-    mockDB['authInfo'].push(newUser) 
+    return newUser;
 
 }
 

@@ -64,7 +64,6 @@ function RegisterPage() {
           return response.text();
         }
       })
-      .then(result => window.location.replace(result))
       .catch(error => {
         console.log('error', error);
         //seterrmsg({name: "Error", message: error});
