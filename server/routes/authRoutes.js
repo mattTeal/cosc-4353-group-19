@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const findUser = require('../valUsrPss').findUser;
 const createUser = require('../valUsrPss').createUser;
-let { mockDB } = require('../mockdatabase');
+const db = require('../database');
 
 const valregex = /^\w+$/i;
 
@@ -61,15 +61,27 @@ router.post("/register", (req, res) => {
     }
 
     // Go ahead and create a new user.
-    createUser(username, password);
+    const newUser = createUser(username, password);
 
     console.log(req.body);
+
+    try {
+        db.promise().query(`INSERT INTO USERS VALUES(
+            '${newUser.userId}', 
+            '${username}',
+            '${newUser.hash}',
+            '${newUser.salt}'
+            )`
+        )
+        res.status(201).send("Post completed");    
+    } catch (error) {
+        console.log(error)
+    }
 
     // Redirect them somewhere.
     // return res.redirect("http://localhost:3000/profile");
 
     // console.log(req.body);
-    res.status(200).send("http://localhost:3000/profile");
 })
 
 //logout
