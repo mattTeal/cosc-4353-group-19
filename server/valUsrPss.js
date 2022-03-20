@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 let {mockDB} = require('./mockdatabase');
+const db = require('./database');
 
 function genPass(password, salt){
     const newSalt = salt ? salt : crypto.randomBytes(16).toString('hex')
@@ -17,12 +18,16 @@ function genUserid(){
 }
 
 function findUser(username){
-    const user = mockDB.authInfo.find(u => u.username === username);
+    // const user = db.users.find(u => u.username === username);
+    const user = db.query(
+        'SELECT * FROM USERS WHERE Username = ?;',
+        username,
+    )
     return user;
 }
 
 function findUserId(id){
-    const userid = mockDB.authInfo.find(u => u.userId === id)
+    const userid = db.users.find(u => u.userId === id)
     return userid;
 }
 
@@ -41,7 +46,6 @@ function createUser(username, password){
     return newUser;
 
 }
-
 
 function validatePass(password, hash, salt){
     var verhash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');

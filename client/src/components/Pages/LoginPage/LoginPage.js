@@ -6,6 +6,7 @@ function LoginPage() {
   //edit to have variables that hold the username and password
   const [err, setErr] = useState({ name:"", message: "" });
   const [submit, setSubmit] = useState(false);
+  const [user, setUser] = useState();
 
   const ErrorMessage = (name) =>
     name === err.name && (
@@ -100,7 +101,10 @@ function LoginPage() {
             return response.text();
           }
         })
-        .then(result => window.location.replace(result))
+        .then(response => {
+          setUser(response.json());
+          console.log(user);
+        })
         .catch(error => {
           //console.log('error', error);
           setErr({name: "Error", message: error});
