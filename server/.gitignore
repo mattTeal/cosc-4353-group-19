@@ -7,6 +7,9 @@ node_modules
 /.pnp
 .pnp.js
 ./database.js
+/database.js
+database.js
+database
 
 # testing
 /coverage
