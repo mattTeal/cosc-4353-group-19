@@ -14,42 +14,11 @@ function LoginPage() {
   );
 
   const errs = {
-    user: "invalid username",
-    pass: "invalid password"
+    username: "invalid username",
+    password: "invalid password"
   };
 
   const submitHandler = (e) => {
-    //event.preventDefault();
-
-  //   var {user, pass} = document.forms[0];
-  //   const data = tempLogin.find((users) => users.username === user.value);
-
-  //   if(data) {
-  //     if(data.password !== pass.value){
-  //       setErr({name: "pass", message: errs.pass})
-  //     }
-  //     else{
-  //       setSubmit(true);
-  //     }
-  //   }
-  //   else {
-  //     setErr({name: "user", message: errs.user});
-  //   }
-  // };
-
-  // const tempLogin = [
-  //   {
-  //     username: "user1",
-  //     password: "pass1"
-  //   },
-  //   {
-  //     username: "user2",
-  //     password: "pass2"
-  //   }
-
-
-  //];
-
     //const { username, password } = document.forms[0]; //<- returning innerHTML object ?
     e.preventDefault();
     const username = e.target.username.value;
@@ -58,14 +27,14 @@ function LoginPage() {
 
     if (!validRegex.test(username)) {
         e.preventDefault();
-        setErr({ name: "username", message: errs.user })
+        setErr({ name: "username", message: errs.username })
         //console.log(err); // <- testing
         //console.log(`username: ${username}`); // <- testing
     }
 
     if (!validRegex.test(password)) {
         e.preventDefault();
-        setErr({ name: "password", message: errs.pass })
+        setErr({ name: "password", message: errs.password })
         //console.log(err); // <- testing
         //console.log(`password: ${password}`); // <- testing
     }

@@ -50,7 +50,7 @@ function RegisterPage() {
       
     fetch("http://localhost:8080/api/auth/register", requestOptions)
       .then(response => {
-        if (!response.ok) {
+        if (response.status != 201) {
           //e.preventDefault();
           return response.text().then(text => {
             console.log(text); //<- testing
@@ -58,9 +58,11 @@ function RegisterPage() {
           })
         }
         else {
-          //setsubmit(true);
+          setsubmit(true);
           //e.preventDefault();
-          console.log(response.text); //<- testing
+          console.log(response.text()); //<- testing
+          console.log(response.statusText);
+          console.log(response.status)
           return response.text();
         }
       })
