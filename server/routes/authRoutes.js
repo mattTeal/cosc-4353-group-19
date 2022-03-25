@@ -66,7 +66,7 @@ router.post("/register", (req, res) => {
     console.log(req.body);
 
     try {
-        db.promise().query(`INSERT INTO USERS VALUES(
+        db.promise().query(`CALL registerPost(
             '${newUser.userId}', 
             '${username}',
             '${newUser.hash}',
