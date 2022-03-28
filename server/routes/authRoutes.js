@@ -4,6 +4,7 @@ const passport = require('passport');
 const findUser = require('../valUsrPss').findUser;
 const createUser = require('../valUsrPss').createUser;
 const db = require('../database');
+const { validatePass } = require('../valUsrPss');
 
 const valregex = /^\w+$/i;
 
@@ -12,29 +13,30 @@ const valregex = /^\w+$/i;
 // });
 
 //login route
-router.post("/login", passport.authenticate("local", {
-    //successRedirect: "http://localhost:3000/profile",
-    //failureRedirect: "http://localhost:3000/",
-    //failureMessage: true
-}), (req, res) => {
-    let url = (mockDB["authInfo"].profileCompleted?"http://localhost:3000/fuel":"http://localhost:3000/profile");
-    res.status(200).send(url);
-});
+router.post("/login", (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
 
-// router.post("/login", (req, res) => {
-//     if (req.isAuthenticated())
-//       return res.redirect('http://localhost:3000/profile"');
-//     const authenticateUser = passport.authenticate('local', {
-//       successReturnToOrRedirect: "http://localhost:3000/profile",
-//       failureRedirect: "http://localhost:3000/"
-//     })
-//     authenticateUser(req, res, () => res.redirect('http://localhost:3000/'))
-//   });
-
-//get entire database route for testing
-/*router.get("/getDatabase", (req,res) => {
-    res.status(200).send(JSON.stringify(mockDB));
-}) */
+    db.query(
+        "SELECT * FROM USERS WHERE Username = ?;",
+        username,
+        (err, result) => {
+          if (err) {
+            res.send({ err: err });
+          }
+          console.log(result);
+          if (result.length > 0) {
+            if (validatePass(password, result[0].Hash, result[0].Salt))
+                res.status(201).send(result);
+            else
+                res.status(403).send("Incorrect username or password!")
+          } else {
+            res.status(404).send("User doesn't exist");
+          }
+        }
+      );
+    
+})
 
 //register route
 router.post("/register", (req, res) => {
@@ -55,10 +57,6 @@ router.post("/register", (req, res) => {
     }
 
     // Check if user already exists, if so bad.
-    if(findUser(username, password) != undefined){
-        return res.status(428).send({message: 'User already exists. Register with new user.'})
-        
-    }
 
     // Go ahead and create a new user.
     const newUser = createUser(username, password);
