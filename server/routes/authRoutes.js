@@ -29,9 +29,9 @@ router.post("/login", (req, res) => {
             if (validatePass(password, result[0].Hash, result[0].Salt))
                 res.status(201).send(result);
             else
-                res.status(403).send({ message: "Incorrect username or password!"})
+                res.status(403).send("Incorrect username or password!")
           } else {
-            res.status(404).send({ message: "User doesn't exist" });
+            res.status(404).send("User doesn't exist");
           }
         }
       );
