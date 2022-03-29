@@ -78,7 +78,7 @@ function FuelForm(props) {
                             id='address1Form' 
                             name='address1Form' 
                             maxLength={100} 
-                            onChange={e => setDetails({...details, addressLine2: e.target.value})} 
+                            onChange={e => setDetails({...details, addressLine1: e.target.value})} 
                             value = {details.addressLine1} 
                             required>
                             </input>                   
