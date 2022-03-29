@@ -5,19 +5,10 @@ import AddressData from '../AddressData/AddressData'
 import { createQuote } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
-    const userData = {
-        addressLine1: props.addressLine1,
-        addressLine2: props.addressLine2,
-        city: props.city,
-        stateCode: props.stateCode,
-        zipcode: props.zipcode
-    }
-
-    const [details, setDetails] = useState({gallons: "", date: ""})
-    const [userAddress, setUserAddress] = useState(true);
-    const [loading, setLoading] = useState('false')
-    const [address, setAddress] = useState(
+    const [details, setDetails] = useState(
         {
+          gallons: 0,
+          date: '',  
           addressLine1: "",
           addressLine2: "",
           city: "",
@@ -25,6 +16,17 @@ function FuelForm(props) {
           zipcode: ""
         }
       );
+    const userData = {
+        gallons: details.gallons,
+        date: details.date,
+        addressLine1: props.addressLine1,
+        addressLine2: props.addressLine2,
+        city: props.city,
+        stateCode: props.stateCode,
+        zipcode: props.zipcode,
+    }
+    const [userAddress, setUserAddress] = useState(true);
+    const [loading, setLoading] = useState('false')
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -36,17 +38,36 @@ function FuelForm(props) {
         )
     }
 
+    const initialState = {
+          gallons: details.gallons,
+          date: details.date,
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          stateCode: "AL",
+          zipcode: ""
+      };
+
+    const handleAddress = () => {
+        setUserAddress(!userAddress)
+        if(!userAddress)
+            setDetails(initialState);
+        else
+            setDetails(userData);
+        console.log(details);
+    }
+
     return (
         <form onSubmit={submitHandler}>
             <div className="form-inner">
                 <h2>Find out how much you can save!</h2>
                 <div className="form-group">
                     <label>Gallons requested</label>
-                    <input type="number" minLength={0} name="gallons" id="gallons" onChange={
+                    <input type="number" minLength={0} name="gallons" id="gallons" required onChange={
                         e => setDetails({...details, gallons: e.target.value})} value={details.gallons}/>
                 </div>
                 <div className="form-group">
-                    <input type='checkbox' id='useraddress' onClick={() => setUserAddress(!userAddress)}/>
+                    <input type='checkbox' id='useraddress' onClick={() => handleAddress()}/>
                     <label for='useraddress'>Use address linked to account</label>
                     <label>Shipping Address</label>
                     {!userAddress ?
@@ -57,8 +78,8 @@ function FuelForm(props) {
                             id='address1Form' 
                             name='address1Form' 
                             maxLength={100} 
-                            onChange={e => setAddress({...address, addressLine2: e.target.value})} 
-                            value = {address.addressLine1} 
+                            onChange={e => setDetails({...details, addressLine1: e.target.value})} 
+                            value = {details.addressLine1} 
                             required>
                             </input>                   
                             <label htmlFor='address2Form'>Address Line 2</label>
@@ -67,8 +88,8 @@ function FuelForm(props) {
                             id='address2Form' 
                             name='address2Form' 
                             maxLength={100} 
-                            onChange={e => setAddress({...address, addressLine2: e.target.value})} 
-                            value = {address.addressLine2}>
+                            onChange={e => setDetails({...details, addressLine2: e.target.value})} 
+                            value = {details.addressLine2}>
                             </input>
                             <label htmlFor='cityForm'>City</label>
                             <input 
@@ -76,14 +97,14 @@ function FuelForm(props) {
                             id='cityForm' 
                             name='cityForm' 
                             maxLength={100} 
-                            onChange={e => setAddress({...address, city: e.target.value})} 
-                            value = {address.city}
+                            onChange={e => setDetails({...details, city: e.target.value})} 
+                            value = {details.city}
                             required>  
                             </input>
                             <label htmlFor='stateForm'>State</label>
                             <select 
-                            value={address.stateCode} name="stateForm"
-                            onChange={e => setAddress({...address, stateCode: e.target.value})}>
+                            value={details.stateCode} name="stateForm"
+                            onChange={e => setDetails({...details, stateCode: e.target.value})}>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AR">AR</option>	
@@ -143,7 +164,7 @@ function FuelForm(props) {
                             name='zipcodeForm' 
                             maxLength={9} 
                             minLength={5} 
-                            onChange={e => setAddress({...address, zipcode: e.target.value})} value = {address.zipcode}
+                            onChange={e => setDetails({...details, zipcode: e.target.value})} value = {details.zipcode}
                             required>
                             </input>
                         </div> 
