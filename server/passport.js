@@ -1,4 +1,3 @@
-const Connection = require('mysql2/typings/mysql/lib/Connection');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const genPass = require('./valUsrPss').genPass;
@@ -6,7 +5,6 @@ const findUser = require('./valUsrPss').findUser;
 const findUserId = require('./valUsrPss').findUserId;
 const db = require('./database');
 
-db.query(`USE vidyawxx_build2`);
 
 const verifyCallback = (username, password, done) => {
     const user = findUser(username);
