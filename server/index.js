@@ -9,6 +9,8 @@ const path = require("path");
 const session = require("express-session");
 const router = require("./routes");
 const morgan = require("morgan");
+const {dbconfig} = require('./database');
+var MySQLStore = require('express-mysql-session')(session);
 
 dotenv.config();
 const app = express();
@@ -28,8 +30,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+var sessionStore = new MySQLStore(dbconfig);
+
 app.use(session({
   secret: 'some secret',
+  store: sessionStore,
   resave: false, 
   saveUninitialized: true,
   cookie:{
