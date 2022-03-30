@@ -27,7 +27,7 @@ router.post("/login", (req, res) => {
           console.log(result);
           if (result.length > 0) {
             if (validatePass(password, result[0].Hash, result[0].Salt))
-                res.status(201).send(result);
+                res.status(201).send(req.userId);
             else
                 res.status(403).send("Incorrect username or password!")
           } else {
@@ -71,7 +71,7 @@ router.post("/register", (req, res) => {
             '${newUser.salt}'
             )`
         )
-        res.status(201).send("Post completed");    
+        res.status(201).send("User created!");    
     } catch (error) {
         console.log(error)
     }

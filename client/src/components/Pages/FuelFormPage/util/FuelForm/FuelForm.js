@@ -5,6 +5,7 @@ import AddressData from '../AddressData/AddressData'
 import { createQuote } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
+
     const [details, setDetails] = useState(
         {
           gallons: 0,
@@ -15,7 +16,7 @@ function FuelForm(props) {
           stateCode: "",
           zipcode: ""
         }
-      );
+    );
       
     /*const userData = {
         gallons: details.gallons,
@@ -39,8 +40,23 @@ function FuelForm(props) {
         var createQuoteParams = {
             gallons: details.gallons,
             date: details.date,
-            //BIG ISSUE: addressString lacks input validation
-            addressString: userAddress ? `${props.addressLine1} ${props.addressLine2} ${props.city}, ${props.stateCode} ${props.zipcode}` : `${details.addressLine1} ${details.addressLine2} ${details.city}, ${details.stateCode} ${details.zipcode}`,
+            addressData: userAddress ? 
+            {
+                addressLine1: props.addressLine1,
+                addressLine2: props.addressLine2 || "",
+                city: props.city,
+                stateCode: props.stateCode,
+                zipcode: props.zipcode,
+            
+            } : {
+
+                addressLine1: details.addressLine1,
+                addressLine2: details.addressLine2 || "",
+                city: details.city,
+                stateCode: details.stateCode,
+                zipcode: details.zipcode,
+
+            },
             inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
         }
         //console.log(createQuoteParams);
