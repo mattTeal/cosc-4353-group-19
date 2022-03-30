@@ -16,29 +16,42 @@ function FuelForm(props) {
           zipcode: ""
         }
       );
-    const userData = {
+      
+    /*const userData = {
         gallons: details.gallons,
         date: details.date,
         addressLine1: props.addressLine1,
-        addressLine2: props.addressLine2,
+        addressLine2: props.addressLine2 || "",
         city: props.city,
         stateCode: props.stateCode,
         zipcode: props.zipcode,
-    }
+    }*/
+
     const [userAddress, setUserAddress] = useState(true);
     const [loading, setLoading] = useState('false')
 
     const submitHandler = (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log(details);
-        createQuote(details).then(
+
+        //console.log(details);
+
+        var createQuoteParams = {
+            gallons: details.gallons,
+            date: details.date,
+            //BIG ISSUE: addressString lacks input validation
+            addressString: userAddress ? `${props.addressLine1} ${props.addressLine2} ${props.city}, ${props.stateCode} ${props.zipcode}` : `${details.addressLine1} ${details.addressLine2} ${details.city}, ${details.stateCode} ${details.zipcode}`,
+            inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
+        }
+        //console.log(createQuoteParams);
+
+        createQuote(createQuoteParams).then(
             setLoading(false),
             console.log("New quote created.")
         )
     }
 
-    const initialState = {
+    /*const initialState = {
           gallons: details.gallons,
           date: details.date,
           addressLine1: "",
@@ -46,14 +59,18 @@ function FuelForm(props) {
           city: "",
           stateCode: "AL",
           zipcode: ""
-      };
+      }; */
 
     const handleAddress = () => {
         setUserAddress(!userAddress)
-        if(!userAddress)
+        /*if(!userAddress) {
+            console.log("userAddress == false : Address form is now hidden.")
             setDetails(initialState);
-        else
+        }
+        else {
+            console.log("userAddress == true : Address form is now visible.")
             setDetails(userData);
+        }*/
         console.log(details);
     }
 
@@ -170,11 +187,11 @@ function FuelForm(props) {
                         </div> 
                         : 
                         <AddressData 
-                            addressLine1 = {userData.addressLine1}
-                            addressLine2 = {userData.addressLine2}
-                            city = {userData.city}
-                            stateCode = {userData.stateCode}
-                            zipcode = {userData.zipcode}
+                            addressLine1 = {props.addressLine1}
+                            addressLine2 = {props.addressLine2}
+                            city = {props.city}
+                            stateCode = {props.stateCode}
+                            zipcode = {props.zipcode}
                         /> 
                     }
                     <div>

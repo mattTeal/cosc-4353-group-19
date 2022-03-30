@@ -50,7 +50,7 @@ function RegisterPage() {
       
     fetch("http://localhost:8080/api/auth/register", requestOptions)
       .then(response => {
-        if (response.status != 201) {
+        if (response.status !== 201) {
           //e.preventDefault();
           return response.text().then(text => {
             console.log(text); //<- testing

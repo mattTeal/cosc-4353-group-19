@@ -21,14 +21,14 @@ function FuelFormPage() {
     } 
   );
 
-  const [quotes, setQuotes] = useState(
+  /*const [quotes, setQuotes] = useState(
     {
       date: "",
       gallons: "",
     }
-  )
+  )*/
 
-  const quoteData = getStorageValue("quote", {
+  /*const quoteData = getStorageValue("quote", {
       firstName:"",
       lastName:"",
       addressLine1:"",
@@ -40,28 +40,22 @@ function FuelFormPage() {
       pricePerGallon: "",
       date: "",
     }
-  );
+  );*/
 
   useEffect(() => {
     getUser().then((result) => {
       setUser(result);
     })
-    getQuotes().then((result) => {
+    /*getQuotes().then((result) => {
       setQuotes(result);
-    })
+    })*/
   }, [])
 
   return (
     <div id="OuterDiv">
         <NavBar/>
         <div id="FuelFormPageContent">
-          <FuelForm 
-            addressLine1 = {User.addressLine1}
-            addressLine2 = {User.addressLine2}
-            city = {User.city}
-            stateCode = {User.stateCode}
-            zipcode = {User.zipcode}
-          />
+          <FuelForm />
           <div id="TableFlexBox">
             <h2 id='TableTitle'>Quote History</h2> 
             {/* in the future, don't pass all these props. have table update upon changing. maybe?
@@ -74,9 +68,9 @@ function FuelFormPage() {
               city = {User.city}
               stateCode = {User.stateCode}
               zipcode = {User.zipcode}
-              gallons = {quotes.gallons}
-              ppg = {quotes.pricePerGallon}
-              date = {quotes.date}
+              // gallons = {quotes.gallons}
+              // ppg = {quotes.pricePerGallon}
+              // date = {quotes.date}
             />
           </div>
         </div>
