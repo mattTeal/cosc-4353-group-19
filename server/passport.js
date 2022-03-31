@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy
 const genPass = require('./valUsrPss').genPass;
 const findUser = require('./valUsrPss').findUser;
 const findUserId = require('./valUsrPss').findUserId;
-const db = require('./database');
+let {mockDB} = require('./mockdatabase');
 
 
 const verifyCallback = (username, password, done) => {

@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const db = require('../database');
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
-    if (mockDB["authInfo"].profileCompleted)
-        res.status(200).send(mockDB.userProfileInfo);
-    else 
-        res.status(404).send("No profile to retrieve. Create one!")
+    //fetch profile data from database
+
+
 });
 
 router.post('/', (req, res) => {

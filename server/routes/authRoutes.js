@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const findUser = require('../valUsrPss').findUser;
 const createUser = require('../valUsrPss').createUser;
-const {db} = require('../database');
+const db = require('../database');
 const { validatePass } = require('../valUsrPss');
 
 const valregex = /^\w+$/i;
@@ -75,6 +75,7 @@ router.post("/register", (req, res) => {
             '${newUser.salt}'
             )`
         )
+
         if (!req.session.userID) {
             req.session.userID = newUser.userId;
         }

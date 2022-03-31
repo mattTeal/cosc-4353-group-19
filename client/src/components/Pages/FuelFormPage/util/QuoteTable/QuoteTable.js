@@ -1,26 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 //import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
 //import AddressData from "../AddressData/AddressData";
 
 function QuoteTable(props) {
+  const [dataTable, setDataTable] = React.useState([
+    {
+      Name: "Test Name",
+      Date: "",
+      Gallons: "",
+      Address: "",
+      Total: "",
+      ppg: ""
+    }
+  ]);
 
-    //const [ppgBuffer, setppgBuffer] = useState(1);
+  useEffect(() => {
+    //fetch request to get data from server
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
 
-    // if (props.stateCode === "TX") {
-    //   setppgBuffer(30);
-    // }
-    // else {
-    //   setppgBuffer(50);
-    // }
+    fetch("http://localhost:8080/api/quotes", requestOptions) //<- testing
+      .then(response => response.json())
+      .then(data => {
+        setDataTable(data);
+      });
+    }, []);
 
-    //THIS DOES NOT UPDATE OR ADD ENTRIES TO LIST ! this is for DUMMY DATA
-    //in the future, update the list UPON CHANGING THE DATA, not upon refreshing.
-
-    //data in table
-
-  const data = React.useMemo(() =>
+  /* const data = React.useMemo(() =>
   [
     {
     name: props.firstName + " " + props.lastName,
@@ -32,8 +42,11 @@ function QuoteTable(props) {
     total: props.gallons * 30
     },
   ],
-  [props.firstName, props.lastName, props.addressLine1, props.addressLine2, props.city, props.stateCode, props.zipcode, props.date, props.gallons] //<- not that anyone cares but this is the depedency array!
-  )
+  [props] //<- not that anyone cares but this is the depedency array!
+  ) */
+
+  const tableData = React.useMemo(() => [...dataTable], [dataTable]);
+  console.log(dataTable);
 
   //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.
   const columns = React.useMemo(() => 
@@ -44,11 +57,11 @@ function QuoteTable(props) {
           [
             {
             Header: 'Name',
-            accessor: 'name', // <- 'accessor' in columns is the 'key' in data
+            accessor: 'Name', // <- 'accessor' in columns is the 'key' in data
             },
             {
             Header: 'Address',
-            accessor: 'address',
+            accessor: 'Address',
             },
           ],
       },
@@ -58,11 +71,11 @@ function QuoteTable(props) {
           [
             {
                 Header: 'Delivery Date',
-                accessor: 'date',
+                accessor: 'Date',
             },
             {
                 Header: '# Gallons',
-                accessor: 'gallons',
+                accessor: 'Gallons',
             },
             {
                 Header: '$ / Gallon',
@@ -70,14 +83,13 @@ function QuoteTable(props) {
             },
             {
                 Header: 'Total',
-                accessor: 'total',
+                accessor: 'Total',
             },
           ],
       },
     ],
     []
   )
-
       //useTable hook
   const {
       getTableProps,
@@ -85,7 +97,7 @@ function QuoteTable(props) {
       headerGroups,
       rows,
       prepareRow,
-  } = useTable({columns, data})
+  } = useTable({columns, data:tableData})
 
   //rendering
   return (
