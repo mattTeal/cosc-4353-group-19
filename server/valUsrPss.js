@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 let {mockDB} = require('./mockdatabase');
-const db = require('./database');
+const {db} = require('./database');
 
 function genPass(password, salt){
     const newSalt = salt ? salt : crypto.randomBytes(16).toString('hex')
