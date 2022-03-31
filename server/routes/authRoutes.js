@@ -26,8 +26,11 @@ router.post("/login", (req, res) => {
           }
           console.log(result);
           if (result.length > 0) {
-            if (validatePass(password, result[0].Hash, result[0].Salt))
-                res.status(201).send(req.userId);
+            if (validatePass(password, result[0].Hash, result[0].Salt)) {
+                if (!req.session.userID) 
+                    req.session.userID = result[0].UserID;
+                res.status(201).send("Login successful");
+            }
             else
                 res.status(403).send("Incorrect username or password!")
           } else {
@@ -71,6 +74,8 @@ router.post("/register", (req, res) => {
             '${newUser.salt}'
             )`
         )
+        if (!req.session.userID) 
+            req.session.userID = newUser.userId;
         res.status(201).send("User created!");    
     } catch (error) {
         console.log(error)

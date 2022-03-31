@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const db = require('../database');
+const {db} = require('../database');
 const findUser = require('../valUsrPss').findUser;
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
     //res.status(200).send(mockDB.quoteHistory);
     // get data from database
-    db.query('SELECT * FROM quotes', (err, rows) => {
+    db.query(
+        `SELECT * FROM QUOTES WHERE UserID = "?";`,
+        req.session.userID,
+        (err, rows) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -19,6 +22,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // get userID
     // post to MySQL database with userID
+    if (!req.session.userID) {
+        res.status(403).send(/*"You must be logged in to post a quote"*/ req.session);
+    }
 
     // form parameters
     const {gallons, date, addressData, inState} = req.body;
@@ -49,7 +55,7 @@ router.post('/', (req, res) => {
         var addressString = addressData.addressLine1 + " " + addressData.addressLine2 + " " + addressData.city + ", " + addressData.stateCode + " " + addressData.zipcode;
 
         try {
-            db.promise().query(`CALL quotePost(?, ?, ?, ?)`, [gallons, date, addressString, inState]);
+            db.promise().query(`CALL quotePost(?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, req.session.userID]);
             res.status(201).send({message: "Post completed with status code 201."});    
         } catch (error) {
             console.log(error)
