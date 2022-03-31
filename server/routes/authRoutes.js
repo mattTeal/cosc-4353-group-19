@@ -27,8 +27,9 @@ router.post("/login", (req, res) => {
           console.log(result);
           if (result.length > 0) {
             if (validatePass(password, result[0].Hash, result[0].Salt)) {
-                if (!req.session.userID) 
+                if (!req.session.userID) {
                     req.session.userID = result[0].UserID;
+                }
                 res.status(201).send("Login successful");
             }
             else
@@ -74,9 +75,11 @@ router.post("/register", (req, res) => {
             '${newUser.salt}'
             )`
         )
-        if (!req.session.userID) 
+
+        if (!req.session.userID) {
             req.session.userID = newUser.userId;
-        res.status(201).send("User created!");    
+        }
+        res.status(201).send("Post completed");    
     } catch (error) {
         console.log(error)
     }
