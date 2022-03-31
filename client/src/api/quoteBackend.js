@@ -17,7 +17,11 @@ export const getUser = async () => {
 export const getQuotes = async () => {
     return (
         await fetch(
-            `${BASE_ENDPOINT}/quotes`
+            `${BASE_ENDPOINT}/quotes`,
+            {
+                method: 'GET',
+                credentials: 'same-origin'
+            }
         ).then(
             result => result.ok? result.json() : {error: true}
         )
@@ -31,7 +35,8 @@ export const createQuote = async (data) => {
             {
                 method: "POST",
                 headers: HEADER,
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                credentials: 'same-origin'
             }
         ).then(
             result => result.ok ? result.json() : {error: true}

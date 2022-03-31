@@ -1,12 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const db = require('../database');
+const {db} = require('../database');
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
     //fetch profile data from database
-
-
+    db.query(
+        `SELECT * FROM profiles`,
+        (err, rows) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(rows[0]);
+            }
+        }
+    )
 });
 
 router.post('/', (req, res) => {

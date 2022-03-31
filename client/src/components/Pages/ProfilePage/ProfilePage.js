@@ -26,7 +26,8 @@ function ProfilePage() {
 
     fetch(url, {
       method:"GET",
-      redirect:"follow"
+      redirect:"follow",
+      credentials: "same-origin"
     })
       .then((response) => {
         if (!response.ok)
@@ -36,7 +37,17 @@ function ProfilePage() {
       })
       .then((data) => {
         console.log(data); 
-        setUser(data);
+        setUser(() => {
+          return {
+            firstName: data.FirstName,
+            lastName: data.LastName,
+            addressLine1: data.AddressLine1,
+            addressLine2: data.AddressLine2 || "",
+            city: data.City,
+            stateCode: data.StateCode,
+            zipcode: data.Zipcode
+          }
+        });
       })
       .catch((error) => {
         console.log(error);
