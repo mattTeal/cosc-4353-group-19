@@ -5,34 +5,15 @@ const findUser = require('../valUsrPss').findUser;
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
-    //res.status(200).send(mockDB.quoteHistory);
+    // access userID from url query string
+    const userID = req.query.userID;
+    //console.log(userID);
     // get data from database
-    if (!req.session.userID) {
-        // query for userID from sessions table in MySQL
-        if (req.sessionID) {
-            db.query(
-                `SELECT data FROM SESSIONS WHERE session_id = "?";`,
-                req.sessionID,
-                (err, rows) => {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        if (rows.length > 0) {
-                            req.session.userID = rows[0].data.userID;
-                        } else {
-                            res.status(401).send(/*"Session not found/stored"*/ req.sessionID);
-                        }
-                    }
-                }     
-            )
-        }
-        else {
-            res.status(403).send("You must be logged in to post a quote");
-        }
+    if (!userID) {
+        res.status(403).send("You must be logged in to post a quote");
     } else {
         db.query(
-            `SELECT * FROM QUOTES WHERE UserID = "?";`,
-            req.session.userID,
+            `CALL quoteGet("${userID}");`,
             (err, rows) => {
             if (err) {
                 res.status(500).send(err);
@@ -44,34 +25,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    // form parameters
+    const {gallons, date, addressData, inState, userID} = req.body;
     // post to MySQL database with userID
-    if (!req.session.userID) {
-        // query for userID from sessions table in MySQL
-        if (req.sessionID) {
-            db.query(
-                `SELECT data FROM SESSIONS WHERE session_id = "?";`,
-                req.sessionID,
-                (err, rows) => {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        if (rows.length > 0) {
-                            req.session.userID = rows[0].data.userID;
-                        } else {
-                            res.status(401).send(/*"Session not found/stored"*/ req.sessionID);
-                        }
-                    }
-                }     
-            )
-        }
-        else {
-            res.status(403).send("You must be logged in to post a quote");
-        }
+    if (!userID || userID === "") {
+        res.status(403).send("You must be logged in to post a quote");
     }
     else {
-        // form parameters
-        const {gallons, date, addressData, inState} = req.body;
-
         //validate address data
         const regexName = /^[a-zA-Z]+$/;
         const regexStreet = /\b\d{1,6} +.{2,25}\b(avenue|ave|court|ct|street|st|drive|dr|lane|ln|road|rd|blvd|plaza|parkway|pl|place|pkwy)[.,]?(.{0,25} +\b\d{5}\b)?/ig;
@@ -98,7 +58,7 @@ router.post('/', (req, res) => {
             var addressString = addressData.addressLine1 + " " + addressData.addressLine2 + " " + addressData.city + ", " + addressData.stateCode + " " + addressData.zipcode;
 
             try {
-                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, req.session.userID]);
+                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID]);
                 res.status(201).send({message: "Post completed with status code 201."});    
             } catch (error) {
                 console.log(error)

@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
+import { useUserInfo } from "../../../util/AuthContext/AuthContext.tsx";
 //import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
+import { getQuotes, getUser } from '../../../../../api/quoteBackend.js'
 //import AddressData from "../AddressData/AddressData";
 
 function QuoteTable(props) {
+
+  const { userInfo } = useUserInfo();
+  //console.log(userInfo); // this is the userID from the AuthContext
+
   const [dataTable, setDataTable] = React.useState([
     {
-      Name: "Test Name",
+      Name: "",
       Date: "",
       Gallons: "",
       Address: "",
@@ -17,36 +23,24 @@ function QuoteTable(props) {
   ]);
 
   useEffect(() => {
-    //fetch request to get data from server
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
+    //get userID from LocalStorage
+    var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+    //console.log(key);
 
-    fetch("http://localhost:8080/api/quotes", requestOptions) //<- testing
-      .then(response => response.json())
-      .then(data => {
-        setDataTable(data);
-      });
+    getQuotes(key).then(data => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        //console.log(data[0]);
+        setDataTable(data[0]);
+        console.log(dataTable);
+      }
+    });
+
     }, []);
 
-  /* const data = React.useMemo(() =>
-  [
-    {
-    name: props.firstName + " " + props.lastName,
-    address: props.addressLine1 + " " + props.addressLine2 + " " + 
-    props.city + ", " + props.stateCode + " " + props.zipcode,
-    date: props.date,
-    gallons: props.gallons,
-    ppg: 30,
-    total: props.gallons * 30
-    },
-  ],
-  [props] //<- not that anyone cares but this is the depedency array!
-  ) */
-
   const tableData = React.useMemo(() => [...dataTable], [dataTable]);
-  console.log(dataTable);
+  //console.log(dataTable);
 
   //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.
   const columns = React.useMemo(() => 
@@ -90,7 +84,8 @@ function QuoteTable(props) {
     ],
     []
   )
-      //useTable hook
+  
+  //useTable hook
   const {
       getTableProps,
       getTableBodyProps,

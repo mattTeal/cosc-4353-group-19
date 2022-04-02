@@ -14,13 +14,14 @@ export const getUser = async () => {
     )
 }
 
-export const getQuotes = async () => {
+export const getQuotes = async (key) => {
     return (
         await fetch(
-            `${BASE_ENDPOINT}/quotes`,
+            `${BASE_ENDPOINT}/quotes/?userID=${key}`,
             {
                 method: 'GET',
-                credentials: 'same-origin'
+                credentials: 'same-origin',
+                //headers: HEADER
             }
         ).then(
             result => result.ok? result.json() : {error: true}

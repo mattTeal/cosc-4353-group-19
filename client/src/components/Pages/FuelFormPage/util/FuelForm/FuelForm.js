@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import './FuelForm.css'
+import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
 import { createQuote } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
+
+    const { userInfo, setUserInfo } = useUserInfo();
 
     const [details, setDetails] = useState(
         {
@@ -18,16 +21,6 @@ function FuelForm(props) {
         }
     );
       
-    /*const userData = {
-        gallons: details.gallons,
-        date: details.date,
-        addressLine1: props.addressLine1,
-        addressLine2: props.addressLine2 || "",
-        city: props.city,
-        stateCode: props.stateCode,
-        zipcode: props.zipcode,
-    }*/
-
     const [userAddress, setUserAddress] = useState(true);
     const [loading, setLoading] = useState('false')
 
@@ -58,24 +51,15 @@ function FuelForm(props) {
 
             },
             inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
+            userID: userInfo.userID ? userInfo.userID : localStorage.getItem('userID')
         }
-        //console.log(createQuoteParams);
+        //console.log(createQuoteParams.userID);
 
         createQuote(createQuoteParams).then(
             setLoading(false),
             console.log("New quote created.")
         )
     }
-
-    /*const initialState = {
-          gallons: details.gallons,
-          date: details.date,
-          addressLine1: "",
-          addressLine2: "",
-          city: "",
-          stateCode: "AL",
-          zipcode: ""
-      }; */
 
     const handleAddress = () => {
         setUserAddress(!userAddress)
@@ -87,7 +71,7 @@ function FuelForm(props) {
             console.log("userAddress == true : Address form is now visible.")
             setDetails(userData);
         }*/
-        console.log(details);
+        //console.log(details);
     }
 
     return (
@@ -101,7 +85,7 @@ function FuelForm(props) {
                 </div>
                 <div className="form-group">
                     <input type='checkbox' id='useraddress' onClick={() => handleAddress()}/>
-                    <label for='useraddress'>Use address linked to account</label>
+                    <label htmlFor='useraddress'>Use address linked to account</label>
                     <label>Shipping Address</label>
                     {!userAddress ?
                         <div> 

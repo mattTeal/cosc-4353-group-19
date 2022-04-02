@@ -14,8 +14,7 @@ const valregex = /^\w+$/i;
 
 //login route
 router.post("/login", (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     db.query(
         "SELECT * FROM USERS WHERE Username = ?;",
@@ -30,7 +29,7 @@ router.post("/login", (req, res) => {
                 if (!req.session.userID) {
                     req.session.userID = result[0].UserID;
                 }
-                res.status(201).send("Login successful");
+                res.status(201).send(req.session.userID);
             }
             else
                 res.status(403).send("Incorrect username or password!")
