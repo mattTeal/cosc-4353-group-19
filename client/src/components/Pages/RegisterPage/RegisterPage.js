@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom'
+import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -10,6 +11,8 @@ function RegisterPage() {
     password: '',
     confirmpass: ''
   });
+
+  const { userInfo, setUserInfo } = useUserInfo();
 
   const [passwordValid, setPasswordValid] = useState(false);
 
@@ -60,11 +63,15 @@ function RegisterPage() {
         else {
           setsubmit(true);
           //e.preventDefault();
-          console.log(response.text()); //<- testing
+          /*console.log(response.text()); //<- testing
           console.log(response.statusText);
-          console.log(response.status)
+          console.log(response.status)*/
           return response.text();
         }
+      }).then(userID => {
+        localStorage.setItem('userID', userID);
+        //console.log(userID); //<- testing
+        setUserInfo({ userID: userID });
       })
       .catch(error => {
         console.log('error', error);

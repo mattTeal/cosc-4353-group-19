@@ -17,19 +17,15 @@ router.post("/login", (req, res) => {
     const { username, password } = req.body;
 
     db.query(
-        "SELECT * FROM USERS WHERE Username = ?;",
-        username,
+        `CALL loginPost("${username}")`,
         (err, result) => {
           if (err) {
             res.send({ err: err });
           }
           console.log(result);
           if (result.length > 0) {
-            if (validatePass(password, result[0].Hash, result[0].Salt)) {
-                if (!req.session.userID) {
-                    req.session.userID = result[0].UserID;
-                }
-                res.status(201).send(req.session.userID);
+            if (validatePass(password, result[0][0].Hash, result[0][0].Salt)) {
+                res.status(201).send(result[0][0].UserID);
             }
             else
                 res.status(403).send("Incorrect username or password!")
@@ -75,10 +71,7 @@ router.post("/register", (req, res) => {
             )`
         )
 
-        if (!req.session.userID) {
-            req.session.userID = newUser.userId;
-        }
-        res.status(201).send("Post completed");    
+        res.status(201).send(newUser.userId);    
     } catch (error) {
         console.log(error)
     }
