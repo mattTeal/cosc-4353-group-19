@@ -4,10 +4,14 @@ const HEADER = {
     'Content-Type': 'application/json;charset=UTF-8'
 }
 
-export const getUser = async () => {
+export const getUser = async (key) => {
     return (
         await fetch(
-            `${BASE_ENDPOINT}/profile`
+            `${BASE_ENDPOINT}/profile/?userID=${key}`, 
+        {
+            method: 'GET',
+            credentials: 'same-origin',
+        }
         ).then(
             result => result.ok? result.json() : {error: true}
         )

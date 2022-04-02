@@ -3,7 +3,7 @@ import { useUserInfo } from "../../../util/AuthContext/AuthContext.tsx";
 //import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
-import { getQuotes, getUser } from '../../../../../api/quoteBackend.js'
+import { getQuotes } from '../../../../../api/quoteBackend.js'
 //import AddressData from "../AddressData/AddressData";
 
 function QuoteTable(props) {
@@ -23,16 +23,14 @@ function QuoteTable(props) {
   ]);
 
   useEffect(() => {
-    //get userID from LocalStorage
+    //get userID from Context or LocalStorage
     var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
-    //console.log(key);
 
     getQuotes(key).then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
-        //console.log(data[0]);
-        setDataTable(data[0]);
+        setDataTable(data[0]); // query causes supplemental data to be returned. at index 0 is the data we want.
         console.log(dataTable);
       }
     });
@@ -51,7 +49,7 @@ function QuoteTable(props) {
           [
             {
             Header: 'Name',
-            accessor: 'Name', // <- 'accessor' in columns is the 'key' in data
+            accessor: 'FullName', // <- 'accessor' in columns is the 'key' in data
             },
             {
             Header: 'Address',

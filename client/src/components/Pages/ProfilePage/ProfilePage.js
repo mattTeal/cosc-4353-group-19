@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../util/NavBar/NavBar'
 //import StateDropDown from '../FuelFormPage/util/FuelForm/StateDropDown/StateDropDown';
 import AddressData from '../FuelFormPage/util/AddressData/AddressData';
+import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 //import fetchData from '../util/FrontEndFunctions/apiRequests';
 import './ProfilePage.css'
 
 function ProfilePage() {
+
+  const { userInfo } = useUserInfo();
 
   const [User, setUser] = useState(
     {
@@ -22,7 +25,12 @@ function ProfilePage() {
   const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
-    const url = "http://localhost:8080/api/profile/";
+    if (userInfo.userID === "") {
+      console.log("User not logged in!");
+    }
+    //profile still needs detect when a user has not completed their profile first
+
+    /*const url = "http://localhost:8080/api/profile/";
 
     fetch(url, {
       method:"GET",
@@ -52,7 +60,7 @@ function ProfilePage() {
       .catch((error) => {
         console.log(error);
         setHidden(false);
-      });
+      });*/
 
   },[hidden]);
 
@@ -66,6 +74,8 @@ function ProfilePage() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
+    var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+
     var urlencoded = new URLSearchParams();
     urlencoded.append("firstNameForm", User.firstName);
     urlencoded.append("lastNameForm", User.lastName);
@@ -74,12 +84,13 @@ function ProfilePage() {
     urlencoded.append("cityForm", User.city);
     urlencoded.append("stateForm", User.stateCode);
     urlencoded.append("zipcodeForm", User.zipcode);
+    urlencoded.append("userID", key);
 
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: urlencoded,
-      redirect: 'follow'
+      redirect: 'follow',
     };
     
     fetch("http://localhost:8080/api/profile/", requestOptions)
@@ -106,17 +117,7 @@ function ProfilePage() {
         <h1>Profile</h1>
         {hidden ? 
         <div className='ProfileInfo' id='ProfileInfoDisplay'>
-          <div className='FullNameDisplay'> {/*This div could be unnecessary*/}
-            <span className='FirstNameDisplay'>{User.firstName} </span>
-            <span className='LastNameDisplay'>{User.lastName}</span>
-          </div>
-          <AddressData 
-            addressLine1 = {User.addressLine1}
-            addressLine2 = {User.addressLine2}
-            city = {User.city}
-            stateCode = {User.stateCode}
-            zipcode = {User.zipcode}
-          />
+          <AddressData />
           <button 
             onClick={() => {setHidden(hidden => !hidden);}}>Edit Profile Information
           </button>

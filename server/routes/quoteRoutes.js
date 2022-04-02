@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // form parameters
-    const {gallons, date, addressData, inState, userID} = req.body;
+    const {gallons, date, addressData, inState, userID, fullName} = req.body;
     // post to MySQL database with userID
     if (!userID || userID === "") {
         res.status(403).send("You must be logged in to post a quote");
@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
             var addressString = addressData.addressLine1 + " " + addressData.addressLine2 + " " + addressData.city + ", " + addressData.stateCode + " " + addressData.zipcode;
 
             try {
-                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID]);
+                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID, fullName]);
                 res.status(201).send({message: "Post completed with status code 201."});    
             } catch (error) {
                 console.log(error)

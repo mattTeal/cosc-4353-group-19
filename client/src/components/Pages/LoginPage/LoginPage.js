@@ -90,8 +90,7 @@ function LoginPage() {
   const showForm = (
     <>
       <div className="loginForm">
-        {/* <form action="http://localhost:8080/api/auth/login" method="POST"> */}
-        <form onSubmit={submitHandler} /*action="http://localhost:8080/api/auth/login" method="POST"*/>
+        <form onSubmit={submitHandler} >
           <div className="signin">
             <h3>Sign In</h3>
           </div>

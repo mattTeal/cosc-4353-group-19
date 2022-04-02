@@ -4,9 +4,10 @@ const {db} = require('../database');
 let { mockDB } = require("../mockdatabase");
 
 router.get('/', (req, res) => {
+    const userID = req.query.userID;
     //fetch profile data from database
     db.query(
-        `SELECT * FROM profiles`,
+        `CALL profileGet("${userID}");`,
         (err, rows) => {
             if (err) {
                 res.status(500).send(err);
@@ -26,7 +27,8 @@ router.post('/', (req, res) => {
         addressLine2: req.body.address2Form.trim() || "",
         city: req.body.cityForm.trim() || "",
         stateCode: req.body.stateForm.trim() || "",
-        zipcode: req.body.zipcodeForm.trim() || "" //<- for error checking
+        zipcode: req.body.zipcodeForm.trim() || "", //<- for error checking
+        userID: req.body.userID || ""
     }
 
     //input validation
@@ -36,8 +38,11 @@ router.post('/', (req, res) => {
     const regexAptSuite = /((#|APT|BSMT|BLDG|DEPT|FL|FRNT|HNGR|KEY|LBBY|LOT|LOWR|OFC|PH|PIER|REAR|RM|SIDE|SLIP|SPC|STOP|STE|TRLR|UNIT|UPPR|\,)[\w]*)\n/gi;
     const regexZipcode = /^\d{5}(-\d{4})?$/;
     const regexCity = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
-
-    if (!regexName.test(addressData.firstName) || !regexName.test(addressData.lastName))
+    
+    if (addressData.userID === "") {
+        res.status(403).send("You must be logged in to post a quote");
+    }
+    else if (!regexName.test(addressData.firstName) || !regexName.test(addressData.lastName))
         //res.status(400).send("First or last name contains invalid characters.");
         res.status(400).send(`First or last name contains invalid characters.`);
     else if (!regexStreet.test(addressData.addressLine1) && !regexCityGrid.test(addressData.addressLine1)) 
@@ -49,11 +54,17 @@ router.post('/', (req, res) => {
     else if (!regexZipcode.test(addressData.zipcode))
         res.status(400).send("Zip code is invalid. Please try again with valid input.");
     else {
-        //create user object
-        mockDB["userProfileInfo"] = JSON.stringify(addressData);
-        mockDB["authInfo"].profileCompleted = true;
-        //response
-        res.status(200).send("Post completed with status code 200.");
+        //create user object in MySQL database
+        db.query(`CALL profilePost(?, ?, ?, ?, ?, ?, ?, ?);`, [addressData.firstName, addressData.lastName, addressData.addressLine1, addressData.addressLine2, addressData.city, addressData.stateCode, addressData.zipcode, addressData.userID], 
+        (err, rows) => {
+            if (err) {  
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(rows[0]);
+            }
+        });
+
+        //mockDB["authInfo"].profileCompleted = true;
     }
 })
 
