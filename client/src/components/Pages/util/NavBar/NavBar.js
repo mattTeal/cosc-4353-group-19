@@ -1,7 +1,9 @@
 import React from "react";
+import { useUserInfo } from "../AuthContext/AuthContext.tsx";
 import "./NavBar.css"
 
 const NavBar = () => {
+    const { userInfo, setUserInfo } = useUserInfo();
     return (
         <div className="topnav">
             <div className="container">
@@ -24,6 +26,10 @@ const NavBar = () => {
                                         .then(response => response.text())
                                         .then(result => {
                                             console.log(result);
+                                            setUserInfo({userID: ""});
+                                            console.log(userInfo);
+                                            localStorage.clear();
+
                                             window.location.replace(result);
                                         })
                                         .catch(error => console.log('error', error));

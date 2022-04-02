@@ -4,20 +4,29 @@ const HEADER = {
     'Content-Type': 'application/json;charset=UTF-8'
 }
 
-export const getUser = async () => {
+export const getUser = async (key) => {
     return (
         await fetch(
-            `${BASE_ENDPOINT}/profile`
+            `${BASE_ENDPOINT}/profile/?userID=${key}`, 
+        {
+            method: 'GET',
+            credentials: 'same-origin',
+        }
         ).then(
             result => result.ok? result.json() : {error: true}
         )
     )
 }
 
-export const getQuotes = async () => {
+export const getQuotes = async (key) => {
     return (
         await fetch(
-            `${BASE_ENDPOINT}/quotes`
+            `${BASE_ENDPOINT}/quotes/?userID=${key}`,
+            {
+                method: 'GET',
+                credentials: 'same-origin',
+                //headers: HEADER
+            }
         ).then(
             result => result.ok? result.json() : {error: true}
         )
@@ -31,7 +40,8 @@ export const createQuote = async (data) => {
             {
                 method: "POST",
                 headers: HEADER,
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                credentials: 'same-origin'
             }
         ).then(
             result => result.ok ? result.json() : {error: true}

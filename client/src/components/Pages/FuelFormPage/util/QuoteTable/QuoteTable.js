@@ -1,39 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useUserInfo } from "../../../util/AuthContext/AuthContext.tsx";
 //import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
+import { getQuotes } from '../../../../../api/quoteBackend.js'
 //import AddressData from "../AddressData/AddressData";
 
 function QuoteTable(props) {
 
-    //const [ppgBuffer, setppgBuffer] = useState(1);
+  const { userInfo } = useUserInfo();
+  //console.log(userInfo); // this is the userID from the AuthContext
 
-    // if (props.stateCode === "TX") {
-    //   setppgBuffer(30);
-    // }
-    // else {
-    //   setppgBuffer(50);
-    // }
-
-    //THIS DOES NOT UPDATE OR ADD ENTRIES TO LIST ! this is for DUMMY DATA
-    //in the future, update the list UPON CHANGING THE DATA, not upon refreshing.
-
-    //data in table
-
-  const data = React.useMemo(() =>
-  [
+  const [dataTable, setDataTable] = React.useState([
     {
-    name: props.firstName + " " + props.lastName,
-    address: props.addressLine1 + " " + props.addressLine2 + " " + 
-    props.city + ", " + props.stateCode + " " + props.zipcode,
-    date: props.date,
-    gallons: props.gallons,
-    ppg: 30,
-    total: props.gallons * 30
-    },
-  ],
-  [props.firstName, props.lastName, props.addressLine1, props.addressLine2, props.city, props.stateCode, props.zipcode, props.date, props.gallons] //<- not that anyone cares but this is the depedency array!
-  )
+      Name: "",
+      Date: "",
+      Gallons: "",
+      Address: "",
+      Total: "",
+      ppg: ""
+    }
+  ]);
+
+  useEffect(() => {
+    //get userID from Context or LocalStorage
+    var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+
+    getQuotes(key).then(data => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setDataTable(data[0]); // query causes supplemental data to be returned. at index 0 is the data we want.
+        console.log(dataTable);
+      }
+    });
+
+    }, []);
+
+  const tableData = React.useMemo(() => [...dataTable], [dataTable]);
+  //console.log(dataTable);
 
   //table structure: 2 headers 'User Info' and 'Quote Info', each with subheaders.
   const columns = React.useMemo(() => 
@@ -44,11 +49,11 @@ function QuoteTable(props) {
           [
             {
             Header: 'Name',
-            accessor: 'name', // <- 'accessor' in columns is the 'key' in data
+            accessor: 'FullName', // <- 'accessor' in columns is the 'key' in data
             },
             {
             Header: 'Address',
-            accessor: 'address',
+            accessor: 'Address',
             },
           ],
       },
@@ -58,11 +63,11 @@ function QuoteTable(props) {
           [
             {
                 Header: 'Delivery Date',
-                accessor: 'date',
+                accessor: 'Date',
             },
             {
                 Header: '# Gallons',
-                accessor: 'gallons',
+                accessor: 'Gallons',
             },
             {
                 Header: '$ / Gallon',
@@ -70,22 +75,22 @@ function QuoteTable(props) {
             },
             {
                 Header: 'Total',
-                accessor: 'total',
+                accessor: 'Total',
             },
           ],
       },
     ],
     []
   )
-
-      //useTable hook
+  
+  //useTable hook
   const {
       getTableProps,
       getTableBodyProps,
       headerGroups,
       rows,
       prepareRow,
-  } = useTable({columns, data})
+  } = useTable({columns, data:tableData})
 
   //rendering
   return (

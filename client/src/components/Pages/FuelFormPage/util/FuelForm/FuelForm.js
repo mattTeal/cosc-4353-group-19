@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './FuelForm.css'
+import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
-import { createQuote } from '../../../../../api/quoteBackend'
+import { createQuote, getUser } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
+
+    const { userInfo } = useUserInfo();
+
     const [details, setDetails] = useState(
         {
           gallons: 0,
@@ -13,48 +17,70 @@ function FuelForm(props) {
           addressLine2: "",
           city: "",
           stateCode: "",
-          zipcode: ""
+          zipcode: "",
+          fullName: ""
         }
-      );
-    const userData = {
-        gallons: details.gallons,
-        date: details.date,
-        addressLine1: props.addressLine1,
-        addressLine2: props.addressLine2,
-        city: props.city,
-        stateCode: props.stateCode,
-        zipcode: props.zipcode,
-    }
+    );
+      
     const [userAddress, setUserAddress] = useState(true);
     const [loading, setLoading] = useState('false')
+
+    useEffect(() => {
+        var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+
+        getUser(key).then(data => {
+            if (data.error) {
+              console.log(data.error);
+            } else {
+              setDetails(
+                {
+                    addressLine1: data[0].AddressLine1,
+                    addressLine2: data[0].AddressLine2 || "",
+                    city: data[0].City,
+                    stateCode: data[0].StateCode,
+                    zipcode: data[0].ZipCode,
+                    fullName: data[0].FullName
+                }
+              ); // query causes supplemental data to be returned. at index 0 is the data we want.
+            }
+        });
+
+    }, []);
+
 
     const submitHandler = (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log(details);
-        createQuote(details).then(
+
+        //console.log(details);
+
+        var createQuoteParams = {
+            fullName: details.fullName,
+            gallons: details.gallons,
+            date: details.date,
+            addressData: {
+
+                addressLine1: details.addressLine1,
+                addressLine2: details.addressLine2 || "",
+                city: details.city,
+                stateCode: details.stateCode,
+                zipcode: details.zipcode,
+                fullName: details.fullName
+
+            },
+            inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
+            userID: userInfo.userID ? userInfo.userID : localStorage.getItem('userID')
+        }
+        //console.log(createQuoteParams.userID);
+
+        createQuote(createQuoteParams).then(
             setLoading(false),
             console.log("New quote created.")
         )
     }
 
-    const initialState = {
-          gallons: details.gallons,
-          date: details.date,
-          addressLine1: "",
-          addressLine2: "",
-          city: "",
-          stateCode: "AL",
-          zipcode: ""
-      };
-
     const handleAddress = () => {
         setUserAddress(!userAddress)
-        if(!userAddress)
-            setDetails(initialState);
-        else
-            setDetails(userData);
-        console.log(details);
     }
 
     return (
@@ -67,8 +93,8 @@ function FuelForm(props) {
                         e => setDetails({...details, gallons: e.target.value})} value={details.gallons}/>
                 </div>
                 <div className="form-group">
-                    <input type='checkbox' id='useraddress' onClick={() => handleAddress()}/>
-                    <label for='useraddress'>Use address linked to account</label>
+                    <input type='checkbox' id='useraddress' onClick={() => handleAddress()} defaultChecked/>
+                    <label htmlFor='useraddress'>Use address linked to account</label>
                     <label>Shipping Address</label>
                     {!userAddress ?
                         <div> 
@@ -169,13 +195,7 @@ function FuelForm(props) {
                             </input>
                         </div> 
                         : 
-                        <AddressData 
-                            addressLine1 = {userData.addressLine1}
-                            addressLine2 = {userData.addressLine2}
-                            city = {userData.city}
-                            stateCode = {userData.stateCode}
-                            zipcode = {userData.zipcode}
-                        /> 
+                        <AddressData /> 
                     }
                     <div>
                         <br></br>

@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const findUser = require('../valUsrPss').findUser;
 const createUser = require('../valUsrPss').createUser;
-const db = require('../database');
+const {db} = require('../database');
 const { validatePass } = require('../valUsrPss');
 
 const valregex = /^\w+$/i;
@@ -14,8 +14,7 @@ const valregex = /^\w+$/i;
 
 //login route
 router.post("/login", (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     db.query(
         "SELECT * FROM USERS WHERE Username = ?;",
@@ -26,8 +25,12 @@ router.post("/login", (req, res) => {
           }
           console.log(result);
           if (result.length > 0) {
-            if (validatePass(password, result[0].Hash, result[0].Salt))
-                res.status(201).send(result);
+            if (validatePass(password, result[0].Hash, result[0].Salt)) {
+                if (!req.session.userID) {
+                    req.session.userID = result[0].UserID;
+                }
+                res.status(201).send(req.session.userID);
+            }
             else
                 res.status(403).send("Incorrect username or password!")
           } else {
@@ -71,6 +74,10 @@ router.post("/register", (req, res) => {
             '${newUser.salt}'
             )`
         )
+
+        if (!req.session.userID) {
+            req.session.userID = newUser.userId;
+        }
         res.status(201).send("Post completed");    
     } catch (error) {
         console.log(error)

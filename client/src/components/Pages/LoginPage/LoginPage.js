@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import './LoginPage.css'
+import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 
 function LoginPage() {
   //edit to have variables that hold the username and password
   const [err, setErr] = useState({ name:"", message: "" });
   const [submit, setSubmit] = useState(false);
-  const [user, setUser] = useState();
+  const { userInfo, setUserInfo } = useUserInfo();
 
   const ErrorMessage = (name) =>
     name === err.name && (
@@ -51,6 +52,7 @@ function LoginPage() {
         method: 'POST',
         headers: myHeaders,
         body: urlencoded,
+        credentials: 'same-origin'
         //redirect: 'follow'
       };
       
@@ -65,14 +67,16 @@ function LoginPage() {
           }
           else {
             setSubmit(true);
-            //e.preventDefault();
-            //console.log(response.text); //<- testing
+            //setUserInfo({ userID: response });
+            //LOCAL STORAGE
+            //console.log(userInfo);
             return response.text();
           }
         })
-        .then(response => {
-          setUser(response.json());
-          console.log(user);
+        .then(userID => {
+            localStorage.setItem('userID', userID);
+            //console.log(userID); //<- testing
+            setUserInfo({ userID: userID });
         })
         .catch(error => {
           //console.log('error', error);
@@ -86,8 +90,7 @@ function LoginPage() {
   const showForm = (
     <>
       <div className="loginForm">
-        {/* <form action="http://localhost:8080/api/auth/login" method="POST"> */}
-        <form onSubmit={submitHandler} /*action="http://localhost:8080/api/auth/login" method="POST"*/>
+        <form onSubmit={submitHandler} >
           <div className="signin">
             <h3>Sign In</h3>
           </div>
@@ -119,15 +122,15 @@ function LoginPage() {
   );
 
   return (
-    <div>
-      {/* <NavBar/> */}
-      <div className="login-form">
-        <div className="title">
-          {/* <h1 id="login-header">LoginPage</h1> */}
-          {submit ? <Navigate to="/fuel"/> : showForm}
+      <div>
+        {/* <NavBar/> */}
+        <div className="login-form">
+          <div className="title">
+            {/* <h1 id="login-header">LoginPage</h1> */}
+            {submit ? <Navigate to="/fuel"/> : showForm}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 
