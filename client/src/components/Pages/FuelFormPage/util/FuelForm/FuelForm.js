@@ -93,8 +93,12 @@ function FuelForm(props) {
                         e => setDetails({...details, gallons: e.target.value})} value={details.gallons}/>
                 </div>
                 <div className="form-group">
-                    <input type='checkbox' id='useraddress' onClick={() => handleAddress()} defaultChecked/>
-                    <label htmlFor='useraddress'>Use address linked to account</label>
+                    <div className='addrcheckbox'>
+                        <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
+                        <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label>
+                    </div>
+                    {/* <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
+                    <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label> */}
                     <label>Shipping Address</label>
                     {!userAddress ?
                         <div> 
