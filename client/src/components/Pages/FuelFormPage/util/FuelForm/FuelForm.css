@@ -79,7 +79,7 @@ form .form-inner {
 
 form .form-inner .form-group {
   display: block;
-  width: 300px;
+  width: 350px;
   margin-bottom: 30px;
 }
 
@@ -88,7 +88,7 @@ form .form-inner .form-group {
   vertical-align: middle;
   position: absolute;
   bottom: 413px;
-  left: 85px;
+  left: 60px;
 }
 
 .addrcheckbox label{

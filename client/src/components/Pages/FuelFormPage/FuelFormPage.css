@@ -12,5 +12,5 @@ div#TableFlexBox {
     border-left: 5px solid white;
     flex-grow:1;
     min-width: 50%;
-    max-width: 70%;
+    max-width: 100%;
 }
