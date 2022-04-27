@@ -19,7 +19,9 @@ function FuelForm(props) {
           stateCode: "",
           zipcode: "",
           fullName: "",
-          rateHistory: false //default value
+          rateHistory: false, //default value
+          suggestedPrice: 0,
+          total: 0
         }
     );
       
@@ -58,8 +60,14 @@ function FuelForm(props) {
         var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
 
         getQuotes(key).then(data => {
-            setDetails({...details, rateHistory: (!data[0].AddressLine1)});
-            console.log(details.rateHistory);
+            if(data.error){
+                console.log(data.error)
+            }
+            else{
+                setDetails({...details, rateHistory: (!data[0].AddressLine1)});
+                console.log(details.rateHistory);
+            }
+            
         }) 
 
         var createQuoteParams = {
@@ -85,6 +93,18 @@ function FuelForm(props) {
             setLoading(false),
             console.log("New quote created.")
         )
+
+        
+        getQuotes(key).then(data => {
+            if(data.error){
+                console.log(data.error)
+            }
+            else{
+                setDetails({...details, suggestedPrice: data[0].SuggestedPrice});
+                setDetails({...details, total: data[0].Total});
+            }
+        })
+
     }
 
     const handleAddress = () => {
@@ -221,8 +241,16 @@ function FuelForm(props) {
                             onChange={
                                 e => setDetails({...details, date: e.target.value})} value={details.date}/>
                 </div>
+                <div className="SPrice-Display">
+                    <label>Suggested Price:</label>
+                    <p>{details.suggestedPrice}</p>
+                </div>
+                <div className="TPrice-Display">
+                    <label>Total Price:</label>
+                    <p>{details.total}</p>
+                </div>
                 <div className="form-group">
-                    <input type="submit" value="Find Cost"></input>
+                    <input type="submit" value="Get Quote"></input>
                 </div>
             </div>
         </form>
