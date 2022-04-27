@@ -4,6 +4,7 @@ import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
 import { createQuote, getUser, getQuotes } from '../../../../../api/quoteBackend'
+import Modal from '../../util/modal'
 
 
 function FuelForm(props) {
@@ -27,7 +28,9 @@ function FuelForm(props) {
     );
       
     const [userAddress, setUserAddress] = useState(true);
-    const [loading, setLoading] = useState('false')
+    const [loading, setLoading] = useState('false');
+
+    const [modalHidden, setModalHidden] = useState(true);
 
     useEffect(() => {
         var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
@@ -278,42 +281,13 @@ function FuelForm(props) {
                     <p>{details.total}</p>
                 </div> */}
 
-                {/* <div class="modal" id="modal" aria-labelledby="editModal" aria-hidden="true">
-                    <div class="modalDialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="modalbtn" data-dismiss="modal" aria-label="modalbtn" onclick="closeModal()">
-                                    <span class="close">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <label><b>Flight ID</b></label>
-                                <input id="flt_id" placeholder="Flight ID" type="text" maxlength="5" required />
-                                <br />
-                                <label><b>Departure</b></label>
-                                <input id="dep_dte" placeholder="Date" type="date" required />
-                                <input id="dep_tme" placeholder="Time" type="time" step="1" required />
-                                <input id="dep_arpt" placeholder="Airport" type="text" maxlength="3" required />
-                                <br />
-                                <label><b>Arrival</b></label>
-                                <input id="arv_dte" placeholder="Date" type="date" required />
-                                <input id="arv_tme" placeholder="Time" type="time" step="1" required />
-                                <input id="arv_arpt" placeholder="Airport" type="text" maxlength="3" required />
-                                <br />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="closebtn" data-dismiss="modal" onclick="closeModal()">CANCEL</button>
-                                <button type="button" class="savebtn" id="saveedit">Save Changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-
                 <div className="form-group">
                     <input type="submit" value="Get Quote"></input>
                 </div>
 
-                <button onclick="openModal()" id="butt4">Add Flight</button>
+                {modalHidden ? <p>test</p> : <p>false render test</p>}
+
+                <button onClick={() => {setModalHidden(modalHidden => !modalHidden);}} id="butt4">Add Flight</button>
 
             </div>
         </form>

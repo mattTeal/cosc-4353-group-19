@@ -1,24 +1,6 @@
 import React from 'react'
 
 function Modal(props) {
-    
-    //modal element
-    const modal = document.getElementById('modal');
-    //modal open button
-    const modalbtn = document.getElementById('modalbtn');
-    //close button
-    const closebtn = document.getElementsByClassName('closebtn')[0];
-
-    modalbtn.addEventListener('click', closeModal);
-    closebtn.addEventListener('click', closeModal);
-    
-    function openModal(){
-        modal.style.display = 'block';
-    }
-    function closeModal(){
-        modal.style.display = "none";
-   
-
 
     return (
         <div class="modal" id="modal" aria-labelledby="editModal" aria-hidden="true">
@@ -53,3 +35,5 @@ function Modal(props) {
         </div>
     ) 
 }
+
+export default Modal
