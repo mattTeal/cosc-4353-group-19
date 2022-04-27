@@ -97,3 +97,24 @@ form .form-inner .form-group {
 .addrcheckbox{
   margin-bottom: 30px;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(205, 97, 85, 0.5);
+}
+
+.modal .modal-content {
+  background-color: #CD6155;
+  margin: 30% auto;
+  padding: 20px;
+  width: 75%;
+  -webkit-box-shadow: 0 5px 8px 0 rgba(100, 30, 22, 0.3), 0 7px 20px 0 rgba(100, 30, 22, 0.5);
+          box-shadow: 0 5px 8px 0 rgba(100, 30, 22, 0.3), 0 7px 20px 0 rgba(100, 30, 22, 0.5);
+}
