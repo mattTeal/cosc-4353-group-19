@@ -35,8 +35,9 @@ function FuelForm(props) {
             if (data.error) {
               console.log(data.error);
             } else {
-              setDetails(
+              setDetails(details => (
                 {
+                    ...details,
                     addressLine1: data[0].AddressLine1,
                     addressLine2: data[0].AddressLine2 || "",
                     city: data[0].City,
@@ -44,12 +45,24 @@ function FuelForm(props) {
                     zipcode: data[0].ZipCode,
                     fullName: data[0].FullName
                 }
-              ); // query causes supplemental data to be returned. at index 0 is the data we want.
+              )); // query causes supplemental data to be returned. at index 0 is the data we want.
             }
         });
 
-    }, []);
-
+        getQuotes(key).then(data => {
+            if(data.error){
+                console.log(data.error)
+            }
+            else {
+                setDetails(
+                    {
+                        ...details,
+                        rateHistory: (data[0].Address !== false),
+                    }
+                );
+            }
+        })
+    }, [details.rateHistory]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -63,11 +76,14 @@ function FuelForm(props) {
             if(data.error){
                 console.log(data.error)
             }
-            else{
-                setDetails({...details, rateHistory: (!data[0].AddressLine1)});
-                console.log(details.rateHistory);
+            else {
+                setDetails(
+                    {
+                        ...details,
+                        rateHistory: (data[0].Address !== false),
+                    }
+                );
             }
-            
         }) 
 
         var createQuoteParams = {
@@ -100,8 +116,10 @@ function FuelForm(props) {
                 console.log(data.error)
             }
             else{
-                setDetails({...details, suggestedPrice: data[0].SuggestedPrice});
+                setDetails({...details, suggestedPrice: data[0].SuggestedPrice}); 
                 setDetails({...details, total: data[0].Total});
+                console.log(data[0].SuggestedPrice + ", " + data[0].Total);
+                //console.log(details.suggestedPrice + ", " + details.total);
             }
         })
 
