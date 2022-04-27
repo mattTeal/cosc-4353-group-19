@@ -18,7 +18,8 @@ function FuelForm(props) {
           city: "",
           stateCode: "",
           zipcode: "",
-          fullName: ""
+          fullName: "",
+          rateHistory: false //default value
         }
     );
       
@@ -53,6 +54,10 @@ function FuelForm(props) {
         setLoading(true);
 
         //console.log(details);
+        //assign RateHistoryFactor root 
+        getQuotes(key).then(data => {
+            setDetails({...details, rateHistory: (!data[0].AddressLine1)});
+        }) 
 
         var createQuoteParams = {
             fullName: details.fullName,
