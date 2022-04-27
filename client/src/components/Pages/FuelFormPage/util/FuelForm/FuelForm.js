@@ -3,7 +3,7 @@ import './FuelForm.css'
 import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
-import { createQuote, getUser } from '../../../../../api/quoteBackend'
+import { createQuote, getUser, getQuotes } from '../../../../../api/quoteBackend'
 
 function FuelForm(props) {
 
@@ -54,9 +54,12 @@ function FuelForm(props) {
         setLoading(true);
 
         //console.log(details);
-        //assign RateHistoryFactor root 
+        //assign RateHistoryFactor root
+        var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+
         getQuotes(key).then(data => {
             setDetails({...details, rateHistory: (!data[0].AddressLine1)});
+            console.log(details.rateHistory);
         }) 
 
         var createQuoteParams = {
