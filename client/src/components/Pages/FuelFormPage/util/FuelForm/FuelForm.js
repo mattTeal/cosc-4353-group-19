@@ -187,8 +187,8 @@ function FuelForm(props) {
                 </div>
                 <div className="form-group">
                     <div className='addrcheckbox'>
-                        <input type="checkbox" id='useraddress' className="useraddress" onClick={() => handleAddress()} defaultChecked/>
-                        <label htmlFor='useraddress' className="addrLabel">Use address linked to account</label>
+                        <label htmlFor='useraddress' className="addrLabel">Use address linked to account
+                        <input type="checkbox" id='useraddress' className="useraddress" onClick={() => handleAddress()} defaultChecked/></label>
                     </div>
                     {/* <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
                     <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label> */}
