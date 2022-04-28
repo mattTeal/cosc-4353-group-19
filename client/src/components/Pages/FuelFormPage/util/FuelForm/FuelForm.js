@@ -325,7 +325,7 @@ function FuelForm(props) {
 
                     <button onClick={() => {setModalHidden(modalHidden => !modalHidden);}} id="butt4">Add Flight</button> */}
 
-                    <Container className='Container'>
+                    <Container style={{width: '100%'}} className='Container'>
                         <Button className='butt' onClick={openModal}>
                             Save Quote
                         </Button>

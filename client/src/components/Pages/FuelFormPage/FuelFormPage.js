@@ -30,20 +30,12 @@ function FuelFormPage() {
       <div id="OuterDiv">
           <NavBar/>
           <div id="FuelFormPageContent">
-            <FuelForm />
+            <div id='PositionModal'>
+              <FuelForm id="GettingToModal"/>
+            </div>
             <div id="TableFlexBox">
               <h2 id='TableTitle'>Quote History</h2> 
-              {/* in the future, don't pass all these props. have table update upon changing. maybe?
-              logic will change when we implement backend */}
-              <QuoteTable 
-                /*firstName = {User.firstName}
-                lastName = {User.lastName}
-                addressLine1 = {User.addressLine1}
-                addressLine2 = {User.addressLine2}
-                city = {User.city}
-                stateCode = {User.stateCode}
-                zipcode = {User.zipcode}*/
-              />
+              <QuoteTable />
             </div>
           </div>
           <div>
