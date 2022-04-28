@@ -5,6 +5,8 @@ import {MdClose} from 'react-icons/md'
 const Background = styled.div`
     position: fixed;
     height: 100%;
+    width: 1575px;
+    left: 50px;
     top: 50px;
     display: flex;
     justify-content: center;
