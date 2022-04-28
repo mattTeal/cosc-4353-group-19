@@ -65,8 +65,8 @@ export const Modal = ({showModal, setShowModal}) =>{
                         <ModalContent>
                             <h1>Are you sure you would like to save?</h1>
                             <p>Add quote to quote history.</p>
-                            <button>Yes</button>
-                            <button>No</button>
+                            <button onClick={() => setShowModal (prev => !prev)}>Yes</button>
+                            <button onClick={() => setShowModal (prev => !prev)}>No</button>
                         </ModalContent>
                         <CloseModal onClick={() => setShowModal (prev => !prev)}></CloseModal>
                     </ModalWrap>
