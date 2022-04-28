@@ -26,9 +26,10 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // form parameters
-    const {gallons, date, addressData, inState, userID, fullName} = req.body;
+    const {userID, gallons, date, addressData, inState, fullName} = req.body;
     // post to MySQL database with userID
-    if (!userID || userID === "") {
+    console.log("In post: "+ userID);
+    if (userID === undefined) {
         res.status(403).send("You must be logged in to post a quote")
     }
     else {
@@ -44,7 +45,8 @@ router.post('/', (req, res) => {
             //res.status(400).send("First or last name contains invalid characters.");
             res.status(400).send(`First or last name contains invalid characters.`);
         else if (!regexStreet.test(addressData.addressLine1) && !regexCityGrid.test(addressData.addressLine1)) 
-            res.status(400).send("Address line 1 invalid. Please try again with valid input.");
+            {console.log("In post, addressData.addressLine1 = " + addressData.addressLine1);
+            res.status(400).send("Address line 1 invalid. Please try again with valid input."); }
         else if (addressData.addressLine2 !== "" && !regexAptSuite.test(addressData.addressLine2))
             res.status(400).send("Address line 2 invalid. Please try again with valid input.");
         else if (!regexCity.test(addressData.city))

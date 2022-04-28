@@ -153,19 +153,20 @@ function FuelForm(props) {
                 console.log("Quote database is empty.");
             }
             else{
+                console.log(data);
                 setDetails(
                     {
                         ...details,
-                        suggestedPrice: data[0].SuggestedPrice,
+                        suggestedPrice: data[0][0].SuggestedPrice,
                     }
                 );
                 setDetails(
                     {
                         ...details,
-                        total: data[0].Total,
+                        total: data[0][0].Total,
                     }
                 );
-                console.log(data[0].SuggestedPrice + ", " + data[0].Total);
+                console.log(data[0][0].SuggestedPrice + ", " + data[0][0].Total);
             }
         })
 
@@ -305,14 +306,15 @@ function FuelForm(props) {
                             onChange={
                                 e => setDetails({...details, date: e.target.value})} value={details.date}/>
                 </div>
-                {/* <div className="SPrice-Display">
+
+                <div className="SPrice-Display">
                     <label>Suggested Price:</label>
-                    <p>{details.suggestedPrice}</p>
+                    <p><b>${details.suggestedPrice}</b></p>
                 </div>
                 <div className="TPrice-Display">
                     <label>Total Price:</label>
-                    <p>{details.total}</p>
-                </div> */}
+                    <p><b>${details.total}</b></p>
+                </div> 
 
                 <div className='submitButtons'>
                     <div className="form-group">

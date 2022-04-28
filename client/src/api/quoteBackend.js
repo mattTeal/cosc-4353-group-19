@@ -34,7 +34,7 @@ export const getQuotes = async (key) => {
 }
 
 export const createQuote = async (data) => {
-    console.log("In create quote, data.userID = "+ data.userID);
+    console.log("In create quote, data.userID = " + data.userID);
     return (
         await fetch(
             `${BASE_ENDPOINT}/quotes`,
