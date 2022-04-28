@@ -96,7 +96,7 @@ function FuelForm(props) {
                 );
             }
         })
-    }, [details.rateHistory]);
+    }, [details.rateHistory, userInfo.userID]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -137,17 +137,19 @@ function FuelForm(props) {
             inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
             userID: userInfo.userID ? userInfo.userID : localStorage.getItem('userID')
         }
-        //console.log(createQuoteParams.userID);
+        console.log(createQuoteParams.userID);
 
         createQuote(createQuoteParams).then(
             setLoading(false),
             console.log("New quote created.")
         )
 
-        
         getQuotes(key).then(data => {
-            if(data.error){
+            if(data.error) {
                 console.log(data.error)
+            }
+            else if (data[0].Address === false) {
+                console.log("Quote database is empty.");
             }
             else{
                 setDetails(
@@ -183,8 +185,8 @@ function FuelForm(props) {
                 </div>
                 <div className="form-group">
                     <div className='addrcheckbox'>
-                        <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
-                        <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label>
+                        <input type="checkbox" id='useraddress' className="useraddress" onClick={() => handleAddress()} defaultChecked/>
+                        <label htmlFor='useraddress' className="addrLabel">Use address linked to account</label>
                     </div>
                     {/* <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
                     <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label> */}

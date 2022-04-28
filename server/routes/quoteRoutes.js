@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
     const {gallons, date, addressData, inState, userID, fullName} = req.body;
     // post to MySQL database with userID
     if (!userID || userID === "") {
-        res.status(403).send("You must be logged in to post a quote");
+        res.status(403).send("You must be logged in to post a quote")
     }
     else {
         //validate address data
@@ -66,5 +66,24 @@ router.post('/', (req, res) => {
         }
     }
 });
+
+router.delete('/', (req, res) => {
+    // access userID from url query string
+    const userID = req.query.userID;
+    // get data from database
+    if (!userID) {
+        res.status(403).send("You must be logged in to delete a quote");
+    } else {
+        db.query(
+            `CALL deleteMostRecentQuote("${userID}");`,
+            (err, rows) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+})
 
 module.exports = router;

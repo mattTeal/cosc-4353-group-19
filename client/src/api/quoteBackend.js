@@ -34,6 +34,7 @@ export const getQuotes = async (key) => {
 }
 
 export const createQuote = async (data) => {
+    console.log("In create quote, data.userID = "+ data.userID);
     return (
         await fetch(
             `${BASE_ENDPOINT}/quotes`,
@@ -45,6 +46,20 @@ export const createQuote = async (data) => {
             }
         ).then(
             result => result.ok ? result.json() : {error: true}
+        )
+    )
+}
+
+export const deleteRecentQuote = async (key) => {
+    return (
+        await fetch(
+            `${BASE_ENDPOINT}/profile/?userID=${key}`, 
+        {
+            method: 'DELETE',
+            credentials: 'same-origin',
+        }
+        ).then(
+            result => result.ok? result.json() : {error: true}
         )
     )
 }
