@@ -10,12 +10,13 @@ import styled from 'styled-components'
 
 const Container = styled.div`
     display: flex;
-    float: right;
+    width: 100%;
     margin-top: -85px;
     &:hover .butt {
         cursor: pointer;
         transform: scale(1.1) perspective(1px);
     }
+    justify-content: right;
 `;
 
 const Button = styled.div`
@@ -322,7 +323,7 @@ function FuelForm(props) {
 
                     <button onClick={() => {setModalHidden(modalHidden => !modalHidden);}} id="butt4">Add Flight</button> */}
 
-                    <Container>
+                    <Container className='Container'>
                         <Button className='butt' onClick={openModal}>
                             Save Quote
                         </Button>

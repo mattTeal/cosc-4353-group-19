@@ -14,14 +14,15 @@ const Background = styled.div`
 `
 
 const ModalWrap = styled.div`
-    width: 750px;
-    height: 550px;
+    width: 700px;
+    height: 350px;
     box-shadow: 0 5px 8px 0 rgba(100, 30, 22, 0.3), 0 7px 20px 0 rgba(100, 30, 22, 0.5);
     background: #fff;
     display: flex;
     position: absolute;
     z-index: 10;
     border-radius: 10px;
+    justify-content: center;
 `
 
 const ModalContent = styled.div`
@@ -63,10 +64,12 @@ export const Modal = ({showModal, setShowModal}) =>{
                 <Background>
                     <ModalWrap showModal={showModal}>
                         <ModalContent>
-                            <h1>Are you sure you would like to save?</h1>
-                            <p>Add quote to quote history.</p>
-                            <button onClick={() => setShowModal (prev => !prev)}>Yes</button>
-                            <button onClick={() => setShowModal (prev => !prev)}>No</button>
+                            <h1 style={{marginTop: '25px'}}>Are you sure you would like to save?</h1>
+                            <p style={{marginTop: '45px'}}>Add quote to quote history.</p>
+                            <div style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: '100px'}} >
+                                <button style={{marginRight: '45px'}} onClick={() => setShowModal (prev => !prev)}>Yes</button>
+                                <button onClick={() => setShowModal (prev => !prev)}>No</button>
+                            </div>
                         </ModalContent>
                         <CloseModal onClick={() => setShowModal (prev => !prev)}></CloseModal>
                     </ModalWrap>
