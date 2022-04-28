@@ -1,39 +1,77 @@
 import React from 'react'
+import styled from 'styled-components'
+import {MdClose} from 'react-icons/md'
 
-function Modal(props) {
+const Background = styled.div`
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 166, 51, 0.5);
+`
 
-    return (
-        <div class="modal" id="modal" aria-labelledby="editModal" aria-hidden="true">
-            <div class="modalDialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="modalbtn" data-dismiss="modal" aria-label="modalbtn" onclick="closeModal()">
-                            <span class="close">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label><b>Flight ID</b></label>
-                        <input id="flt_id" placeholder="Flight ID" type="text" maxlength="5" required />
-                        <br />
-                        <label><b>Departure</b></label>
-                        <input id="dep_dte" placeholder="Date" type="date" required />
-                        <input id="dep_tme" placeholder="Time" type="time" step="1" required />
-                        <input id="dep_arpt" placeholder="Airport" type="text" maxlength="3" required />
-                        <br />
-                        <label><b>Arrival</b></label>
-                        <input id="arv_dte" placeholder="Date" type="date" required />
-                        <input id="arv_tme" placeholder="Time" type="time" step="1" required />
-                        <input id="arv_arpt" placeholder="Airport" type="text" maxlength="3" required />
-                        <br />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="closebtn" data-dismiss="modal" onclick="closeModal()">CANCEL</button>
-                        <button type="button" class="savebtn" id="saveedit">Save Changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ) 
-}
+const ModalWrap = styled.div`
+    width: 750px;
+    height: 550px;
+    box-shadow: 0 5px 8px 0 rgba(100, 30, 22, 0.3), 0 7px 20px 0 rgba(100, 30, 22, 0.5);
+    background: #fff;
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    border-radius: 10px;
+`
 
-export default Modal
+const ModalContent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.8;
+    flex-direction: column;
+
+    button{
+        background-color: #ff4500;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2em;
+        border: none;
+        margin-bottom: 2em;
+        border-radius: 2em;
+        padding: 0.5em 1em;
+        width: unset;
+        cursor: pointer;
+    }
+`
+
+const CloseModal = styled(MdClose)`
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    padding 0;
+    z-index: 10;
+`
+
+export const Modal = ({showModal, setShowModal}) =>{
+    return(
+        <>
+            {showModal ? (
+                <Background>
+                    <ModalWrap showModal={showModal}>
+                        <ModalContent>
+                            <h1>Are you sure you would like to save?</h1>
+                            <p>Add quote to quote history.</p>
+                            <button>Yes</button>
+                            <button>No</button>
+                        </ModalContent>
+                        <CloseModal onClick={() => setShowModal (prev => !prev)}></CloseModal>
+                    </ModalWrap>
+                </Background>
+            ) : null}
+        </>
+    )
+};

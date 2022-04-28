@@ -4,7 +4,32 @@ import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
 import { createQuote, getUser, getQuotes } from '../../../../../api/quoteBackend'
-import Modal from '../../util/modal'
+import {Modal} from '../../util/modal'
+import styled from 'styled-components'
+
+
+const Container = styled.div`
+    display: flex;
+    float: right;
+    margin-top: -85px;
+    &:hover .butt {
+        cursor: pointer;
+        transform: scale(1.1) perspective(1px);
+    }
+`;
+
+const Button = styled.div`
+    background-color: #ff4500;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: none;
+    margin-bottom: 2em;
+    border-radius: 2em;
+    padding: 0.5em 1em;
+    width: unset;
+    cursor: pointer;
+`;
 
 
 function FuelForm(props) {
@@ -30,7 +55,12 @@ function FuelForm(props) {
     const [userAddress, setUserAddress] = useState(true);
     const [loading, setLoading] = useState('false');
 
-    const [modalHidden, setModalHidden] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    
+    const openModal = () =>{
+        setShowModal(prev => !prev)
+    }
+
 
     useEffect(() => {
         var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
@@ -281,13 +311,23 @@ function FuelForm(props) {
                     <p>{details.total}</p>
                 </div> */}
 
-                <div className="form-group">
+                <div className='submitButtons'>
+                    <div className="form-group">
                     <input type="submit" value="Get Quote"></input>
+                    </div>
+
+                    {/* {modalHidden ? <p>test</p> : <p>false render test</p>}
+
+                    <button onClick={() => {setModalHidden(modalHidden => !modalHidden);}} id="butt4">Add Flight</button> */}
+
+                    <Container>
+                        <Button className='butt' onClick={openModal}>
+                            Save Quote
+                        </Button>
+                        <Modal showModal={showModal} setShowModal={setShowModal} />
+                    </Container>
                 </div>
-
-                {modalHidden ? <p>test</p> : <p>false render test</p>}
-
-                <button onClick={() => {setModalHidden(modalHidden => !modalHidden);}} id="butt4">Add Flight</button>
+                
 
             </div>
         </form>
