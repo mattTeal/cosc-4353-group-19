@@ -115,7 +115,7 @@ function FuelForm(props) {
                 setDetails(
                     {
                         ...details,
-                        rateHistory: (data[0].Address !== false),
+                        rateHistory: (data[0][0].Address !== false),
                     }
                 );
             }
