@@ -51,9 +51,10 @@ export const createQuote = async (data) => {
 }
 
 export const deleteRecentQuote = async (key) => {
+    console.log("In delete quote, key = " + key);
     return (
         await fetch(
-            `${BASE_ENDPOINT}/profile/?userID=${key}`, 
+            `${BASE_ENDPOINT}/quotes/?userID=${key}`, 
         {
             method: 'DELETE',
             credentials: 'same-origin',

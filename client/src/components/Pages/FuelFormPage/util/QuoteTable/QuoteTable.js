@@ -71,7 +71,7 @@ function QuoteTable(props) {
             },
             {
                 Header: '$ / Gallon',
-                accessor: 'ppg',
+                accessor: 'SuggestedPrice',
             },
             {
                 Header: 'Total',

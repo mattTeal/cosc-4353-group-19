@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {MdClose} from 'react-icons/md'
+import { deleteRecentQuote } from '../../../../api/quoteBackend'
 
 const Background = styled.div`
     position: fixed;
@@ -58,7 +59,7 @@ const CloseModal = styled(MdClose)`
     z-index: 10;
 `
 
-export const Modal = ({showModal, setShowModal}) =>{
+export const Modal = ({showModal, setShowModal, userID, suggestedPrice, total}) => {
     return(
         <>
             {showModal ? (
@@ -66,13 +67,28 @@ export const Modal = ({showModal, setShowModal}) =>{
                     <ModalWrap showModal={showModal}>
                         <ModalContent>
                             <h1 style={{marginTop: '25px'}}>Are you sure you would like to save?</h1>
-                            <p style={{marginTop: '45px'}}>Add quote to quote history.</p>
-                            <div style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: '100px'}} >
+                            <p style={{marginTop: '5px'}}>
+                                <div className='Prices-Display'>
+                                    <div className="SPrice-Display">
+                                        <label>Suggested Price:</label>
+                                        <p><b>${suggestedPrice}</b></p>
+                                    </div>
+                                    <div className="TPrice-Display">
+                                        <label>Total Price:</label>
+                                        <p><b>${total}</b></p>
+                                    </div> 
+                                    <p>Do you want to save this quote to the database?</p>
+                                </div>
+                            </p>
+                            <div style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: '75px'}} >
                                 <button style={{marginRight: '45px'}} onClick={() => setShowModal (prev => !prev)}>Yes</button>
-                                <button onClick={() => setShowModal (prev => !prev)}>No</button>
+                                <button onClick={() => {
+                                    deleteRecentQuote(userID);
+                                    setShowModal (prev => !prev);
+                                }}>No</button>
                             </div>
                         </ModalContent>
-                        <CloseModal onClick={() => setShowModal (prev => !prev)}></CloseModal>
+                        <CloseModal onClick={() => {setShowModal (prev => !prev);}}></CloseModal>
                     </ModalWrap>
                 </Background>
             ) : null}

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 //import UserInfoContext from '../util/AuthContext/AuthContext.tsx';
-import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
+//import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 import NavBar from '../util/NavBar/NavBar';
 import FuelForm from './util/FuelForm/FuelForm'
 import QuoteTable from './util/QuoteTable/QuoteTable';
-import getStorageValue from '../util/useLocalStorage/useLocalStorage'
+//import getStorageValue from '../util/useLocalStorage/useLocalStorage'
 import './FuelFormPage.css';
 
-import { getQuotes, getUser } from '../../../api/quoteBackend'
+//import { getQuotes, getUser } from '../../../api/quoteBackend'
 
 function FuelFormPage() {
   

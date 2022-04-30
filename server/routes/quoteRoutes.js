@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // form parameters
-    const {userID, gallons, date, addressData, inState, fullName} = req.body;
+    const {userID, gallons, date, addressData, inState, fullName, hasRateHistory} = req.body;
     // post to MySQL database with userID
     console.log("In post: "+ userID);
     if (userID === undefined) {
@@ -45,8 +45,8 @@ router.post('/', (req, res) => {
             //res.status(400).send("First or last name contains invalid characters.");
             res.status(400).send(`First or last name contains invalid characters.`);
         else if (!regexStreet.test(addressData.addressLine1) && !regexCityGrid.test(addressData.addressLine1)) 
-            {console.log("In post, addressData.addressLine1 = " + addressData.addressLine1);
-            res.status(400).send("Address line 1 invalid. Please try again with valid input."); }
+            //{console.log("In post, addressData.addressLine1 = " + addressData.addressLine1);
+            res.status(400).send("Address line 1 invalid. Please try again with valid input."); //}
         else if (addressData.addressLine2 !== "" && !regexAptSuite.test(addressData.addressLine2))
             res.status(400).send("Address line 2 invalid. Please try again with valid input.");
         else if (!regexCity.test(addressData.city))
@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
             var addressString = addressData.addressLine1 + " " + addressData.addressLine2 + " " + addressData.city + ", " + addressData.stateCode + " " + addressData.zipcode;
 
             try {
-                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID, fullName]);
+                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID, fullName, hasRateHistory]);
                 res.status(201).send({message: "Post completed with status code 201."});    
             } catch (error) {
                 console.log(error)
