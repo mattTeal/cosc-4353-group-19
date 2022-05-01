@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 //import UserInfoContext from '../util/AuthContext/AuthContext.tsx';
-import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
+//import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 import NavBar from '../util/NavBar/NavBar';
 import FuelForm from './util/FuelForm/FuelForm'
 import QuoteTable from './util/QuoteTable/QuoteTable';
-import getStorageValue from '../util/useLocalStorage/useLocalStorage'
+//import getStorageValue from '../util/useLocalStorage/useLocalStorage'
 import './FuelFormPage.css';
 
-import { getQuotes, getUser } from '../../../api/quoteBackend'
+//import { getQuotes, getUser } from '../../../api/quoteBackend'
 
 function FuelFormPage() {
   
@@ -30,20 +30,12 @@ function FuelFormPage() {
       <div id="OuterDiv">
           <NavBar/>
           <div id="FuelFormPageContent">
-            <FuelForm />
+            <div id='PositionModal'>
+              <FuelForm id="GettingToModal"/>
+            </div>
             <div id="TableFlexBox">
               <h2 id='TableTitle'>Quote History</h2> 
-              {/* in the future, don't pass all these props. have table update upon changing. maybe?
-              logic will change when we implement backend */}
-              <QuoteTable 
-                /*firstName = {User.firstName}
-                lastName = {User.lastName}
-                addressLine1 = {User.addressLine1}
-                addressLine2 = {User.addressLine2}
-                city = {User.city}
-                stateCode = {User.stateCode}
-                zipcode = {User.zipcode}*/
-              />
+              <QuoteTable />
             </div>
           </div>
           <div>

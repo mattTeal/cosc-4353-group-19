@@ -26,10 +26,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     // form parameters
-    const {gallons, date, addressData, inState, userID, fullName} = req.body;
+    const {userID, gallons, date, addressData, inState, fullName, hasRateHistory} = req.body;
     // post to MySQL database with userID
-    if (!userID || userID === "") {
-        res.status(403).send("You must be logged in to post a quote");
+    console.log("In post: "+ userID);
+    if (userID === undefined) {
+        res.status(403).send("You must be logged in to post a quote")
     }
     else {
         //validate address data
@@ -44,7 +45,8 @@ router.post('/', (req, res) => {
             //res.status(400).send("First or last name contains invalid characters.");
             res.status(400).send(`First or last name contains invalid characters.`);
         else if (!regexStreet.test(addressData.addressLine1) && !regexCityGrid.test(addressData.addressLine1)) 
-            res.status(400).send("Address line 1 invalid. Please try again with valid input.");
+            //{console.log("In post, addressData.addressLine1 = " + addressData.addressLine1);
+            res.status(400).send("Address line 1 invalid. Please try again with valid input."); //}
         else if (addressData.addressLine2 !== "" && !regexAptSuite.test(addressData.addressLine2))
             res.status(400).send("Address line 2 invalid. Please try again with valid input.");
         else if (!regexCity.test(addressData.city))
@@ -58,7 +60,7 @@ router.post('/', (req, res) => {
             var addressString = addressData.addressLine1 + " " + addressData.addressLine2 + " " + addressData.city + ", " + addressData.stateCode + " " + addressData.zipcode;
 
             try {
-                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID, fullName]);
+                db.promise().query(`CALL quotePost(?, ?, ?, ?, ?, ?, ?)`, [gallons, date, addressString, inState, userID, fullName, hasRateHistory]);
                 res.status(201).send({message: "Post completed with status code 201."});    
             } catch (error) {
                 console.log(error)
@@ -66,5 +68,24 @@ router.post('/', (req, res) => {
         }
     }
 });
+
+router.delete('/', (req, res) => {
+    // access userID from url query string
+    const userID = req.query.userID;
+    // get data from database
+    if (!userID) {
+        res.status(403).send("You must be logged in to delete a quote");
+    } else {
+        db.query(
+            `CALL deleteMostRecentQuote("${userID}");`,
+            (err, rows) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(rows);
+            }
+        });
+    }
+})
 
 module.exports = router;

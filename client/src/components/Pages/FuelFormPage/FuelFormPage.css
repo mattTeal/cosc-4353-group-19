@@ -1,6 +1,7 @@
 div#FuelFormPageContent {
     display: flex;
     flex-direction: ltr;
+    width: 100%;
 }
 h2#TableTitle {
     text-align: center;

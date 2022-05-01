@@ -3,7 +3,35 @@ import './FuelForm.css'
 import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
-import { createQuote, getUser } from '../../../../../api/quoteBackend'
+import { createQuote, getUser, getQuotes } from '../../../../../api/quoteBackend'
+import {Modal} from '../../util/modal'
+import styled from 'styled-components'
+
+
+const Container = styled.div`
+    display: flex;
+    width: 100%;
+    margin-top: -85px;
+    &:hover .butt {
+        cursor: pointer;
+        transform: scale(1.1) perspective(1px);
+    }
+    justify-content: right;
+`;
+
+const Button = styled.div`
+    background-color: #ff4500;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: none;
+    margin-bottom: 2em;
+    border-radius: 2em;
+    padding: 0.5em 1em;
+    width: unset;
+    cursor: pointer;
+`;
+
 
 function FuelForm(props) {
 
@@ -18,41 +46,94 @@ function FuelForm(props) {
           city: "",
           stateCode: "",
           zipcode: "",
-          fullName: ""
+          fullName: "",
+          rateHistory: false, //default value
+          suggestedPrice: 0,
+          total: 0
         }
     );
       
+    const [quoteHidden, setQuoteHidden] = useState(true);
+
     const [userAddress, setUserAddress] = useState(true);
-    const [loading, setLoading] = useState('false')
+
+    const [showModal, setShowModal] = useState(false);
+    
+    const openModal = () =>{
+        setShowModal(prev => !prev)
+    }
 
     useEffect(() => {
+        console.log("useEffect ran");
+        setQuoteHidden(true);
         var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
 
         getUser(key).then(data => {
             if (data.error) {
               console.log(data.error);
             } else {
-              setDetails(
-                {
-                    addressLine1: data[0].AddressLine1,
-                    addressLine2: data[0].AddressLine2 || "",
-                    city: data[0].City,
-                    stateCode: data[0].StateCode,
-                    zipcode: data[0].ZipCode,
-                    fullName: data[0].FullName
-                }
-              ); // query causes supplemental data to be returned. at index 0 is the data we want.
+                //console.log("inside useEffect; getUser data: ", data);
+                setDetails(
+                    {
+                        ...details,
+                        addressLine1: data[0].AddressLine1,
+                        addressLine2: data[0].AddressLine2 || "",
+                        city: data[0].City,
+                        stateCode: data[0].StateCode,
+                        zipcode: data[0].ZipCode,
+                        fullName: data[0].FullName
+                    }
+                ); 
+                console.log("inside useEffect; setDetails: ", details);
+              //console.log(data)// query causes supplemental data to be returned. at index 0 is the data we want.
             }
         });
+    }, [userInfo.userID]);
 
+    useEffect(() => { // to run when details is updated
+        console.log("details has been updated as per details UseEffect: ", details);
+    }, [details]);
+
+    useEffect(() => { //to initally update rateHistory
+        var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+        getQuotes(key).then(data => {
+            if(data.error){
+                console.log(data.error)
+            }
+            else {
+                setDetails((prevDetails) => (
+                    {
+                        ...prevDetails,
+                        rateHistory: (data[0][0].Address !== false),
+                    }
+                ));
+                console.log("inside useEffect part 2; setDetails: ", details);
+            }
+        })
     }, []);
-
 
     const submitHandler = (e) => {
         e.preventDefault();
-        setLoading(true);
 
+        setQuoteHidden(quoteHidden => !quoteHidden);
         //console.log(details);
+        //assign RateHistoryFactor root
+        var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
+
+        getQuotes(key).then(data => {
+            if(data.error){
+                console.log(data.error)
+            }
+            else {
+                setDetails(
+                    {
+                        ...details,
+                        rateHistory: (data[0][0].Address !== false),
+                    }
+                );
+                console.log("inside submitHandler; setDetails: ", details);
+            }
+        }) 
 
         var createQuoteParams = {
             fullName: details.fullName,
@@ -68,15 +149,38 @@ function FuelForm(props) {
                 fullName: details.fullName
 
             },
-            inState: userAddress ? (props.stateCode === 'TX') : (details.stateCode === 'TX'),
-            userID: userInfo.userID ? userInfo.userID : localStorage.getItem('userID')
+            inState: userAddress ? (details.stateCode === 'TX') : (props.stateCode === 'TX'),
+            userID: userInfo.userID ? userInfo.userID : localStorage.getItem('userID'),
+            hasRateHistory: details.rateHistory
         }
-        //console.log(createQuoteParams.userID);
+        console.log(createQuoteParams);
+        //console.log("Instate boolean comparing " + details.stateCode + " to 'TX' : " + (details.stateCode === 'TX') + " and userAddress: " + userAddress);
 
         createQuote(createQuoteParams).then(
-            setLoading(false),
             console.log("New quote created.")
         )
+
+        getQuotes(key).then(data => {
+            if(data.error) {
+                console.log(data.error)
+            }
+            else if (data[0][0].Address === false) {
+                console.log("Quote database is empty.");
+            }
+            else{
+                //console.log(data);
+                setDetails(details => (
+                    {
+                        ...details,
+                        suggestedPrice: data[0][0].SuggestedPrice,
+                        total: data[0][0].Total
+                    }
+                ));
+                //console.log("inside submitHandler part 2; setDetails: ", details);
+                //console.log("After assignment to details.suggestedPrice: " + details.suggestedPrice + ", when it should be " + data[0][0].SuggestedPrice);
+            }
+        })
+
     }
 
     const handleAddress = () => {
@@ -94,8 +198,8 @@ function FuelForm(props) {
                 </div>
                 <div className="form-group">
                     <div className='addrcheckbox'>
-                        <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
-                        <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label>
+                        <label htmlFor='useraddress' className="addrLabel">Use address linked to account
+                        <input type="checkbox" id='useraddress' className="useraddress" onClick={() => handleAddress()} defaultChecked/></label>
                     </div>
                     {/* <input type="checkbox" id='useraddress' classname="useraddress" onClick={() => handleAddress()} defaultChecked/>
                     <label htmlFor='useraddress' classname="addrLabel">Use address linked to account</label> */}
@@ -213,9 +317,33 @@ function FuelForm(props) {
                             onChange={
                                 e => setDetails({...details, date: e.target.value})} value={details.date}/>
                 </div>
-                <div className="form-group">
-                    <input type="submit" value="Find Cost"></input>
+                
+                {quoteHidden ? null :
+                    <div className='Prices-Display'>
+                        <div className="SPrice-Display">
+                            <label>Suggested Price:</label>
+                            <p><b>${details.suggestedPrice}</b></p>
+                        </div>
+                        <div className="TPrice-Display">
+                            <label>Total Price:</label>
+                            <p><b>${details.total}</b></p>
+                        </div> 
+                    </div>
+                }
+                
+                <div className='submitButtons'>
+                    <div className="form-group">
+                        <input type="submit" value="Get Quote"></input>
+                    </div>
+
+                    <Container style={{width: '100%'}} className='Container'>
+                        <Button className='butt' onClick={openModal}>
+                            Save Quote
+                        </Button>
+                        <Modal showModal={showModal} setShowModal={setShowModal} userID = {userInfo.userID ? userInfo.userID : localStorage.getItem("userID")} suggestedPrice = {details.suggestedPrice} total = {details.total} />
+                    </Container>
                 </div>
+                
             </div>
         </form>
     )
