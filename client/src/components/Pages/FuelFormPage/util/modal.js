@@ -69,7 +69,7 @@ export const Modal = ({showModal, setShowModal, userID, suggestedPrice, total}) 
                             <h1 style={{marginTop: '25px'}}>Are you sure you would like to save?</h1>
                             <p style={{marginTop: '5px'}}>
                                 <div className='Prices-Display'>
-                                    <div className="SPrice-Display">
+                                    <div  className="SPrice-Display">
                                         <label>Suggested Price:</label>
                                         <p><b>${suggestedPrice}</b></p>
                                     </div>
@@ -77,10 +77,10 @@ export const Modal = ({showModal, setShowModal, userID, suggestedPrice, total}) 
                                         <label>Total Price:</label>
                                         <p><b>${total}</b></p>
                                     </div> 
-                                    <p>Do you want to save this quote to the database?</p>
+                                    <p style={{marginTop: '10px'}}>Do you want to save this quote to the database?</p>
                                 </div>
                             </p>
-                            <div style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: '75px'}} >
+                            <div style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: '30px'}} >
                                 <button style={{marginRight: '45px'}} onClick={() => setShowModal (prev => !prev)}>Yes</button>
                                 <button onClick={() => {
                                     deleteRecentQuote(userID);
