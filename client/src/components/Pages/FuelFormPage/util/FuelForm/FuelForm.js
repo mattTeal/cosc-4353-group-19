@@ -128,7 +128,7 @@ function FuelForm(props) {
                 setDetails(
                     {
                         ...details,
-                        rateHistory: (data[0][0].Address !== false),
+                        rateHistory: (data[0].length > 0),
                     }
                 );
                 console.log("inside submitHandler; setDetails: ", details);
