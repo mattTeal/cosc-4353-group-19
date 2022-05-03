@@ -19,15 +19,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    console.log(req.body)
     // copying input data 
     const addressData = { 
-        firstName: req.body.firstNameForm.trim() || "",
-        lastName: req.body.lastNameForm.trim() || "",
-        addressLine1: req.body.address1Form.trim() || "",
-        addressLine2: req.body.address2Form.trim() || "",
-        city: req.body.cityForm.trim() || "",
-        stateCode: req.body.stateForm.trim() || "",
-        zipcode: req.body.zipcodeForm.trim() || "", //<- for error checking
+        firstName: req.body.firstName || "",
+        lastName: req.body.lastName || "",
+        addressLine1: req.body.address1 || "",
+        addressLine2: req.body.address2 || "",
+        city: req.body.city || "",
+        stateCode: req.body.state || "",
+        zipcode: req.body.zipcode || "", //<- for error checking
         userID: req.body.userID || ""
     }
 
