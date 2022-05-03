@@ -24,12 +24,12 @@ router.post('/', (req, res) => {
     const addressData = { 
         firstName: req.body.firstName || "",
         lastName: req.body.lastName || "",
-        addressLine1: req.body.address1 || "",
-        addressLine2: req.body.address2 || "",
+        addressLine1: req.body.addressLine1 || "",
+        addressLine2: req.body.addressLine2 || "",
         city: req.body.city || "",
         stateCode: req.body.state || "",
         zipcode: req.body.zipcode || "", //<- for error checking
-        userID: req.body.userID || ""
+        userID: req.body.key || ""
     }
 
     //input validation

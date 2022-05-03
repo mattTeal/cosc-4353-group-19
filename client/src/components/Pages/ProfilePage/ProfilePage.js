@@ -5,7 +5,7 @@ import AddressData from '../FuelFormPage/util/AddressData/AddressData';
 import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 //import fetchData from '../util/FrontEndFunctions/apiRequests';
 import './ProfilePage.css'
-import { editUser } from '../../../api/profileBackend';
+import { editUser } from '../../../api/profile/profileBackend';
 
 function ProfilePage() {
 

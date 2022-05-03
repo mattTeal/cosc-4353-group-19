@@ -3,7 +3,7 @@ import './FuelForm.css'
 import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx'
 //import getStorageValue from '../../../util/useLocalStorage/useLocalStorage'
 import AddressData from '../AddressData/AddressData'
-import { createQuote, getUser, getQuotes } from '../../../../../api/quoteBackend'
+import { createQuote, getUser, getQuotes } from '../../../../../api/quote/quoteBackend'
 import {Modal} from '../../util/modal'
 import styled from 'styled-components'
 
