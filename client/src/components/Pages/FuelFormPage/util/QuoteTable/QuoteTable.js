@@ -3,7 +3,7 @@ import { useUserInfo } from "../../../util/AuthContext/AuthContext.tsx";
 //import { useState } from "react";
 import {useTable} from "react-table";
 import './QuoteTable.css'
-import { getQuotes } from '../../../../../api/quoteBackend.js'
+import { getQuotes } from '../../../../../api/quote/quoteBackend.js'
 //import AddressData from "../AddressData/AddressData";
 
 function QuoteTable(props) {

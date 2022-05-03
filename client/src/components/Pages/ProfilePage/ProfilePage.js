@@ -5,6 +5,7 @@ import AddressData from '../FuelFormPage/util/AddressData/AddressData';
 import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 //import fetchData from '../util/FrontEndFunctions/apiRequests';
 import './ProfilePage.css'
+import { editUser } from '../../../api/profile/profileBackend';
 
 function ProfilePage() {
 
@@ -18,7 +19,8 @@ function ProfilePage() {
       addressLine2: "",
       city: "",
       stateCode: "",
-      zipcode: ""
+      zipcode: "",
+      key: ""
     }
   );
 
@@ -68,39 +70,11 @@ function ProfilePage() {
 
   let profileEditHandler = (e) => {
     e.preventDefault();
-    
     console.log(JSON.stringify(User));
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
     var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
-
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("firstNameForm", User.firstName);
-    urlencoded.append("lastNameForm", User.lastName);
-    urlencoded.append("address1Form", User.addressLine1);
-    urlencoded.append("address2Form", User.addressLine2);
-    urlencoded.append("cityForm", User.city);
-    urlencoded.append("stateForm", User.stateCode);
-    urlencoded.append("zipcodeForm", User.zipcode);
-    urlencoded.append("userID", key);
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: 'follow',
-    };
+    setUser({...User, key: key})
     
-    fetch("http://localhost:8080/api/profile/", requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          return response.text().then(text => { throw new Error(text) });
-        }
-        else 
-          return response.text();
-      })
+    editUser(User)
       .then(result => {
         console.log(result);
         setHidden(hidden => !hidden);

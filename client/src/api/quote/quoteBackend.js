@@ -1,5 +1,3 @@
-import { loginUser } from "./loginBackend"
-
 const BASE_ENDPOINT = "http://localhost:8080/api"
 const HEADER = {
     'Accept': 'application/json',
