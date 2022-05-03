@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import './LoginPage.css'
 import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
+import { loginUser } from '../../../api/loginBackend';
 
 function LoginPage() {
   //edit to have variables that hold the username and password
@@ -40,46 +41,17 @@ function LoginPage() {
         //console.log(err); // <- testing
         //console.log(`password: ${password}`); // <- testing
     }
-    else { //attempting to add a fetch request to circumvent redirection
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-      
-      var urlencoded = new URLSearchParams();
-      urlencoded.append("username", username);
-      urlencoded.append("password", password);
-      
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: urlencoded,
-        credentials: 'same-origin'
-        //redirect: 'follow'
-      };
-      
-      fetch("http://localhost:8080/api/auth/login", requestOptions)
-        .then(response => {
-          if (!response.ok) {
-            //e.preventDefault();
-            return response.text().then(text => {
-              //console.log(text); //<- testing
-              throw new Error(text);
-            })
-          }
-          else {
-            setSubmit(true);
-            //setUserInfo({ userID: response });
-            //LOCAL STORAGE
-            //console.log(userInfo);
-            return response.text();
-          }
-        })
-        .then(userID => {
-            localStorage.setItem('userID', userID);
-            //console.log(userID); //<- testing
-            setUserInfo({ userID: userID });
+    else { //attempting to add a fetch request to circumvent redirection  
+      loginUser({username, password})
+        .then(res => {
+          setSubmit(true);
+          localStorage.setItem('userID', res.userID);
+          //console.log(userID); //<- testing
+          setUserInfo({ userID: res.userID });
         })
         .catch(error => {
-          //console.log('error', error);
+          setSubmit(false);
+          console.log('error: ', error)
           setErr({name: "Error", message: error});
         });
     }

@@ -25,7 +25,7 @@ router.post("/login", (req, res) => {
           console.log(result);
           if (result.length > 0) {
             if (validatePass(password, result[0][0].Hash, result[0][0].Salt)) {
-                res.status(201).send(result[0][0].UserID);
+                res.status(201).send({userID: result[0][0].UserID});
             }
             else
                 res.status(403).send("Incorrect username or password!")
