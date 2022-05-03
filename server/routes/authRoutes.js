@@ -71,7 +71,7 @@ router.post("/register", (req, res) => {
             )`
         )
 
-        res.status(201).send(newUser.userId);    
+        res.status(201).send({userID: newUser.userId});    
     } catch (error) {
         console.log(error)
     }

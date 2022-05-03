@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import './LoginPage.css'
 import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
-import { loginUser } from '../../../api/loginBackend';
+import { loginUser } from '../../../api/login/loginBackend';
 
 function LoginPage() {
   //edit to have variables that hold the username and password

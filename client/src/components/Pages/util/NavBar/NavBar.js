@@ -1,9 +1,12 @@
 import React from "react";
+import { logoutUser } from "../../../../api/navbar/navbarBackend";
 import { useUserInfo } from "../AuthContext/AuthContext.tsx";
+import { useNavigate } from "react-router-dom";
 import "./NavBar.css"
 
 const NavBar = () => {
     const { userInfo, setUserInfo } = useUserInfo();
+    const naviagte = useNavigate();
     return (
         <div className="topnav">
             <div className="container">
@@ -17,20 +20,13 @@ const NavBar = () => {
                             <li><a href="/profile">Profile</a></li>
                             {/* <li><a href="http://localhost:8080/api/auth/logout">Sign Out</a></li> */ /* <- this wasn't working on angel's computer */}
                             <li><button onClick={() => {
-                                    var requestOptions = {
-                                        method: 'POST',
-                                        redirect: 'follow'
-                                    };
-                                    
-                                    fetch("http://localhost:8080/api/auth/logout", requestOptions)
-                                        .then(response => response.text())
+                                    logoutUser()
                                         .then(result => {
                                             console.log(result);
                                             setUserInfo({userID: ""});
                                             console.log(userInfo);
                                             localStorage.clear();
-
-                                            window.location.replace(result);
+                                            naviagte('/');
                                         })
                                         .catch(error => console.log('error', error));
                                         }}>

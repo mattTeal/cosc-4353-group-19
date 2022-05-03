@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom'
+import { createUser } from '../../../api/register/registerBackend';
 import { useUserInfo } from '../util/AuthContext/AuthContext.tsx';
 import './RegisterPage.css'
 
@@ -32,46 +33,12 @@ function RegisterPage() {
     const username = e.target.username.value;
     const password = e.target.password.value;
     const confirmpass = e.target.confirmpass.value;
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
       
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("username", username);
-    urlencoded.append("password", password);
-    urlencoded.append("confirmpass", confirmpass);
-
-    //console.log(`password: ${password}`); // <- testing
-    //console.log(`username: ${username}`); // <- testing
-      
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      //redirect: 'follow'
-    };
-      
-    fetch("http://localhost:8080/api/auth/register", requestOptions)
-      .then(response => {
-        if (response.status !== 201) {
-          //e.preventDefault();
-          return response.text().then(text => {
-            console.log(text); //<- testing
-            throw new Error(text);
-          })
-        }
-        else {
-          setsubmit(true);
-          //e.preventDefault();
-          /*console.log(response.text()); //<- testing
-          console.log(response.statusText);
-          console.log(response.status)*/
-          return response.text();
-        }
-      }).then(userID => {
-        localStorage.setItem('userID', userID);
+    createUser({username, password, confirmpass}
+      ).then(res => {
+        localStorage.setItem('userID', res.userID);
         //console.log(userID); //<- testing
-        setUserInfo({ userID: userID });
+        setUserInfo({ userID: res.userID });
       })
       .catch(error => {
         console.log('error', error);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUser } from '../../../../../api/quoteBackend.js'
+import { getUser } from '../../../../../api/quote/quoteBackend.js'
 import { useUserInfo } from '../../../util/AuthContext/AuthContext.tsx';
 
 function AddressData(props) {
