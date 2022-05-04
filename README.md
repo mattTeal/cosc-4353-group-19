@@ -2,7 +2,7 @@
 ## Spring 2022 Group 19 Project for COSC 4368
 
 ### **_If the images below are not clear, zoom in on your browser to better the image._**
-<br><br>
+<br>
 
 ### Feico Demo
 ![282c8d887b22cb027fbd998cee6a32a1](https://user-images.githubusercontent.com/89936190/166823782-05a10fe7-2d4b-4607-92c7-ae79f3aa1c76.png)
