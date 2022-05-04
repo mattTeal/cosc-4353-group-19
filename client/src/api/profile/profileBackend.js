@@ -16,7 +16,7 @@ export const editUser = async (data) => {
             credentials: 'same-origin'
         }
         ).then(
-            result => console.log('result ', result.json())
+            result => result.ok ? result.json() : {error: true}
         )
     )
 }
