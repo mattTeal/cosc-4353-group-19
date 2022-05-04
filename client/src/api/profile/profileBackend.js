@@ -6,6 +6,7 @@ const HEADER = {
 
 export const editUser = async (data) => {
     return (
+        console.log(data),
         await fetch(
             `${BASE_ENDPOINT}/profile`, 
         {
@@ -15,7 +16,7 @@ export const editUser = async (data) => {
             credentials: 'same-origin'
         }
         ).then(
-            result => result.ok ? result.json() : {error: true}
+            result => console.log('result ', result.json())
         )
     )
 }

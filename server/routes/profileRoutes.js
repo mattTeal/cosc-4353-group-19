@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
             if (err) {  
                 res.status(500).send(err);
             } else {
-                res.status(200).send(rows[0]);
+                res.status(200).send(addressData);
             }
         });
 

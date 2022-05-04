@@ -28,6 +28,9 @@ function ProfilePage() {
 
   useEffect(() => {
     if (userInfo.userID === "") {
+      var key = userInfo.userID === "" ? userInfo.userID : localStorage.getItem("userID");
+      setUser({...User, key: key})
+      console.log(userInfo.userID)
       console.log("User not logged in!");
     }
     //profile still needs detect when a user has not completed their profile first
@@ -70,9 +73,11 @@ function ProfilePage() {
 
   let profileEditHandler = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(User));
-    var key = userInfo.userID ? userInfo.userID : localStorage.getItem("userID");
-    setUser({...User, key: key})
+    var key = userInfo.userID === '' ? localStorage.getItem("userID") : userInfo.userID;
+    User.key = key
+
+    console.log('hello ', key)
+    console.log('hello ', User)
     
     editUser(User)
       .then(result => {
@@ -80,7 +85,7 @@ function ProfilePage() {
         setHidden(hidden => !hidden);
       })
       .catch(error => {
-        alert(error);
+        console.log(error)
       });
   }
 
