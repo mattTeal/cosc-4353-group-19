@@ -1,5 +1,5 @@
 # Welcome to Feico
-## Spring 2022 Group 19 Project for COSC 4368
+## Spring 2022 Group 19 Project for COSC 4353
 
 ### **_If the images below are not clear, zoom in on your browser to better the image._**
 <br>
