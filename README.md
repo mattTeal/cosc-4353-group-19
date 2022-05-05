@@ -1,7 +1,7 @@
 # Welcome to Feico
 ## Spring 2022 Group 19 Project for COSC 4353
 
-### **Click an image below for its full resolution.**
+### **_Click an image below for its full resolution._**
 <br>
 
 ### Feico Demo
